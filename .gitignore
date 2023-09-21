@@ -1,4 +1,4 @@
-*.pdf 
+slides/*.pdf 
 slides/aux
 slides/tmp
 

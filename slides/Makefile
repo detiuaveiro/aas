@@ -30,6 +30,6 @@ aux/%: aux
 clean:
 	rm -rf aux
 	rm -rf tmp
-	latexmk -c
+	latexmk -C
 
 .PHONY: all clean pdf 
