@@ -6,30 +6,15 @@ ALL_PDF = $(patsubst %.tex,%.pdf,$(wildcard *.tex))
 all : $(ALL_PDF)
 pdf : $(ALL_PDF)
 
-%.pdf: aux/% tmp/% %.tex
-	latexmk -xelatex $*.tex > tmp/$*/out || (less +G tmp/$*/out && exit 1)
-# compile using XeLaTex
-# redirects the shell output of latexmk to tmp
-# if latexmk were to fail, show the tail of said output for debugging purposes
-	mv `ls $*.* | grep -v '\.tex\|\.pdf\|\.dvi\|\.ps'` aux/$*
-# -mv $*Notes.bib aux/$*
-# moves everything but the .tex and .pdf to aux (or eventually .dvi or .ps)
-
-tmp :
-	mkdir -p tmp
+%.pdf: aux %.tex
+	latexmk -xelatex -silent -jobname=aux/$* $*.tex 
+	mv aux/$*.pdf $*.pdf
 
 aux :
 	mkdir -p aux
 
-tmp/%: tmp
-	mkdir -p tmp/$*
-
-aux/%: aux
-	mkdir -p aux/$*
-
 clean:
 	rm -rf aux
-	rm -rf tmp
 	latexmk -C
 
-.PHONY: all clean pdf 
+.PHONY: all clean pdf
