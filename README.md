@@ -9,7 +9,7 @@ The theorical material can be found [here](slides/).
 Follow the instructions bellow:
 ```bash
 python3 -m venv venv
-sourve venv/bin/activate
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
