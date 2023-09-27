@@ -13,6 +13,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+The notebooks can be found [here](notebooks/)
+
 ## Schedule
 
 <table>
