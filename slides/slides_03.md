@@ -84,3 +84,39 @@ Anomalies can be broadly categorized as:
 # Anomaly Detection
 
 ![](figures/anomaly.drawio.pdf)
+
+# Clustering
+
+Type of **unsupervised learning method**. 
+Generally, it is used as a process to find meaningful structure, explanatory underlying processes, generative features, and groupings inherent in a set of examples.
+![](figures/clustering.png)
+
+# Clustering Methods
+
+- **Density-Based Methods:** These methods consider the clusters as the dense region having some similarities and differences from the lower dense region of the space. These methods have good accuracy and the ability to merge two clusters.
+
+- **Hierarchical Based Methods:** The clusters formed in this method form a tree-type structure based on the hierarchy. New clusters are formed using the previously formed one.
+
+- **Partitioning Methods:** These methods partition the objects into $k$ clusters and each partition forms one cluster. This method is used to optimize an objective criterion similarity function such as when the distance is a major parameter.
+
+# Clustering: Anomaly Detection
+
+![](figures/clustering_anomaly.png)
+
+# Blind Source Separation
+
+Blind Source Separation (BSS) refers to a problem where both the sources and the mixing methodology are unknown, only mixture signals are available for further separation process.
+
+In several situations it is desirable to recover all individual sources from the mixed signal, or at least to segregate a particular source.
+
+# Blind Source Separation: PCA
+
+** Principal component analysis**, or PCA, is a statistical procedure that allows you to summarize the information content in large data tables by means of a smaller set of “summary indices” that can be more easily visualized and analyzed.
+
+![](figures/PCA.png)
+
+# Blind Source Separation: ICA
+
+**Independent Component Analysis** (ICA) is a powerful technique in the field of data analysis that allows you to separate and identify the underlying independent sources in a multivariate data set.
+
+![](figures/PCA_vs_ICA.png)
