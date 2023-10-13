@@ -120,3 +120,17 @@ In several situations it is desirable to recover all individual sources from the
 **Independent Component Analysis** (ICA) is a powerful technique in the field of data analysis that allows you to separate and identify the underlying independent sources in a multivariate data set.
 
 ![](figures/PCA_vs_ICA.png)
+
+# Blind Source Separation: NNMF
+
+**Non-negative matrix factorization (NNMF)** is a group of algorithms in multivariate analysis and linear algebra where a matrix $V$ is factorized into two matrices $W$ and $H$, with the property that all three matrices have no negative elements.
+
+This non-negativity makes the resulting matrices easier to inspect. Also, in applications such as processing of audio spectrograms or muscular activity, non-negativity is inherent to the data being considered. 
+
+Since the problem is not exactly solvable in general, it is commonly approximated numerically.
+
+![](figures/NNMF.png)
+
+# Blind Source Separation: Anomaly Detection
+
+![](figures/nnmf_anomaly.png)
