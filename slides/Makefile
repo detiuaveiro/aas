@@ -7,7 +7,7 @@ ALL_PDF := $(filter-out README.pdf, $(ALL_PDF))
 all: $(ALL_PDF)
 pdf: $(ALL_PDF)
 
-%.pdf: %.md
+%.pdf: %.md style.tex
 	pandoc -t beamer -s --bibliography=references.bib --pdf-engine=lualatex --include-in-header=style.tex -o $@ $<
 
 clean:
