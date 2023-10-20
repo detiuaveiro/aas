@@ -3,6 +3,12 @@ title: Aprendizagem Aplicada à Segurança
 author: Mário Antunes
 institute: Universidade de Aveiro
 date: September 22, 2023
+header-includes:
+ - \usetheme[sectionpage=none,numbering=fraction,progressbar=frametitle]{metropolis}
+ - \usepackage{longtable,booktabs}
+ - \usepackage{etoolbox}
+ - \AtBeginEnvironment{longtable}{\small}
+ - \AtBeginEnvironment{cslreferences}{\small}
 nocite: |
   @halder:2018, @chio:2018, @parisi:2019, @tsukerman:2019, @mueller:2019
 ---
