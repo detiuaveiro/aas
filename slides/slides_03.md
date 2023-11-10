@@ -121,7 +121,7 @@ In several situations it is desirable to recover all individual sources from the
 
 ## Blind Source Separation: PCA
 
-** Principal component analysis**, or PCA, is a statistical procedure that allows you to summarize the information content in large data tables by means of a smaller set of “summary indices” that can be more easily visualized and analyzed.
+**Principal component analysis**, or PCA, is a statistical procedure that allows you to summarize the information content in large data tables by means of a smaller set of “summary indices” that can be more easily visualized and analyzed.
 
 ![](figures/PCA.png)
 
