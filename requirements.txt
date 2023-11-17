@@ -17,5 +17,8 @@ wordcloud>=1.9.2
 pyBlindOpt>=0.1.1
 Faker>=19.10.0
 yellowbrick>=1.5
+statsmodels>=0.14.0
 mlxtend>=0.23.0
 tensorflow-cpu>=2.14.0
+scikeras>=0.1.8
+ 
