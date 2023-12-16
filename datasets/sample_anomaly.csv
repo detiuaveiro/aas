@@ -1,0 +1,3593 @@
+user,dst_port,country,anomaly
+b244d142,443,United States,1
+1021694a,80,United States,1
+1021694a,80,United States,1
+1021694a,80,United States,1
+142f88ad,443,United States,1
+73a649d0,443,Israel,1
+73a649d0,443,Israel,1
+73a649d0,443,Israel,1
+73a649d0,443,Israel,1
+73a649d0,443,Israel,1
+73a649d0,443,Israel,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+73a649d0,443,Israel,1
+73a649d0,443,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+73a649d0,443,Israel,1
+73a649d0,443,Israel,1
+73a649d0,443,Israel,1
+73a649d0,443,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+e872b304,443,Israel,1
+e872b304,443,Israel,1
+e872b304,443,Israel,1
+e872b304,443,Israel,1
+47a39ca0,443,United States,1
+986d94cb,443,Portugal,1
+1021694a,80,United States,1
+1021694a,80,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+6f391535,53,Bulgaria,1
+6f391535,53,Bulgaria,1
+6f391535,53,Bulgaria,1
+da66a2db,443,Israel,1
+da66a2db,443,Israel,1
+da66a2db,443,Israel,1
+da66a2db,443,Israel,1
+da66a2db,443,Israel,1
+da66a2db,443,Israel,1
+da66a2db,443,Israel,1
+da66a2db,443,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+dcb729df,443,Israel,1
+dcb729df,443,Israel,1
+dcb729df,443,Israel,1
+dcb729df,443,Israel,1
+dcb729df,443,Israel,1
+dcb729df,443,Israel,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+6f391535,53,France,1
+6f391535,53,France,1
+6f391535,53,France,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+58f0f43a,53,Portugal,1
+58f0f43a,53,Portugal,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United Kingdom,1
+6f391535,53,United Kingdom,1
+e3e88045,80,United States,1
+e3e88045,80,United States,1
+e3e88045,80,United States,1
+e3e88045,80,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+af39a3af,80,United Kingdom,1
+af39a3af,80,United Kingdom,1
+d48914d7,80,China,1
+d48914d7,80,China,1
+6f391535,53,Ireland,1
+6f391535,53,Ireland,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+362f59eb,443,United States,1
+362f59eb,443,United States,1
+6f391535,53,United Kingdom,1
+6f391535,53,United Kingdom,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,France,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+5a5a5568,443,Norway,1
+5a5a5568,443,Norway,1
+5a5a5568,443,Norway,1
+6f391535,53,Netherlands,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,France,1
+6f391535,53,France,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+a2b2b93f,443,Norway,1
+a2b2b93f,443,Norway,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+837fc617,443,Russian Federation,1
+837fc617,443,Russia,1
+837fc617,443,Russian Federation,1
+837fc617,443,Russia,1
+837fc617,443,Russian Federation,1
+837fc617,443,Russia,1
+837fc617,443,Russian Federation,1
+837fc617,443,Russia,1
+837fc617,443,Russian Federation,1
+837fc617,443,Russia,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+9371a1fe,443,Israel,1
+9371a1fe,443,Israel,1
+9371a1fe,443,Israel,1
+9371a1fe,443,Israel,1
+9371a1fe,443,Israel,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+9371a1fe,443,Israel,1
+9371a1fe,443,Israel,1
+9371a1fe,443,Israel,1
+9371a1fe,443,Israel,1
+9371a1fe,443,Israel,1
+9371a1fe,443,Israel,1
+837fc617,443,Russian Federation,1
+837fc617,443,Russia,1
+d68e5ea6,443,Israel,1
+d68e5ea6,443,Israel,1
+d68e5ea6,443,Israel,1
+d68e5ea6,443,Israel,1
+d68e5ea6,443,Israel,1
+d68e5ea6,443,Israel,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+837fc617,443,Russian Federation,1
+837fc617,443,Russia,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,Bulgaria,1
+6f391535,53,Bulgaria,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+837fc617,443,Russian Federation,1
+837fc617,443,Russia,1
+e3e88045,80,United States,1
+e3e88045,80,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+933ecc70,443,Israel,1
+933ecc70,443,Israel,1
+933ecc70,53,Portugal,1
+933ecc70,53,Portugal,1
+933ecc70,53,Portugal,1
+933ecc70,53,Portugal,1
+933ecc70,443,Israel,1
+933ecc70,443,Israel,1
+933ecc70,443,Israel,1
+933ecc70,443,Israel,1
+933ecc70,443,Israel,1
+933ecc70,443,Israel,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+215f074d,443,Israel,1
+215f074d,443,Israel,1
+215f074d,53,Portugal,1
+215f074d,53,Portugal,1
+215f074d,53,Portugal,1
+215f074d,53,Portugal,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United Kingdom,1
+6f391535,53,United Kingdom,1
+6f391535,53,United Kingdom,1
+6f391535,53,United Kingdom,1
+6f391535,53,United Kingdom,1
+6f391535,53,United Kingdom,1
+6f391535,53,Germany,1
+6f391535,53,Germany,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+9371a1fe,443,Israel,1
+9371a1fe,443,Israel,1
+9371a1fe,443,Israel,1
+9371a1fe,443,Israel,1
+9371a1fe,443,Israel,1
+9371a1fe,443,Israel,1
+9371a1fe,443,Israel,1
+e108fc65,443,United States,1
+e108fc65,443,United States,1
+e108fc65,443,United States,1
+6f391535,53,Slovenia,1
+6f391535,53,Slovenia,1
+6f391535,53,Slovenia,1
+6f391535,53,Slovenia,1
+6f391535,53,Slovenia,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,Slovenia,1
+6f391535,53,Slovenia,1
+6f391535,53,Slovenia,1
+6f391535,53,Slovenia,1
+6f391535,53,Slovenia,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+7458c138,443,United States,1
+7458c138,443,United States,1
+7458c138,443,United States,1
+7458c138,443,United States,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+7458c138,443,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+c6ea8556,80,United States,1
+c6ea8556,80,United States,1
+c6ea8556,80,United States,1
+7458c138,443,United States,1
+6f391535,53,Bulgaria,1
+6f391535,53,Bulgaria,1
+6f391535,53,Bulgaria,1
+6f391535,53,Bulgaria,1
+6f391535,53,Bulgaria,1
+6f391535,53,Bulgaria,1
+6f391535,53,Bulgaria,1
+6f391535,53,Bulgaria,1
+6f391535,53,Bulgaria,1
+6f391535,53,Bulgaria,1
+ca1c7a38,443,United States,1
+ca1c7a38,443,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+7458c138,443,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+cb8e68a6,443,Norway,1
+cb8e68a6,443,Norway,1
+7458c138,443,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+7458c138,443,United States,1
+7458c138,443,United States,1
+7458c138,443,United States,1
+7458c138,443,United States,1
+fff24bdd,443,Norway,1
+fff24bdd,443,Norway,1
+7458c138,443,United States,1
+7458c138,443,United States,1
+7458c138,443,United States,1
+7458c138,443,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+9371a1fe,443,Israel,1
+9371a1fe,443,Israel,1
+6f391535,53,France,1
+6f391535,53,France,1
+6e5b42d3,443,Israel,1
+6e5b42d3,443,Israel,1
+b81b6492,443,Israel,1
+b81b6492,443,Israel,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+b81b6492,443,Israel,1
+b81b6492,443,Israel,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+48a6c55c,443,Norway,1
+48a6c55c,443,Norway,1
+1806ff17,443,United States,1
+1806ff17,443,United States,1
+1806ff17,443,United States,1
+1806ff17,443,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+e3e88045,80,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,Netherlands,1
+6f391535,53,Netherlands,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+e511195d,443,United States,1
+215f074d,443,Israel,1
+215f074d,443,Israel,1
+215f074d,443,Israel,1
+215f074d,443,Israel,1
+215f074d,443,Israel,1
+215f074d,443,Israel,1
+76a052c7,53,Portugal,1
+76a052c7,53,Portugal,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+99c11572,443,United Kingdom,1
+99c11572,443,United Kingdom,1
+99c11572,443,United Kingdom,1
+99c11572,443,United Kingdom,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+615b3f18,443,Norway,1
+615b3f18,443,Norway,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+38f8fdff,80,Portugal,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+8aa454ca,443,Israel,1
+8aa454ca,443,Israel,1
+674e9473,443,Germany,1
+674e9473,443,Germany,1
+674e9473,443,Germany,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+7b366967,80,Netherlands,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,Bulgaria,1
+6f391535,53,Bulgaria,1
+6f391535,53,Bulgaria,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,Ukraine,1
+6f391535,53,Ukraine,1
+44341a0c,80,Portugal,1
+44341a0c,80,Portugal,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+4d6d9b0f,53,Portugal,1
+4d6d9b0f,53,Portugal,1
+6f391535,53,France,1
+6f391535,53,France,1
+35e18252,443,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+2d22a1ce,443,United States,1
+28bc4f8e,443,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United Arab Emirates,1
+6f391535,53,United Arab Emirates,1
+6f391535,53,United Arab Emirates,1
+6f391535,53,United Arab Emirates,1
+6f391535,53,Seychelles,1
+6f391535,53,Seychelles,1
+6f391535,53,United Kingdom,1
+6f391535,53,United Kingdom,1
+6f391535,53,Netherlands,1
+6f391535,53,Netherlands,1
+6f391535,53,Netherlands,1
+6f391535,53,Netherlands,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+e3e88045,80,United States,1
+e3e88045,80,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+ca40805f,80,China,1
+ca40805f,80,China,1
+e3e88045,80,United States,1
+e3e88045,80,United States,1
+e3e88045,80,United States,1
+e3e88045,80,United States,1
+16ebad73,80,Luxembourg,1
+16ebad73,80,Luxembourg,1
+988def67,443,Norway,1
+988def67,443,Norway,1
+2d22a1ce,443,United States,1
+2d22a1ce,443,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+3f7db9fc,445,Portugal,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United Kingdom,1
+6f391535,53,United Kingdom,1
+6f391535,53,Germany,1
+6f391535,53,Germany,1
+6f391535,53,Germany,1
+6f391535,53,Germany,1
+6f391535,53,Germany,1
+6f391535,53,Germany,1
+6f391535,53,Germany,1
+76a052c7,443,Israel,1
+76a052c7,443,Israel,1
+76a052c7,53,Portugal,1
+76a052c7,53,Portugal,1
+76a052c7,443,Israel,1
+76a052c7,443,Israel,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+76a052c7,443,Israel,1
+76a052c7,443,Israel,1
+640e9698,443,United States,1
+640e9698,443,United States,1
+640e9698,443,United States,1
+79e8f478,80,United States,1
+79e8f478,80,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+2d22a1ce,443,United States,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Israel,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+6f391535,53,Russian Federation,1
+6f391535,53,Russia,1
+e3e88045,80,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+6f391535,53,United States,1
+3e06999a,80,United States,0
+50eae105,443,United States,0
+0bb1fcc1,443,United States,0
+4580e793,443,United States,0
+cd3363d0,443,United States,0
+020cf42f,443,United States,0
+de98d142,443,United States,0
+76a052c7,443,United States,0
+8a72d412,443,United States,0
+b92fb5bf,443,United States,0
+f3244f49,443,United States,0
+0a219107,443,United States,0
+82eb839b,443,Portugal,0
+2a116aa7,443,United States,0
+b244cdce,443,United States,0
+ab40e19c,3482,United States,0
+fca9a453,6969,Russian Federation,0
+1af743c5,443,United States,0
+8fc184f5,443,United States,0
+1372482f,443,United States,0
+e1058b15,443,United States,0
+34637359,443,United States,0
+611d2741,443,United States,0
+e797229c,443,United States,0
+10f72623,443,Portugal,0
+567b646e,443,United States,0
+63c91915,443,United States,0
+c5569f7a,443,United States,0
+01c8873a,443,United States,0
+c5c9af4b,443,United States,0
+cafdaea7,443,United States,0
+8bdb4132,443,France,0
+4ed1709c,443,United States,0
+1372482f,443,United States,0
+0f5b40ed,443,United States,0
+8f3c27ac,80,United States,0
+b26ca8e7,443,United States,0
+1f4c15d5,443,United States,0
+0170a116,443,United States,0
+4994364c,443,United States,0
+d1bec268,443,United States,0
+c00a8301,443,United States,0
+bacce753,445,Portugal,0
+14f61754,443,United States,0
+8a8587dd,443,United States,0
+2f2a3dc7,443,United States,0
+0107b88e,443,United States,0
+dddf1a45,443,United States,0
+5d9deb55,443,United States,0
+9ec2e3be,443,United States,0
+49d9ceb5,443,United States,0
+7fad50a0,443,United States,0
+7b4911e2,443,Portugal,0
+4d3210a2,80,United States,0
+fe512f81,443,United States,0
+ce8a0cc4,443,Portugal,0
+dab21041,443,Portugal,0
+aaba5f45,80,Portugal,0
+b39a6686,443,United States,0
+d29fe4f4,443,Portugal,0
+74ab471a,443,United States,0
+f831b4a4,443,United States,0
+16f5b3a8,443,United States,0
+9a74323c,443,United States,0
+b42aee75,443,United States,0
+82906b8f,443,United States,0
+e1970aef,443,United States,0
+9dbe76f9,443,United States,0
+0042dc74,443,United States,0
+4c840758,443,United States,0
+d328dd86,443,United States,0
+daa95d6b,80,United Kingdom,0
+f1018e21,443,United States,0
+a38027e5,443,United States,0
+558fa5ab,443,United States,0
+03441cf0,443,United States,0
+fc3e9db2,443,United States,0
+ab7fe483,443,Netherlands,0
+8a7d4124,443,United States,0
+7f7155aa,443,United States,0
+9dfd3a64,443,United States,0
+861ed5e2,443,United States,0
+dfc854ad,53,United States,0
+b908677a,443,United States,0
+0a219107,443,Israel,0
+754e4dd5,443,United States,0
+f69e9e82,443,United States,0
+c52bb89a,443,United States,0
+25128e06,443,United States,0
+dc5003e7,443,United States,0
+f1612ae6,443,United States,0
+18198cd4,9876,United States,0
+16584de8,443,United States,0
+8d4b6693,443,United States,0
+19927856,443,United States,0
+deb46b69,443,United States,0
+b2abd1ac,80,United States,0
+f8a3fba4,443,United States,0
+38f8fdff,80,Portugal,0
+af172b08,443,United States,0
+3741e82b,443,United States,0
+042e8f4f,443,United States,0
+7370ffd3,443,United States,0
+ff7c2f40,443,United States,0
+5adc8234,443,United States,0
+c71685ca,443,United States,0
+b738e7dd,443,United States,0
+98a71fbd,443,United States,0
+90432971,443,United States,0
+17fb013d,443,United States,0
+41cce349,443,United States,0
+986d94cb,443,United States,0
+0dd87be9,443,Portugal,0
+6bb5ed37,53,Portugal,0
+30a8fb19,443,United States,0
+3b3bcfb8,49669,Portugal,0
+a75f02fc,443,Netherlands,0
+eac19b9e,443,Portugal,0
+62a979b7,443,United States,0
+3e95421b,443,United States,0
+849aac30,443,United States,0
+bb4c340f,2710,France,0
+4b07a39a,443,United States,0
+af36b36e,443,United States,0
+c928ded3,443,United States,0
+44939450,443,United States,0
+8ce9607e,443,Netherlands,0
+1db7d3e0,80,United States,0
+aab180c6,443,United States,0
+7b4bbe99,443,United States,0
+cefacd50,443,United States,0
+4cd86317,443,United States,0
+2d3a2a0d,443,United States,0
+fc176592,443,United States,0
+d6eed9e1,443,United States,0
+7f92dca9,443,United States,0
+55e65d4a,443,United States,0
+af2775b3,443,United States,0
+42d4aa82,3482,United States,0
+990cc78b,443,Netherlands,0
+0deac1d7,443,United States,0
+477d3027,443,United States,0
+7ac64142,443,Netherlands,0
+7badced1,443,United States,0
+9fbe09e2,443,United States,0
+73a649d0,443,France,0
+3887a4e1,443,United States,0
+dbe7eb2d,443,Portugal,0
+5ea37e6a,443,United States,0
+845d206f,443,United States,0
+fe781eaa,443,United States,0
+99407fb3,443,United States,0
+0c1319af,451,France,0
+1d2beff8,443,United States,0
+6a4128b3,443,United States,0
+06fa3973,443,United States,0
+d00a3271,443,United States,0
+99c11572,443,United States,0
+27acc2a6,443,Portugal,0
+233b0557,4222,Singapore,0
+9f07dc85,443,United States,0
+effd0505,443,United States,0
+9cb14224,443,Netherlands,0
+1f3174bf,443,United States,0
+65b3ea5f,443,Netherlands,0
+3f9b3c26,443,United States,0
+7853c0e7,443,United States,0
+2dfaa287,443,Netherlands,0
+01a4b6fc,389,Portugal,0
+2fb539e2,443,United States,0
+bca95616,443,United States,0
+67c019d5,443,United States,0
+dc145a50,123,United States,0
+707af4b7,443,Portugal,0
+3bfac59e,443,United States,0
+34da692c,4460,United States,0
+82ec6b12,443,United States,0
+13e40a47,443,United States,0
+ddf87d55,443,United States,0
+4aa051f5,443,United States,0
+7370ffd3,443,United States,0
+d68e5ea6,88,Portugal,0
+dba260b1,135,Portugal,0
+e0b0dda6,443,United States,0
+821c4e7d,443,United States,0
+c3d29506,123,Portugal,0
+c6978aba,443,United States,0
+76cd7e38,443,United States,0
+a2c43d7c,443,United States,0
+4d61a797,443,United States,0
+824d56ac,443,United States,0
+5d33654f,443,United States,0
+988def67,443,United States,0
+75976eaf,443,United States,0
+7a9b6714,443,United States,0
+8844fec7,443,United States,0
+2069cdf4,443,United States,0
+dd25832b,993,United States,0
+c69dcbdc,443,United States,0
+d12af979,443,United States,0
+0a219107,443,United States,0
+b50715c6,443,United States,0
+f15a97f3,443,Portugal,0
+cb0bf1df,443,United States,0
+9d083b4b,443,United States,0
+e0b4a9c1,443,United States,0
+b2d4d573,443,United States,0
+12d6d921,443,United States,0
+e7115b71,443,United States,0
+70951cf9,443,United States,0
+99d7ed54,443,United States,0
+c5083da5,443,United States,0
+b638cc11,80,United States,0
+b42aee75,443,United States,0
+4b033a0a,443,United States,0
+61cac56e,443,United States,0
+5ac84090,443,United States,0
+e7a5145f,6969,Russian Federation,0
+b26dc75e,443,United States,0
+0a3d5bc4,443,United States,0
+70584e18,80,Portugal,0
+b9976a25,443,United States,0
+2a476208,443,United States,0
+8aa454ca,443,United States,0
+25a6a1a3,443,United States,0
+874db6b4,443,United States,0
+f1890533,443,France,0
+a3244aab,443,United States,0
+85893e58,80,United States,0
+96936eaa,80,United States,0
+85c43f50,443,Sweden,0
+c3008663,443,United States,0
+302c860f,443,United States,0
+88b376b4,443,United States,0
+4f76a9c9,443,Netherlands,0
+6262185d,80,United States,0
+734fb83b,451,France,0
+73e45b47,443,United States,0
+1c2cd0eb,6969,United Kingdom,0
+db7ccf90,443,United States,0
+bf3e6ffd,443,United States,0
+8526343b,443,United States,0
+6d1705cc,443,Netherlands,0
+0665902b,993,United States,0
+c581c0aa,443,United States,0
+c7bd2234,443,Netherlands,0
+96e38924,443,United States,0
+202377f9,443,United States,0
+e92b9e2f,443,Portugal,0
+5ea34db5,443,China,0
+29c13cc9,443,United States,0
+c98e113b,443,United States,0
+60315716,443,United States,0
+f1890533,443,United States,0
+fca9a453,1337,Chile,0
+151a6093,443,United States,0
+902b8528,443,United States,0
+47d61fe6,443,United States,0
+3887a4e1,443,United States,0
+71857182,443,United States,0
+ae726607,5333,China,0
+8ed8c74d,443,United States,0
+80856d6e,443,United States,0
+f5af1528,443,United States,0
+0ada0603,443,United States,0
+72deddd3,443,United States,0
+0078de3f,443,Netherlands,0
+42320c78,443,United States,0
+e7b50226,443,United States,0
+79be83c9,443,United States,0
+52861184,443,United States,0
+41c68192,443,United States,0
+a7e1a928,443,United States,0
+1827d048,443,Portugal,0
+6be55b22,443,United States,0
+b762531b,443,United States,0
+fca9a453,2710,United States,0
+6028af6d,443,United States,0
+ed3b371f,443,United States,0
+166ade0b,443,United States,0
+e2283559,443,United States,0
+49981bf0,443,United States,0
+551874d4,443,United States,0
+448e27ab,443,United States,0
+0cd58fee,443,United States,0
+b25dbe7e,443,United States,0
+e0b0dda6,443,United States,0
+2153e78b,443,United States,0
+1d3f538b,443,United States,0
+5939ed77,443,United States,0
+b908677a,443,United States,0
+16584de8,443,United States,0
+17afc711,443,Portugal,0
+c7766c5d,443,United States,0
+0836ddb4,13634,China,0
+703efa0a,443,United States,0
+c7c1a7e4,443,United States,0
+dab8a999,443,United States,0
+6d0731ab,443,Portugal,0
+b8155914,443,Portugal,0
+3cec06da,443,United States,0
+0a10d6fa,443,United States,0
+abe63059,443,United States,0
+e07cfdcf,80,Portugal,0
+4ed1709c,443,Denmark,0
+c1ed5a78,443,United States,0
+040adffe,80,Portugal,0
+f2698182,443,United States,0
+07d93b31,443,United States,0
+fabe9578,443,United States,0
+ce61697b,1032,Portugal,0
+90c1dcbb,443,United States,0
+2a116aa7,443,United States,0
+308a1ff6,443,United States,0
+da3fa25d,443,Portugal,0
+17f090a9,443,United States,0
+bb694085,6363,United States,0
+a630fbe5,80,Portugal,0
+aa369526,443,United States,0
+c91b56c3,443,United States,0
+ee5db8ff,443,United States,0
+05792cc1,443,United States,0
+31d13858,80,Portugal,0
+01898475,443,United States,0
+9013aeeb,443,United States,0
+2f97c997,443,United States,0
+67ee0f78,88,Portugal,0
+e1f76dce,443,United States,0
+0e2985a3,443,United States,0
+98ece44c,443,United States,0
+b20dd4ff,443,United States,0
+72a8e1f2,443,United States,0
+7f9baa87,443,Portugal,0
+c54a0e8a,80,United States,0
+b762531b,443,United States,0
+8fffc434,3482,United States,0
+112b12b8,443,United States,0
+409cd9c4,4460,United States,0
+20076996,443,United States,0
+2b55a556,443,Netherlands,0
+dafbefc1,443,United States,0
+e2684506,443,United States,0
+a74536a2,443,Portugal,0
+ab31e91f,443,Portugal,0
+825dd46e,443,United States,0
+92d6a60e,443,United States,0
+c80db8ae,443,United States,0
+2997668a,443,Germany,0
+4e9de800,443,United States,0
+e45656aa,443,United States,0
+e5532d63,443,United States,0
+758d3b70,443,United States,0
+5bebefa4,443,United States,0
+83105828,443,United States,0
+ca8a82ce,443,United States,0
+0d94bf21,443,Netherlands,0
+075924f3,443,United States,0
+345cf8a8,443,United States,0
+8e99f404,443,United States,0
+45aacff2,443,United States,0
+8e87a739,8443,United States,0
+749a0151,80,United States,0
+64a383f6,443,United States,0
+29b982b0,443,United States,0
+fafbe49f,443,United States,0
+5ec9b551,443,United States,0
+6a3d0bd4,443,Portugal,0
+c92ff382,443,United States,0
+744bdda1,443,United States,0
+a4c38db6,443,Portugal,0
+33965773,443,United States,0
+66b8de5b,443,United States,0
+486c3473,443,Portugal,0
+5704e801,443,United States,0
+1ed5abbf,443,United States,0
+cec75ec2,443,Netherlands,0
+a5972614,443,United States,0
+b0e7ffbb,80,Portugal,0
+9861e8a0,80,United States,0
+4d4f2b3f,443,United States,0
+afe7faaf,443,United States,0
+e9106028,443,United States,0
+2556c513,443,United States,0
+d6d88532,5222,United States,0
+e9f3cb8d,443,United States,0
+06cb9c93,443,United States,0
+b35eea07,443,United States,0
+a458bc0f,443,United States,0
+7853c0e7,443,United Kingdom,0
+f125f877,443,United States,0
+7370ffd3,443,United States,0
+f2fccd43,443,United States,0
+d223c796,443,United States,0
+2f4b09f9,443,United States,0
+ade497b5,6969,United States,0
+fa81182b,6447,Germany,0
+a833a53a,443,United States,0
+447b2a84,443,United States,0
+2b64b52b,443,United States,0
+fdf049cf,443,United States,0
+0ab9245b,80,Portugal,0
+6cf441d6,443,United States,0
+51609c03,88,Portugal,0
+98815f4b,443,United States,0
+21d73d13,443,United States,0
+ef32930f,443,United States,0
+f39ba234,443,United States,0
+73414a5f,80,Portugal,0
+94dc53df,443,United States,0
+e711de95,443,United States,0
+014bf89b,443,United States,0
+a77dd40d,443,Germany,0
+0d94bf21,443,United States,0
+a1063afc,443,United States,0
+6dca4303,443,United States,0
+c190e823,443,United States,0
+daa95d6b,443,United States,0
+87e3f115,443,United States,0
+37b40e6e,443,United States,0
+aaf09b5e,443,United States,0
+fca9a453,6969,United States,0
+059120b5,443,United States,0
+47a39ca0,443,Portugal,0
+f2e5477b,443,United States,0
+03aec668,443,United States,0
+a60a17bb,443,United States,0
+a71369af,443,United States,0
+dce07917,443,United States,0
+9eeb2529,443,United States,0
+ade497b5,6969,Norway,0
+3c8c9c47,993,United States,0
+70186227,443,United States,0
+4d996a35,443,United States,0
+1cc2fbf5,443,United States,0
+16f52db9,443,United States,0
+dc9e714f,443,United States,0
+299c2a44,443,United States,0
+37d2a813,443,United States,0
+21d73d13,443,United States,0
+61b1971e,3482,United States,0
+c69dcbdc,443,United States,0
+47fbef24,443,United States,0
+5a7a6454,443,United States,0
+c190e823,443,United States,0
+69320618,9191,Portugal,0
+90f5e5b5,443,United States,0
+1f1ec3e2,443,United States,0
+f950669b,443,United States,0
+96d51857,443,United States,0
+87e3f115,80,United States,0
+8c56e094,443,United States,0
+eb8a5ccd,443,United States,0
+a3092e50,443,United States,0
+e86a3132,443,United States,0
+bacce753,443,United States,0
+142a26d4,80,Portugal,0
+3845d5ba,443,United States,0
+55ad2218,443,United States,0
+c4ba3052,5223,United States,0
+16584de8,443,Netherlands,0
+129cb432,443,Portugal,0
+4f45367b,443,United States,0
+1b01d9d4,443,United States,0
+d9bfb2d6,443,Netherlands,0
+f17cf7f9,443,United States,0
+13adc926,443,United States,0
+1c27f6d7,443,United States,0
+6137a671,443,United States,0
+de838cce,443,United States,0
+3f559b7f,443,United States,0
+3a0ef95c,443,United States,0
+836692da,88,Portugal,0
+953b8d8b,443,Portugal,0
+41756f5d,443,United States,0
+3bf3e299,443,United States,0
+dc539e3b,443,United States,0
+86397d75,3480,United States,0
+d65cedcf,443,United States,0
+d329f187,443,United States,0
+de9cf3ca,443,United States,0
+826b4204,80,South Korea,0
+f257e1e1,443,United States,0
+5a21e8a8,443,United Kingdom,0
+3741e82b,443,United States,0
+d60443a0,443,Portugal,0
+926c330a,443,United States,0
+0b5b09a6,443,France,0
+af220eca,443,Portugal,0
+f7a04af5,6969,Norway,0
+69320618,443,United States,0
+e6bf98a5,443,United States,0
+c61234ee,443,United States,0
+b8153935,443,Portugal,0
+bb4d2580,443,United States,0
+151a6093,5222,United States,0
+261d6904,443,United States,0
+7f642de9,443,Portugal,0
+c8fe2876,443,United States,0
+f5893f37,443,Portugal,0
+4c860ff9,8443,Portugal,0
+bce69428,443,United States,0
+4070805f,443,United States,0
+4c425f64,443,United States,0
+690a4021,443,United States,0
+d37a20b5,443,United States,0
+4c769baf,443,United Kingdom,0
+9e353ceb,443,United States,0
+c92ff382,443,United States,0
+1b12ea91,443,United States,0
+cb7979f6,443,Portugal,0
+c3dcadfc,5223,United States,0
+0ee5a940,443,United States,0
+2a0c9a99,7824,China,0
+00b9cb56,443,United States,0
+73e0f7a9,443,United States,0
+90360530,443,United States,0
+31df1b83,443,Germany,0
+46846026,443,United States,0
+ab3cc0bb,443,United States,0
+75808144,443,United States,0
+3ef6e2be,443,United States,0
+0c31c29e,443,United States,0
+6675ff94,443,United States,0
+e95a01ee,443,United States,0
+661a9c28,443,United States,0
+1881af7f,443,United States,0
+568b1fa6,443,United States,0
+e5c98040,443,United States,0
+6bb5ed37,443,United States,0
+cafdaea7,443,United States,0
+d3c0b066,443,France,0
+0c1319af,80,Norway,0
+4f76a9c9,8885,United States,0
+4cdb3ab4,443,United States,0
+b92fb5bf,80,United States,0
+66e70a16,443,United States,0
+3692613e,443,United States,0
+62c5e199,443,United States,0
+e2c5a088,443,United States,0
+5cc1254b,443,United States,0
+fe781eaa,443,Portugal,0
+9d5313a8,443,Portugal,0
+ac6dc6fc,443,United States,0
+2f97c997,443,United States,0
+8635853f,443,United States,0
+133dce06,443,United States,0
+27c7c2a6,443,United States,0
+b762531b,443,Portugal,0
+e5401d84,443,United States,0
+4fadd9ac,443,United States,0
+af10bcdf,443,Portugal,0
+bb4d2580,443,United States,0
+c6f1a2a4,443,United States,0
+7370ffd3,443,United States,0
+845d206f,443,United States,0
+0b64eb3a,9440,Portugal,0
+f15a97f3,443,United States,0
+d12af979,443,United States,0
+b8a976e2,443,United States,0
+8903a78e,443,United States,0
+17ce7c41,443,United States,0
+ac0d5201,443,United States,0
+749a0151,443,United States,0
+64458862,443,United States,0
+2899bb86,443,United States,0
+2187b0a6,22222,United States,0
+73e31d37,443,United States,0
+8903a78e,443,France,0
+728a54bd,443,United States,0
+e05e343d,443,United States,0
+537f7547,80,United States,0
+df82e80c,443,United States,0
+d9d917b8,443,United States,0
+c95da719,443,United States,0
+16cf66f9,443,United States,0
+c015468a,443,United States,0
+6be55b22,443,France,0
+27ebb513,443,United States,0
+ef9bd47c,443,United States,0
+95db63f0,443,United States,0
+1b1585df,443,United States,0
+8a7d4124,443,United States,0
+37c10e1f,443,United States,0
+85d235ce,443,United States,0
+142a26d4,443,United States,0
+cf314fc9,80,United States,0
+e6308fb1,443,United States,0
+2ed25741,443,United States,0
+24a5b615,443,United States,0
+b25781e5,443,United States,0
+afca0924,443,United States,0
+9c566f04,6969,Russian Federation,0
+8635853f,443,Netherlands,0
+78c1a1c1,443,United States,0
+eeedca9b,443,Netherlands,0
+1dae9921,443,United States,0
+9b257cad,443,United States,0
+bffe74bf,443,United States,0
+58c48ce4,443,United States,0
+a737897c,443,United States,0
+ecf6087f,443,United States,0
+a9f08fc8,443,United States,0
+b762531b,443,United States,0
+727b7af3,5228,United States,0
+ec3a56ef,443,United States,0
+b97ec97f,80,Portugal,0
+f831b4a4,443,United States,0
+0deac1d7,443,United States,0
+6530c09f,443,United States,0
+e05e343d,443,United States,0
+4a8b3eb4,443,United States,0
+47fab9d3,443,United States,0
+eac19b9e,443,United States,0
+92e59615,443,United States,0
+8f7b4b68,443,United States,0
+b934f87c,443,United States,0
+37501254,5222,United States,0
+7b9b1883,443,United States,0
+4ac90c9b,443,United States,0
+cf5a03fa,443,Portugal,0
+8412d676,443,United States,0
+442c85d1,443,United States,0
+fa5abfd6,443,United States,0
+432a378a,443,United States,0
+0aeaba61,443,United States,0
+b82a50e0,443,United States,0
+05879dd3,443,United States,0
+57131db3,443,United States,0
+8785e48b,443,United States,0
+d7f740e9,443,United States,0
+f54c0401,80,United States,0
+306a0f31,443,United States,0
+849aac30,443,United States,0
+fe70de30,443,United States,0
+79b84b32,443,United States,0
+99a74062,80,Norway,0
+477d3027,443,United States,0
+995b6050,443,Portugal,0
+67581732,443,United States,0
+d9f4ce15,443,United States,0
+fbebdb5e,443,United States,0
+0d78e96c,443,United States,0
+56140508,40443,United States,0
+0ce12bfb,443,United States,0
+99a51603,443,United States,0
+4ce155fa,80,United States,0
+58fed4af,443,United States,0
+29134f18,443,United States,0
+e948bd90,443,Portugal,0
+c6e182c9,80,United States,0
+783acbaf,443,United States,0
+6820217e,443,United States,0
+9371a1fe,443,United States,0
+6c69e3ac,443,United States,0
+0cb3a46b,443,United States,0
+fdf049cf,443,United States,0
+4064939a,443,United States,0
+f44d5e46,443,United States,0
+feda6e56,443,Netherlands,0
+26491e6c,443,United States,0
+2ddb011c,443,United States,0
+38a7934e,443,United States,0
+e2283559,443,Portugal,0
+7aef0ca6,88,Portugal,0
+f920975b,443,United States,0
+7f642de9,443,United States,0
+dbd8b64f,443,United States,0
+7749158d,443,United States,0
+188135b2,443,United States,0
+9db3ba97,443,United States,0
+1b0bbdb1,443,United States,0
+40fa92cc,443,United States,0
+6aef5696,443,Portugal,0
+4d4f2b3f,443,United States,0
+56140508,443,United States,0
+60344ca0,443,United States,0
+c6e8e774,443,United States,0
+1948622e,443,United States,0
+3267457b,5222,United States,0
+ef32e2de,443,United States,0
+cd071304,443,Portugal,0
+74ab471a,443,United States,0
+103018cf,443,United States,0
+2fb539e2,5228,United States,0
+c015468a,443,United States,0
+7f2180db,443,United States,0
+eee6ce34,443,United States,0
+c127da86,443,Portugal,0
+bba39424,443,United States,0
+b244d142,443,United States,0
+26c5c9fc,443,United States,0
+39c17818,443,United States,0
+8a8587dd,443,United States,0
+6808a078,3482,United States,0
+fa5abfd6,3482,United States,0
+1372482f,443,United States,0
+10a66352,443,Netherlands,0
+6739186c,443,United States,0
+b8153935,443,United States,0
+d7328e9b,443,United States,0
+84f7513e,443,United States,0
+37757c65,443,United States,0
+ff5ce7fc,443,Portugal,0
+5a72228a,443,United States,0
+d09f33ef,443,United States,0
+445bc685,443,United States,0
+8c56e094,443,United States,0
+1f46617e,443,United States,0
+9c566f04,1337,Chile,0
+b35a9eb8,443,United States,0
+ce48bc81,443,United States,0
+5f8d6c8a,443,United States,0
+e0aab4f6,443,United States,0
+6fd5e066,443,United States,0
+cda75755,443,United States,0
+01315481,443,United States,0
+5ec07fa3,443,United States,0
+3c85d929,443,United States,0
+34cfd159,443,United States,0
+9d5313a8,443,United States,0
+689afe6b,80,United States,0
+f17cf7f9,443,United States,0
+9619f942,445,Portugal,0
+46b528e5,443,United States,0
+7a8f1def,443,United States,0
+93cc3a13,443,United States,0
+07d93b31,443,United States,0
+401b7058,443,Portugal,0
+133dce06,443,United States,0
+f56496b5,443,United States,0
+99407fb3,80,United States,0
+eb8a5ccd,443,United States,0
+cecedddb,443,Netherlands,0
+37d2a813,16565,Portugal,0
+70e6a88b,443,Norway,0
+2cbe9bc6,443,United States,0
+78a666c1,443,United States,0
+43ebb50e,443,United States,0
+f50728ac,443,United States,0
+1bafc81d,443,United States,0
+d5aff2eb,443,United States,0
+0982f503,443,United States,0
+1e8f71a4,443,United States,0
+18d24837,443,United States,0
+8d4b6693,443,United States,0
+fe70de30,443,United States,0
+a588485b,451,France,0
+e92b9e2f,443,United States,0
+d530c627,443,United States,0
+b0e7ffbb,443,United States,0
+a5d30fad,443,United States,0
+e0a8be0f,443,United States,0
+c575a720,443,United States,0
+ac0d5201,88,Portugal,0
+834520a2,443,United States,0
+61b1971e,443,United States,0
+b0aabff2,443,Portugal,0
+73994f85,443,United States,0
+0455b4b5,443,United States,0
+4b53684d,443,United States,0
+d37a20b5,443,United States,0
+77e446cc,443,United States,0
+5ec07fa3,443,United States,0
+35fe6b0d,443,Netherlands,0
+4ebbb2ad,443,United States,0
+7da8348e,443,Netherlands,0
+10ab22fe,443,United States,0
+7c58edd6,443,United States,0
+b244cdce,443,United States,0
+8faa4432,443,United States,0
+075924f3,443,United States,0
+e0b4a9c1,80,United States,0
+96fdf0c0,443,United States,0
+a1cd5634,443,United States,0
+4bc290d4,443,United States,0
+b735ecb7,443,United States,0
+f7cd97fe,443,United States,0
+133c2f3f,443,Georgia,0
+734fb83b,443,United States,0
+4c441987,443,United States,0
+7b46d322,443,United States,0
+f4d9a7f3,443,United States,0
+c6f1a2a4,443,United States,0
+e5b017a1,443,United States,0
+1482872b,88,Portugal,0
+0e13ef7c,5223,United States,0
+05c97334,443,United States,0
+a66e52f4,443,United States,0
+54ccfb87,443,United States,0
+4c3489ce,443,United States,0
+12249d85,443,Netherlands,0
+4ac90c9b,443,Portugal,0
+83105828,443,United States,0
+321f1523,443,United States,0
+fd230822,443,United States,0
+17b04634,443,United States,0
+be340f86,443,United States,0
+c9e6b427,443,United States,0
+2563e547,443,Portugal,0
+bc988786,443,Portugal,0
+9dc53dd7,443,United States,0
+4fa7c4ad,443,United States,0
+2dc374fa,443,United States,0
+b12525e0,443,United States,0
+1f46617e,443,United States,0
+640c9a65,443,Norway,0
+6736ac88,443,Netherlands,0
+d84253f9,80,Portugal,0
+d927def4,443,United States,0
+41f0f93a,443,Germany,0
+8a140cba,443,United States,0
+faedd9db,443,United States,0
+e9a899e1,443,United States,0
+4324f66f,443,United States,0
+228127f4,443,United States,0
+ee87e676,443,United States,0
+8cae3c22,443,United States,0
+3060aa4a,443,United States,0
+dc2477f9,443,United States,0
+20b858f9,443,United States,0
+a682716b,443,United States,0
+27947234,443,Portugal,0
+ff5ce7fc,443,United States,0
+1037426a,443,United States,0
+da66a2db,443,United States,0
+dab21041,443,United States,0
+524e4d1c,80,Portugal,0
+010d8657,443,United States,0
+52861184,443,United States,0
+05a7db06,443,Portugal,0
+ff5ddaa4,443,Romania,0
+f138a732,88,Portugal,0
+04d249c1,443,United States,0
+6f880baf,443,United States,0
+6cf441d6,443,United States,0
+da8763ed,443,United States,0
+e9bfcb41,443,United States,0
+112b12b8,443,Portugal,0
+af47b8e0,80,United States,0
+8903a78e,443,Denmark,0
+bafd2981,5222,United States,0
+4aa051f5,443,United States,0
+6f241241,443,United States,0
+5f11c22b,443,United States,0
+06cb9c93,443,United States,0
+b41aa8c6,80,Portugal,0
+c6bbd2f5,443,United States,0
+b0f238e1,443,United States,0
+dc9ebfa0,443,United States,0
+592a159e,3482,United States,0
+c6a50447,80,United States,0
+a5d30fad,443,United States,0
+4b5640cd,443,United States,0
+00b9cb56,443,United States,0
+85693a8d,443,United States,0
+f9cef749,443,United States,0
+0fc88c82,443,United States,0
+e0aab4f6,443,United States,0
+d5273da8,443,United States,0
+1fa2e7c2,443,United States,0
+f39ba234,443,United States,0
+e0a8be0f,443,United States,0
+7b498a33,443,Czech Republic,0
+992af48d,443,United States,0
+3a8cd2f6,443,United States,0
+ddf6d634,443,United States,0
+8faa4432,443,United States,0
+957be212,443,United States,0
+79ad3587,443,Portugal,0
+dc6d4e22,443,United States,0
+2bd0a6bd,9876,Egypt,0
+d58f2a96,80,Portugal,0
+4b3e638f,80,Portugal,0
+18198cd4,9876,Russia,0
+e5b017a1,443,United States,0
+f9bd390f,443,United States,0
+135ee36d,443,United States,0
+d986739c,443,United States,0
+9b664dc5,443,United States,0
+e008704d,80,United States,0
+16f52db9,443,Portugal,0
+d68e5ea6,443,United States,0
+65f3df87,443,United States,0
+52a0a282,80,United States,0
+933ecc70,443,United States,0
+72839bfa,443,United States,0
+c1c345fd,80,United States,0
+f4950c97,443,United States,0
+524e4d1c,443,United States,0
+4f4e4d4b,443,United States,0
+d8b3b4de,443,United States,0
+3060aa4a,80,United States,0
+703efa0a,443,United States,0
+eb8a5ccd,21116,United States,0
+6739186c,443,United States,0
+1561469d,443,United States,0
+d266feae,443,United States,0
+b9ecf348,443,United States,0
+080a88f4,443,United States,0
+7e248eb7,443,United States,0
+1b12ea91,443,United States,0
+3692613e,443,United States,0
+22c1d603,443,United States,0
+f6a9caef,443,United States,0
+b7588b84,443,Germany,0
+689b8352,443,United States,0
+4ba6e02a,443,United States,0
+66c5c2c7,443,United States,0
+f7a04af5,80,Norway,0
+aff32c73,443,United States,0
+16721577,443,United States,0
+445aa3db,443,United States,0
+f4e5d9bb,443,Austria,0
+d0445154,443,United States,0
+27ebb513,443,United States,0
+d5273da8,123,United States,0
+b19d92ee,443,United States,0
+eb39c56a,443,United States,0
+1aba51f8,80,United States,0
+78a40717,443,United States,0
+e8c34881,443,France,0
+f8598838,443,United States,0
+d5e95d9e,88,Portugal,0
+45b6eb0e,443,United States,0
+73112e55,443,United States,0
+5d6a6f59,443,United States,0
+c6ff62c5,443,Portugal,0
+824d56ac,443,United States,0
+211b5896,5222,United States,0
+664464c2,443,United States,0
+0390eda7,443,United States,0
+f49d43b7,443,United States,0
+1bafc81d,443,United States,0
+72839bfa,443,United States,0
+4833f112,443,United States,0
+db8d6e8f,443,United States,0
+34cfd159,443,United States,0
+6aef5696,443,United States,0
+7a9b6714,80,United States,0
+9bd149d3,443,Germany,0
+cccb846f,443,United States,0
+604f7d57,443,United States,0
+210b1a8c,443,United States,0
+8171c63e,443,Portugal,0
+a36abe8c,443,United States,0
+f15a97f3,443,United States,0
+5bdca347,443,United States,0
+135ee36d,443,United States,0
+d9cb42d6,443,United States,0
+b20dd4ff,443,United States,0
+39099924,443,United States,0
+6306158b,993,United States,0
+ffbf41d3,443,United States,0
+1a7e9536,443,Portugal,0
+5bcc63e9,443,United States,0
+f7dcbca1,443,United States,0
+19927856,443,United States,0
+202377f9,443,United States,0
+6a361764,443,Netherlands,0
+32401920,443,United States,0
+1ea2f95b,9993,United States,0
+53622813,443,United States,0
+01c3be56,443,United States,0
+753a517a,443,United States,0
+db8d6e8f,443,United States,0
+21f75ba5,443,France,0
+bd487dca,443,United States,0
+bce69428,443,United States,0
+90545d0b,443,United States,0
+4b033a0a,443,United States,0
+c8800abc,443,United States,0
+27d54257,443,United States,0
+826b4204,443,United States,0
+2899bb86,443,United States,0
+f5af1528,443,United States,0
+05792cc1,443,United States,0
+e92787f8,443,United States,0
+17275e11,443,United States,0
+d3f0e128,443,United States,0
+d01f2bc0,443,United States,0
+861381f9,443,United States,0
+e461e7dc,443,United States,0
+4d9c28de,443,United States,0
+f125f877,443,Portugal,0
+0d8b1629,443,United States,0
+0ada0603,443,United States,0
+837fc617,443,United States,0
+bb694085,443,Germany,0
+7458c138,443,Norway,0
+788ee4fa,443,United States,0
+7fd0aba5,80,Hong Kong,0
+6e56a187,443,United States,0
+7770c3e5,389,Portugal,0
+abe20e99,443,United States,0
+1b3873cb,443,United States,0
+2950d778,443,United States,0
+567d79b4,443,France,0
+b36653c5,443,United States,0
+18a91ff3,443,United States,0
+5ac84090,443,Portugal,0
+1c61a859,443,Portugal,0
+23d8abe6,3482,United States,0
+e9a13ea7,443,United States,0
+477d3027,443,United States,0
+c09bdb6c,80,United States,0
+9355b62a,443,United States,0
+c4dba83f,443,United States,0
+ed3b371f,443,United States,0
+dce80fe9,443,Netherlands,0
+3c2d6d1d,443,United States,0
+c6bbd2f5,443,United States,0
+3aa36587,443,Germany,0
+3b28b206,443,United States,0
+dc9e714f,443,United States,0
+cfb08b83,443,United States,0
+dd92abd3,80,Portugal,0
+f2f034a0,443,United States,0
+31b814ab,5222,United States,0
+d057382d,9876,France,0
+1e81013f,443,United States,0
+8a34cf5c,443,United States,0
+734f3272,443,United States,0
+d2c6e9b7,443,United States,0
+ef32930f,443,United States,0
+f7a04af5,6969,United States,0
+f0279b7f,443,United States,0
+1a08ba2d,443,United States,0
+73e0f7a9,443,United States,0
+4c860ff9,443,United States,0
+aab180c6,443,United States,0
+bf3f6cb4,80,United States,0
+d266feae,443,United States,0
+4b8a225c,443,United States,0
+0a219107,443,Netherlands,0
+bba8b0d7,443,France,0
+fc3e9db2,443,United States,0
+6db25215,443,United States,0
+fe512f81,443,United States,0
+f8a3fba4,443,United States,0
+5617522d,443,United States,0
+2187b0a6,22222,United States,0
+f412968c,443,United States,0
+82d5316b,443,United States,0
+3ea2e47d,443,United States,0
+3ef475ec,6969,France,0
+effd0505,443,United States,0
+d68e5ea6,80,United States,0
+5eb61d8f,443,United States,0
+f950669b,80,United States,0
+442c85d1,443,United States,0
+0ff5f51e,443,United States,0
+c00a8301,443,United States,0
+0d172ef1,443,United States,0
+ce2a9a44,443,United States,0
+828cfe2d,443,United States,0
+2288eef2,443,United States,0
+1fb03929,443,United States,0
+18770b54,443,United States,0
+3c6b35e8,443,United States,0
+869d5792,443,United States,0
+76a052c7,80,Portugal,0
+3bf3e299,443,United States,0
+f639b5ce,443,United States,0
+019df68c,443,United States,0
+484c5b16,443,United States,0
+fb75fd31,443,United States,0
+afb68c24,443,United States,0
+16584de8,443,United States,0
+6d0731ab,443,United States,0
+73dedb22,443,United States,0
+84ba1467,443,United States,0
+b79ce510,443,United States,0
+34a604f7,443,United States,0
+6f4b4383,443,United States,0
+ceae26c6,443,United States,0
+ff5ce7fc,443,United States,0
+e5b017a1,443,United States,0
+58c48ce4,443,United States,0
+12febc77,443,United States,0
+2dfaa287,5228,United States,0
+fca9a453,6969,Russia,0
+e697846d,443,United States,0
+2cbca054,443,France,0
+049e504a,443,Norway,0
+0ce12bfb,443,United States,0
+d37296b1,443,United States,0
+5fc033c6,443,United States,0
+8b86ffe2,443,United States,0
+a0f6056f,1032,Portugal,0
+78e1ea97,5222,United States,0
+5a7e7234,443,United States,0
+1c2cd0eb,443,United States,0
+1db8eb74,443,United States,0
+db7ccf90,443,United States,0
+9179b1a4,443,United States,0
+7623fdce,443,United States,0
+0318d5f8,443,United States,0
+3f9b3c26,443,United States,0
+6d143e91,5228,United States,0
+82191852,443,United States,0
+95cd38d6,443,Portugal,0
+5454f399,443,United States,0
+751722a4,443,United States,0
+0ee5a940,443,United States,0
+24d1e9fd,443,United States,0
+1297ac0e,443,United States,0
+713f84f1,443,France,0
+b66d4e23,443,United States,0
+f48da732,443,United States,0
+1c2cd0eb,2710,France,0
+2069cdf4,80,Portugal,0
+020cf42f,443,United States,0
+66c40550,443,United States,0
+350fbe5f,443,United States,0
+075924f3,443,United States,0
+0a0e7ad7,8883,United States,0
+d65cedcf,443,United States,0
+17a9d3e5,443,United States,0
+6fdc30df,443,United States,0
+82764a30,443,United States,0
+efa36beb,443,United States,0
+9e353ceb,80,United States,0
+ecaa9d3d,443,United States,0
+2290242d,80,Portugal,0
+a50eb238,443,Netherlands,0
+98f2dc5f,443,United States,0
+98847bc8,443,United States,0
+66c40550,123,United States,0
+ff5ce7fc,443,United States,0
+1b0e9b65,443,United States,0
+1d9acaa6,443,United States,0
+effd0505,443,United States,0
+283a9226,443,China,0
+c4bb0ce8,443,France,0
+306a0f31,443,United States,0
+cbded085,32288,Italy,0
+3726b3c5,443,United States,0
+95cd38d6,443,United States,0
+a5972614,443,United States,0
+57cf41c0,443,United States,0
+012b5711,443,United States,0
+1b1585df,443,United States,0
+2722fd76,8000,Singapore,0
+03d95589,443,United States,0
+e025ebd0,443,United States,0
+ba9f0406,443,United States,0
+18e85260,443,United States,0
+5155b848,443,United States,0
+414acffd,443,United States,0
+2290242d,443,United States,0
+c71685ca,443,United States,0
+866d1ce6,443,United States,0
+c726d787,443,United States,0
+57a530f4,443,Portugal,0
+6a3d0bd4,443,United States,0
+ed3b371f,443,United States,0
+ec229122,443,United States,0
+d0189f1b,443,United States,0
+95c39b97,443,United States,0
+283a9226,443,China,0
+8db5c0a0,4222,Singapore,0
+d4d78522,443,Portugal,0
+e1058b15,443,United States,0
+08488080,443,United States,0
+d0bf9690,443,United States,0
+57ed2efe,443,United States,0
+eb114205,443,United States,0
+63cbce10,5222,United States,0
+fe70de30,443,United States,0
+7f92dca9,443,United States,0
+8f651bd6,443,United States,0
+373de712,443,United States,0
+d31a09f2,443,United States,0
+1037426a,443,United States,0
+ff78c64c,443,United States,0
+2290242d,443,United States,0
+efa36beb,443,United States,0
+2304cfc7,443,United States,0
+c0ce900d,443,United States,0
+922a72da,443,United States,0
+17dd3b9a,443,United States,0
+39f20786,443,Portugal,0
+228127f4,443,United States,0
+f40a2f57,443,United States,0
+3db33347,443,United States,0
+8a442b2d,443,United States,0
+0366556f,443,United States,0
+7941d433,443,United States,0
+aab180c6,443,United States,0
+c4dba83f,443,United States,0
+ceb42cc3,443,Denmark,0
+e298e2fa,443,Netherlands,0
+d080153f,443,United States,0
+ee5db8ff,443,United States,0
+17aababe,443,United States,0
+9d604bc0,80,United States,0
+c4ac8cf0,6447,Germany,0
+842d0f73,443,United States,0
+dc2477f9,443,United States,0
+49c2c4ba,443,United States,0
+057b5300,443,United States,0
+e79c3133,443,Portugal,0
+f1dec8c2,443,United States,0
+5baba3f1,443,Netherlands,0
+0acb01fd,3482,United States,0
+a25d6b7b,443,United States,0
+4e73c4f0,443,United States,0
+eae499a2,443,Portugal,0
+ade497b5,80,Russian Federation,0
+2b7ed796,443,United States,0
+6faec9c4,443,United States,0
+df89642b,443,United States,0
+0cf7aa56,443,United States,0
+cbded085,5957,Russian Federation,0
+27c7c2a6,443,United States,0
+95e81fce,80,United States,0
+cff9cb61,80,China,0
+548cbc82,443,United States,0
+1f4c15d5,443,United States,0
+63508d27,443,United States,0
+7a9b6714,443,United States,0
+b92fb5bf,443,United States,0
+50c6e58e,443,United States,0
+ec229122,443,United States,0
+50c6e58e,443,United States,0
+24129886,443,Portugal,0
+cf314fc9,443,United States,0
+dd31c5a3,443,United States,0
+e29da86a,5228,United States,0
+7b736e22,443,Portugal,0
+61175388,443,United States,0
+0d173860,443,United States,0
+6eb5dd1b,443,United States,0
+af21a384,443,United States,0
+56de0e45,80,United States,0
+687ad121,443,United States,0
+397e716d,443,United States,0
+4b707b64,443,United States,0
+c2a93478,443,United States,0
+4db64bcd,443,United States,0
+3214f3d2,443,United States,0
+0fae22b2,443,United States,0
+1c2cd0eb,6969,France,0
+62515edd,443,United States,0
+addbc4cd,443,France,0
+a1cd5634,443,United States,0
+d6d1a9e2,443,United States,0
+bceb216a,443,United States,0
+87003a07,443,Germany,0
+e700423d,443,United States,0
+1e8f71a4,443,Netherlands,0
+90a10981,443,United States,0
+825dd46e,443,United States,0
+7853c0e7,443,United States,0
+a5d30fad,8080,United States,0
+8d4b6693,443,United States,0
+aa7f0c95,443,United States,0
+668519bd,443,United States,0
+e9660fef,443,United States,0
+9527abe9,443,United States,0
+05378da3,443,United States,0
+e8bbdfa6,443,United States,0
+7eda35db,443,United States,0
+8c56e094,443,United States,0
+075219fe,443,United States,0
+54689011,80,United States,0
+0bb1fcc1,443,United States,0
+4fcdae0f,443,United States,0
+0170a116,443,United States,0
+bcc1d1fd,443,United States,0
+e24f6eb4,443,United States,0
+b9976a25,443,Brazil,0
+75f2bb59,443,United States,0
+d5e95d9e,443,United States,0
+f1018e21,443,United States,0
+19f3780b,443,United States,0
+f50728ac,443,United States,0
+a47c487f,443,Portugal,0
+e2684506,443,Netherlands,0
+1c2cd0eb,80,Norway,0
+1c2cd0eb,80,Norway,0
+a5e5dec5,443,United States,0
+bc3623a3,443,United States,0
+ed592bab,443,United States,0
+8635853f,443,United States,0
+a0926a5e,443,United States,0
+eb8a5ccd,443,France,0
+de849179,443,United States,0
+fca9a453,80,Norway,0
+ec120655,443,Portugal,0
+7034edb7,443,United States,0
+76a052c7,443,United States,0
+9995a587,443,United States,0
+23dbac0a,443,United States,0
+e4e4ff7a,443,United States,0
+044385ea,443,Portugal,0
+e7cd608d,3480,United States,0
+910cffab,443,United States,0
+e4e4ff7a,443,United States,0
+974f860f,443,United States,0
+caf82713,443,United States,0
+b898bde7,443,United States,0
+05615a8a,80,United States,0
+2afbff9b,443,United States,0
+db64687e,80,United States,0
+888a9b3f,443,United States,0
+c6dc1dd4,443,United States,0
+98009e81,80,United Kingdom,0
+76a9817d,443,United States,0
+c631342e,443,United States,0
+bbb8850c,443,United States,0
+e667554a,443,United States,0
+fff92291,80,Slovakia,0
+b2abd1ac,443,United States,0
+afdc2140,443,Germany,0
+976a1eb2,443,United States,0
+484c5b16,443,United States,0
+9489222c,443,United States,0
+1c2cd0eb,6969,Taiwan,0
+903331ec,443,United States,0
+a79d1fa6,443,United States,0
+42cbea33,443,Norway,0
+fab06e86,443,China,0
+0d1f0a9c,443,United States,0
+933ecc70,443,United States,0
+88b376b4,443,United States,0
+1c2cd0eb,2710,France,0
+47a91e19,443,United States,0
+d0bf9690,443,United States,0
+b40448a3,443,United States,0
+7d97f912,443,United States,0
+8346f62e,443,United States,0
+bba8b0d7,1032,Portugal,0
+51e63d6e,443,United States,0
+2f97c997,80,United States,0
+1046c5d6,443,United States,0
+2c419119,443,United States,0
+e048e29a,443,United States,0
+3741e82b,443,United States,0
+fe37e4fb,443,United States,0
+828cfe2d,443,United States,0
+bd87ac05,443,United States,0
+a0f6056f,88,Portugal,0
+a4c26ecd,443,United States,0
+70cc2d40,80,Portugal,0
+26491e6c,443,United States,0
+7d602f47,443,United States,0
+34037192,123,United States,0
+cba2022d,443,United States,0
+54d9e446,443,Netherlands,0
+4d9c28de,443,United States,0
+3880cf44,443,United States,0
+ab3cc0bb,443,United States,0
+6b30c706,135,Portugal,0
+bce69428,80,United States,0
+b932ebbc,443,United States,0
+f125f877,443,Portugal,0
+f4dea277,3480,United States,0
+56140508,443,United States,0
+b1d05922,80,United States,0
+7f2180db,443,United States,0
+2fffed10,443,United States,0
+7370ffd3,443,United States,0
+178d7c2e,443,United States,0
+32f56327,443,United States,0
+149d5fe4,443,United States,0
+be7cc102,443,United States,0
+19bd5036,443,United States,0
+b2970332,443,United States,0
+849aac30,443,United States,0
+7cefad4e,443,United States,0
+d329f187,443,Israel,0
+8f0b7c24,443,United States,0
+daa95d6b,443,Israel,0
+be7cc102,443,United States,0
+c7318ce0,443,Portugal,0
+cb64cedb,443,United States,0
+14f61754,443,United States,0
+9d6fb249,443,United States,0
+661a9c28,443,United States,0
+3c85d929,443,United States,0
+826b4204,443,United States,0
+24a76ec7,80,United States,0
+f2f14a96,443,United States,0
+9364c350,443,Netherlands,0
+25a6a1a3,443,United States,0
+594a412e,6447,Germany,0
+6d143e91,443,United States,0
+e80114a3,3000,United States,0
+1fc031e4,443,United States,0
+4c9fc54c,443,United States,0
+0deac1d7,443,United States,0
+e79c3133,443,United States,0
+c6f1a2a4,443,United States,0
+dbbc78a1,443,United States,0
+649018fc,443,United States,0
+1c2cd0eb,6969,Taiwan,0
+0d8b1629,443,United States,0
+2b64b52b,443,United States,0
+8e6ff55b,443,United States,0
+a805acc1,443,United States,0
+28edc910,443,United States,0
+02c6b4d5,443,United States,0
+6b683685,88,Portugal,0
+ca40805f,443,United States,0
+6b10bb6e,443,France,0
+18166c6b,5222,United States,0
+3789eb3a,80,United States,0
+332f8d8c,443,United States,0
+f15a97f3,443,United States,0
+f4511ee9,6447,Germany,0
+f4511ee9,443,United States,0
+d93840c8,443,United States,0
+85637131,443,Norway,0
+01fa42f6,443,United States,0
+c5e418f9,443,United States,0
+9371a1fe,443,United States,0
+b0a8724c,443,United States,0
+39099924,443,United States,0
+0d173860,443,United States,0
+a1a3e884,443,United States,0
+c211e96c,443,United States,0
+5a003edb,443,United States,0
+484c5b16,443,United States,0
+2556c513,443,Portugal,0
+4ababd30,443,United States,0
+98df28dd,123,United States,0
+19402dd2,443,United States,0
+cba93b45,443,United States,0
+6a486ba9,443,United States,0
+27617044,443,United States,0
+12249d85,443,United States,0
+8a7d4124,443,United States,0
+43a1f3c9,443,United States,0
+e9ca095d,443,United States,0
+34da692c,123,Portugal,0
+ded740cf,443,United States,0
+242ee75f,443,United States,0
+b15ed94c,443,United States,0
+7ffcafab,443,United States,0
+13e40a47,443,United States,0
+dfb01f5e,443,United States,0
+6d33c89f,443,United States,0
+5d6a6f59,443,United States,0
+fab06e86,8002,China,0
+85637131,443,United States,0
+788ee4fa,443,Portugal,0
+ffbf41d3,443,United States,0
+5c656b37,88,Portugal,0
+16667c0e,443,United States,0
+2d9595c6,443,United States,0
+6b03a165,443,United States,0
+39099924,443,United States,0
+d6d1a9e2,443,United States,0
+be7cc102,443,United States,0
+ac279d64,443,United States,0
+0318d5f8,443,United States,0
+15516ced,443,United States,0
+6189b6c1,3482,United States,0
+0d8b1629,443,United States,0
+2ae6ec80,443,United States,0
+9087bdc5,993,United States,0
+5da2ba46,80,United States,0
+a66e52f4,443,United States,0
+0d94bf21,443,Netherlands,0
+6f372304,443,United States,0
+bf40e447,5222,United States,0
+d01f2bc0,443,India,0
+94dc53df,443,United States,0
+cc36a04d,443,United States,0
+d4dceae0,443,United States,0
+e0b0dda6,443,United States,0
+6cf92ed8,443,United States,0
+258cb801,443,United States,0
+fbab1b73,3480,United States,0
+824d56ac,443,United States,0
+4ae572cb,80,United States,0
+d7abec34,443,Portugal,0
+edc8bdfa,5222,United States,0
+6ae53e70,443,United States,0
+c9aafbaa,3268,Portugal,0
+05048e74,443,United States,0
+b8f61efc,443,United States,0
+ee5db8ff,443,United States,0
+fca9a453,6969,United States,0
+2397030b,443,Portugal,0
+c60668a4,443,United States,0
+2997668a,443,United States,0
+6137a671,443,United States,0
+93b63e07,443,United States,0
+08b24480,443,United States,0
+821cf595,80,United States,0
+76838401,5222,United States,0
+a5e9313f,443,Portugal,0
+16f52db9,443,United States,0
+16584de8,88,Portugal,0
+7a9b6714,443,Portugal,0
+2b64b52b,443,United States,0
+c7bb996d,443,United States,0
+a75f02fc,443,United States,0
+477d3027,443,United States,0
+a4989fec,443,United States,0
+51187602,80,Portugal,0
+45058fa9,389,Portugal,0
+c00a8301,443,United States,0
+3c85d929,443,United States,0
+1e30544c,443,Portugal,0
+08aad807,443,Russia,0
+b2abd1ac,443,United States,0
+f9c66513,443,United States,0
+f257e1e1,443,United States,0
+8913b4e1,443,United States,0
+9cb14224,443,United States,0
+d7328e9b,443,United States,0
+63c91915,443,United States,0
+85bfa501,445,Portugal,0
+8406d923,443,United States,0
+14aa9053,443,United States,0
+b9f09beb,443,United States,0
+4ce155fa,443,United States,0
+feda6e56,443,United States,0
+329aba5e,443,United States,0
+fd230822,443,United States,0
+8bdb4132,443,United States,0
+77880642,443,United States,0
+fcf49691,443,United States,0
+ede3dbe9,445,Portugal,0
+3ce9d801,80,United States,0
+51cccbe2,443,United States,0
+2ce92e35,443,Portugal,0
+a24f1a65,443,United States,0
+c1178caf,443,United States,0
+1329b8c0,443,United States,0
+efceb2bd,6447,China,0
+791748bc,443,United States,0
+1a7233dd,443,United States,0
+1e3c7395,443,Luxembourg,0
+f43f113f,80,United States,0
+471057c2,443,United States,0
+b4106ca3,443,United States,0
+48cd55ed,443,United States,0
+d1d9b865,443,United States,0
+fe37e4fb,6447,Germany,0
+32523f39,443,United States,0
+6d33c89f,443,United States,0
+edaf2632,443,United States,0
+92ba6742,443,United States,0
+f9c66513,443,United States,0
+f5c2c5ec,80,United States,0
+c62efa73,443,United States,0
+e700423d,443,United States,0
+d262bc49,443,Portugal,0
+80c667d8,443,United States,0
+457d797a,443,United States,0
+2afbff9b,443,United States,0
+bfa8348c,443,United States,0
+ac040c33,443,United States,0
+431651c0,443,United States,0
+2be97bf5,443,United States,0
+8bdb4132,443,United States,0
+49177374,9191,Portugal,0
+f5af1528,443,United States,0
+dddf1a45,443,United States,0
+dac3ced6,443,United States,0
+0cad7301,443,United States,0
+8a72d412,443,United States,0
+3db464ed,443,Portugal,0
+9f8c1cca,443,United States,0
+f1890533,443,United States,0
+8648733c,443,Denmark,0
+b2970332,443,United States,0
+a7e6d835,88,Portugal,0
+458fa5ac,443,United States,0
+7853c0e7,80,United States,0
+28f16239,443,United States,0
+af47b8e0,443,United States,0
+f54116c3,5222,United States,0
+c0b442b1,443,United States,0
+ee87e676,443,United States,0
+de298e68,443,Portugal,0
+a1d7c7e9,443,United States,0
+0a553768,80,Portugal,0
+19aae2aa,80,United States,0
+445bc685,443,United States,0
+1c0f6975,443,United States,0
+5398ea34,443,United States,0
+046cb670,443,Netherlands,0
+a975732b,80,United States,0
+35fe6b0d,443,United States,0
+ae320ad7,443,United States,0
+18a97a27,443,United States,0
+6dfe04e8,443,Portugal,0
+47e34164,443,United States,0
+e7a5145f,6969,Russia,0
+0390eda7,443,United States,0
+29b982b0,443,United States,0
+f4e1f193,3480,United States,0
+23be4716,443,United States,0
+69853a21,443,United States,0
+23929a06,443,United States,0
+3b3bcfb8,389,Portugal,0
+a805acc1,443,Portugal,0
+9371a1fe,443,United States,0
+ffbf41d3,443,United States,0
+727b7af3,443,Netherlands,0
+78111406,3480,United States,0
+624083ba,443,United States,0
+61e18180,443,Netherlands,0
+c35cfefa,80,United States,0
+819c2d41,443,United States,0
+a4a7f24b,443,United States,0
+583cbb56,443,United States,0
+f867cb38,80,United States,0
+3930cc57,443,United States,0
+b932ebbc,443,United States,0
+43bc3cfa,443,United States,0
+2245f76d,443,United States,0
+6aab47a2,5222,United States,0
+d59bd53c,443,United States,0
+af47b8e0,443,United States,0
+9699c12e,443,Netherlands,0
+2be97bf5,443,United States,0
+44b89ee4,443,United States,0
+e954b852,443,United States,0
+4de9f493,443,United States,0
+1f2d9f55,443,United States,0
+4070805f,443,United States,0
+233b0557,4222,Singapore,0
+8897ca5d,443,United States,0
+5fc033c6,3480,United States,0
+98c6ad59,443,Portugal,0
+4852282f,443,United States,0
+624b6ead,443,United States,0
+3a681bc2,3480,United States,0
+0c1863ea,443,United States,0
+00a612fd,443,United States,0
+1d877791,443,United States,0
+514d3bc2,443,United States,0
+dd92abd3,443,United States,0
+70c0efb1,443,United States,0
+c1d771df,443,United States,0
+4c9fc54c,443,United States,0
+b92ff643,443,United States,0
+151a6093,443,Germany,0
+ef2bcf49,443,United States,0
+5e3f6f3d,443,United States,0
+7853c0e7,443,United States,0
+0d172ef1,88,Portugal,0
+6028af6d,443,United States,0
+dd31c5a3,443,United States,0
+7f710571,443,United States,0
+a79b6b77,443,United States,0
+d0bf9690,443,United States,0
+ec51669a,443,Portugal,0
+50b25982,443,United States,0
+bcefbb43,443,United States,0
+05615a8a,443,United States,0
+84666386,443,Netherlands,0
+fca9a453,451,France,0
+674e9473,5222,China,0
+6afcdd3c,443,United States,0
+faf8d14b,443,Portugal,0
+524d5e10,443,United States,0
+3483be05,443,United States,0
+c82ccb46,443,United States,0
+cb7979f6,443,Netherlands,0
+30e8d229,443,United States,0
+01dada9f,443,Portugal,0
+1d74cf10,443,United States,0
+30e8d229,443,United States,0
+cdff2863,443,United States,0
+d316d2e8,443,United States,0
+2eaaa74b,443,Portugal,0
+23be4716,443,Germany,0
+70328132,443,United States,0
+ad68741a,53,United States,0
+334feaff,80,United States,0
+ebc6b638,443,United States,0
+bcdc6ab6,443,United States,0
+3845d5ba,443,United States,0
+af47b8e0,443,United States,0
+b42eddfc,443,United States,0
+4c3489ce,443,United States,0
+50b25982,443,United States,0
+50b25982,3482,United States,0
+6058c90e,88,Portugal,0
+38cc0e7a,443,United States,0
+c0ce900d,443,United States,0
+c834d30c,8801,United States,0
+e2684506,6447,Germany,0
+daa64cfe,443,United States,0
+a5e5dec5,443,Portugal,0
+dd28206b,123,United States,0
+d81d297a,443,United States,0
+1f4c15d5,443,United States,0
+4938766b,443,Netherlands,0
+afe7faaf,443,United States,0
+357125e3,80,United States,0
+4ebbb2ad,443,United States,0
+76435978,443,United States,0
+51f9db49,443,Portugal,0
+3741e82b,443,United States,0
+a7453296,443,United States,0
+8a93d41c,80,United States,0
+bdf0bed2,443,Netherlands,0
+65dfbeb2,443,United States,0
+98ece44c,443,United States,0
+c3f02f96,443,United States,0
+c9fdc883,443,United States,0
+75976eaf,443,United States,0
+79ccc60b,443,Portugal,0
+3c1856b8,443,United States,0
+445bc685,443,United States,0
+bbf9ee82,443,Germany,0
+1f296792,443,United States,0
+3060aa4a,443,United States,0
+5a72228a,443,United States,0
+6fd5e066,443,United States,0
+bb694085,6363,United States,0
+3bfbcb28,443,United States,0
+2df81c0e,443,Portugal,0
+159dd142,443,United States,0
+926e90af,443,United States,0
+87c45a88,443,United States,0
+d329f187,443,Netherlands,0
+bbae75f2,993,United States,0
+20076996,443,United States,0
+76120421,443,United States,0
+6a898ce2,443,United States,0
+f7a04af5,1337,Netherlands,0
+d4c705a3,443,United States,0
+cf60e691,443,United States,0
+0a7ac432,443,Portugal,0
+c4dba83f,443,United States,0
+5b2dc5a9,443,United States,0
+1561469d,443,United States,0
+1c2cd0eb,1337,Chile,0
+d65cedcf,443,United States,0
+845d206f,443,United States,0
+4d4f2b3f,443,United States,0
+7552d115,443,Portugal,0
+a1cf9bcd,443,United States,0
+49d9ceb5,443,United States,0
+6212f08b,443,United States,0
+af39a3af,443,United States,0
+888f2ca1,443,United States,0
+e79c3133,443,United States,0
+ec01715f,443,United States,0
+19182eed,443,United States,0
+42d4aa82,443,United States,0
+6bb5ed37,443,United States,0
+0d172ef1,443,Portugal,0
+4ac36e35,80,Portugal,0
+6d1705cc,443,United States,0
+0c6dc2ff,443,United States,0
+bca95616,443,United States,0
+f8dfb37f,443,United States,0
+af7b077d,2710,Israel,0
+e954b852,443,United States,0
+3ef475ec,6969,Russia,0
+e0d1d1ec,443,United States,0
+f2fccd43,4460,United States,0
+233c9d86,443,United States,0
+01fa42f6,443,United States,0
+15522e57,443,United States,0
+5be3791c,443,United States,0
+69b80dd8,443,United States,0
+6f4b4383,443,United States,0
+6c69e3ac,443,United States,0
+bba39424,443,United States,0
+1b1585df,135,Portugal,0
+7107c8b0,443,United States,0
+596b41af,443,United States,0
+eb418712,443,United States,0
+aae48afd,443,United States,0
+a11c596b,443,United States,0
+15516ced,443,United States,0
+0d6b21ea,443,United States,0
+08321637,443,United States,0
+cd014aed,443,United States,0
+1f2d9f55,443,United States,0
+fdaa850e,443,United States,0
+dd25832b,443,United States,0
+b98852f1,443,United States,0
+e9263dc8,88,Portugal,0
+4a1863b7,443,Czech Republic,0
+739059aa,443,United States,0
+5617522d,443,United Kingdom,0
+e585a440,53,United States,0
+c6ff62c5,443,United States,0
+78c1a1c1,6969,United Kingdom,0
+9013aeeb,443,United States,0
+0b1d759f,443,United States,0
+10847772,88,Portugal,0
+efa03c0f,443,Germany,0
+754e4dd5,123,United Kingdom,0
+465a2291,443,United States,0
+7142ef27,443,United States,0
+28bc952c,443,United States,0
+82191852,443,United States,0
+9749b123,443,United States,0
+b5e5537d,443,United States,0
+3a0ef95c,443,United States,0
+fbebdb5e,443,United States,0
+d5e3d12a,443,Netherlands,0
+84ba1467,5,Israel,0
+0cf67040,443,United States,0
+445bc685,443,United States,0
+02ea717c,443,United States,0
+f831b4a4,443,France,0
+40655f88,443,United States,0
+fab06e86,80,China,0
+f6b863cf,443,United States,0
+f138a732,443,United States,0
+d519a9c1,443,Portugal,0
+644beb47,443,United States,0
+a9e0a57c,443,United States,0
+9d59fdbd,443,United States,0
+758d3b70,443,Netherlands,0
+bacce753,443,United States,0
+73112e55,443,China,0
+c7403736,443,United States,0
+3e408776,443,United States,0
+f0c395fd,443,United States,0
+752fa14d,443,United States,0
+063cf451,5222,United States,0
+298ada85,443,United States,0
+77bc827a,3478,United States,0
+27a496a0,443,United States,0
+7f7155aa,443,United States,0
+40d32c82,443,United States,0
+f257e1e1,443,United States,0
+86dcf149,443,United States,0
+dcf2b9f3,993,United States,0
+03f5fcd0,443,United States,0
+32c7527a,80,United States,0
+bb5c3ef8,80,United States,0
+e71cc6df,443,United States,0
+ecb7affd,443,Netherlands,0
+42d4aa82,443,United States,0
+a5d30fad,443,United States,0
+dd31c5a3,443,United States,0
+78c1a1c1,443,United States,0
+138f546d,123,United States,0
+821c4e7d,443,United States,0
+066413e0,443,United States,0
+de849179,443,Czech Republic,0
+80cd6e87,443,United States,0
+ca0bcd90,443,United States,0
+f2dbfbde,5333,China,0
+476c9a9e,88,Portugal,0
+d4015d72,443,United States,0
+aa6b0817,443,United States,0
+7b9b1883,443,United States,0
+69091254,443,United States,0
+3db464ed,443,United States,0
+ac1c8e60,443,Portugal,0
+7f92dca9,443,United States,0
+49058513,443,United States,0
+1ed5abbf,443,United Kingdom,0
+0cd58fee,443,United States,0
+7ced001f,443,United Kingdom,0
+dbe7eb2d,443,United States,0
+4da22dbb,443,United States,0
+818d9471,443,United States,0
+14c3fae4,443,United States,0
+41c68192,443,United States,0
+1806ff17,443,United States,0
+87c0fce6,443,United States,0
+9d6f34fd,443,United States,0
+79bef5d3,443,Netherlands,0
+334feaff,443,United States,0
+2bd0a6bd,443,United States,0
+311648d6,443,United States,0
+1d9acaa6,443,United States,0
+57de17e2,443,United States,0
+849aac30,5222,United States,0
+d0c07956,80,United States,0
+059120b5,443,United States,0
+8336ecd1,443,United States,0
+46e4e67c,53,United States,0
+e5532d63,443,United States,0
+0cd58fee,443,United States,0
+8903a78e,443,United States,0
+3f629b5d,443,United States,0
+67bab3e8,443,United States,0
+64458862,443,United States,0
+5a5b756e,6969,Russia,0
+c5c9af4b,443,United States,0
+fb75fd31,443,Portugal,0
+1b0ce7c9,443,Portugal,0
+1d1365b6,80,Portugal,0
+221db319,443,United States,0
+049e504a,443,France,0
+6eade908,443,United States,0
+4c32a4d1,443,Netherlands,0
+e542f31f,443,United States,0
+f831b4a4,443,France,0
+74c7c8fe,443,United States,0
+202377f9,443,United States,0
+783c4f6e,443,United States,0
+b8a6875a,443,United States,0
+799b74ea,443,Germany,0
+a77dd40d,443,United States,0
+ba2afa9a,443,United States,0
+057b5300,443,United States,0
+ea5d9403,443,United States,0
+78020f9d,443,United States,0
+7f7155aa,80,United States,0
+28701690,443,United States,0
+0e2985a3,443,United States,0
+389d246c,443,United States,0
+dd2d0614,443,United States,0
+484d0177,443,United States,0
+3a91509f,443,United States,0
+cb9d7e16,443,United States,0
+82a1e87f,443,United States,0
+8aa454ca,443,United States,0
+3fecfc2e,443,United States,0
+0fc88c82,443,United States,0
+082f22f8,443,United States,0
+108dbcc2,443,United States,0
+a7d06d58,443,United States,0
+8d4b6693,443,United States,0
+2641cbd5,443,United States,0
+96aa2533,443,United States,0
+d48b6709,443,Portugal,0
+f7a04af5,6969,United Kingdom,0
+4b8a2fc6,443,United States,0
+2807c369,443,United States,0
+7458c138,443,United States,0
+57d8db52,443,United States,0
+8e6ff55b,443,Netherlands,0
+3d32d51f,443,United States,0
+7cefad4e,443,United States,0
+d4c705a3,443,United States,0
+a63919d3,443,United States,0
+347d1699,443,United States,0
+1037426a,443,United States,0
+96aa2533,443,United States,0
+ae457cbd,443,United States,0
+ab40e19c,443,United States,0
+8a270d4e,443,United States,0
+78b9bd52,443,United States,0
+96644469,123,Portugal,0
+af392f23,80,Portugal,0
+d0bf9690,443,United States,0
+1c2cd0eb,2710,United States,0
+bb24af8e,443,United States,0
+c3dcadfc,443,United States,0
+76a052c7,443,United States,0
+1283a0d8,80,United States,0
+e213eb51,443,United States,0
+ab40e19c,443,United States,0
+1c142f1c,443,United States,0
+c7318ce0,443,United States,0
+4bc290d4,443,United States,0
+19a1efd6,80,United States,0
+8f0428b8,443,United States,0
+c4201abf,443,United States,0
+8cb64a06,443,United States,0
+f1dec8c2,443,United States,0
+a458bc0f,443,United States,0
+d223c796,443,France,0
+d7e9ee33,443,United States,0
+ddf6d634,443,United States,0
+233b0557,4222,Singapore,0
+550a7c1a,443,United States,0
+2069cdf4,443,Netherlands,0
+484c5b16,443,Portugal,0
+3c299141,443,United States,0
+22c1d603,443,Portugal,0
+2f97c997,443,United States,0
+d6b33694,443,China,0
+10c1e706,443,United States,0
+be34cde9,443,Portugal,0
+64bb9b9e,443,United States,0
+29ee6bc5,1032,Portugal,0
+81846c20,443,China,0
+1f296792,443,United States,0
+f2660176,443,United States,0
+8a856ae7,443,United States,0
+21fabb78,443,United States,0
+0d8b1629,443,United States,0
+c6978aba,443,United States,0
+a1cd5634,443,United States,0
+e9263dc8,443,United States,0
+818d9471,443,United States,0
+d95c4148,443,France,0
+7b911534,80,United States,0
+d6a45b02,443,United States,0
+e5401d84,443,United States,0
+010d8657,443,Portugal,0
+72839bfa,443,United States,0
+2f97c997,443,United States,0
+f1890533,443,France,0
+1c6d7e76,80,United States,0
+dbe7eb2d,443,Portugal,0
+b0a10095,443,United States,0
+40b83a13,443,United States,0
+3ef475ec,6969,United Kingdom,0
+630b49c1,443,United States,0
+cacdc394,443,United States,0
+c71685ca,443,United States,0
+64458862,443,United States,0
+de74a141,443,United States,0
+39c42c43,50004,Netherlands,0
+c71685ca,443,United States,0
+ef33d5fb,443,United States,0
+baa77e04,443,United States,0
+efceb2bd,8080,China,0
+2fffed10,443,United States,0
+ba24cdcf,6969,United States,0
+d8af18d1,443,United States,0
+df6aee2e,443,United States,0
+0192feba,443,United States,0
+750210cb,443,United States,0
+291f8fbc,443,Portugal,0
+b66d4e23,443,United States,0
+4ed1709c,443,United States,0
+90fbd460,443,United States,0
+bb694085,6363,United States,0
+567d79b4,443,United States,0
+6d9af058,445,Portugal,0
+592a159e,443,United States,0
+53622813,443,United States,0
+cb4ae3b2,443,United States,0
+90c1dcbb,443,United States,0
+63c91915,443,United States,0
+d316d2e8,443,United States,0
+2f97c997,443,United States,0
+a967e7ca,443,United States,0
+eae499a2,443,United States,0
+f2104c37,443,United States,0
+1d877791,3482,United States,0
+551e9d2a,443,United States,0
+eeee9280,443,United States,0
+f774f0d6,443,United States,0
+5a077965,443,United Kingdom,0
+4bfc3913,443,United States,0
+1b0bbdb1,443,United States,0
+0137d45e,443,United States,0
+d01f2bc0,443,United States,0
+76a052c7,443,United States,0
+96289b9b,443,United States,0
+3e408776,443,United States,0
+5c539a1a,443,United States,0
+112b12b8,443,United States,0
+0e2985a3,443,Portugal,0
+5704e801,443,United States,0
+2069cdf4,443,United States,0
+e8bbdfa6,443,United States,0
+edaf2632,443,United States,0
+f66d75fb,443,United States,0
+e5dd54a4,443,Portugal,0
+33a9c3cd,443,United States,0
+8aee2849,443,United States,0
+35e18252,443,United States,0
+e707f3eb,389,Portugal,0
+b18f07bf,80,Virgin Islands,0
+a1ec29d5,443,Portugal,0
+456a8e32,443,United States,0
+32c5e69d,443,United States,0
+808f5d9b,443,United States,0
+76a052c7,443,Netherlands,0
+02ad2ee7,443,United States,0
+9527abe9,443,United States,0
+9ca4c093,443,United States,0
+0971f96c,443,United States,0
+1ea2f95b,9993,United States,0
+7a9b6714,80,United States,0
+04d249c1,443,United States,0
+9eb8ae1e,443,United States,0
+8648733c,80,United States,0
+d12af979,443,United States,0
+ac540a43,443,United States,0
+9cd6bdb7,443,United States,0
+2bd0a6bd,9876,Luxembourg,0
+c7bb996d,443,United States,0
+dddf1a45,443,United States,0
+25659758,443,United States,0
+e62c4371,443,United States,0
+bf27bf82,443,United States,0
+5e1e771b,80,United States,0
+76a052c7,443,Portugal,0
+190bd119,88,Portugal,0
+dbe277c1,443,United States,0
+e045dd2e,443,United States,0
+6530c09f,443,United States,0
+01c3be56,443,United States,0
+0ff5f51e,443,United States,0
+cb077538,80,China,0
+b87ccb26,443,United States,0
+7268d913,443,United States,0
+2a4c86ba,443,Portugal,0
+988def67,59369,Israel,0
+1769e728,443,United States,0
+752fa14d,443,United States,0
+74658a9d,443,United States,0
+62faf07f,443,Netherlands,0
+9b71ed8c,443,United States,0
+2356c030,443,United States,0
+592a159e,443,United States,0
+4506a96d,443,United States,0
+04a51978,443,United States,0
+afe7faaf,443,United States,0
+c4dba83f,443,United States,0
+34637359,443,China,0
+dd25832b,443,United States,0
+1c03cb4c,443,United States,0
+4abc2d46,443,United States,0
+1c03cb4c,443,United States,0
+1ec249ef,443,Virgin Islands,0
+39099924,443,United States,0
+96fff601,6363,United Kingdom,0
+daa95d6b,80,United Kingdom,0
+3741e82b,443,United States,0
+d1b505d4,443,United States,0
+1c2cd0eb,1337,Chile,0
+e2de6b1b,443,United States,0
+6ed0a582,80,United States,0
+0e3937ff,443,United States,0
+dc2477f9,443,United States,0
+fbebdb5e,443,United States,0
+56c1fdf2,443,United States,0
+b8153935,443,United States,0
+3a35960d,443,United States,0
+465a2291,443,United States,0
+7eda35db,443,Netherlands,0
+95db63f0,443,United States,0
+7a9b6714,80,United States,0
+3a677bca,443,United States,0
+dad6ec76,443,United States,0
+a588485b,6969,Norway,0
+57653a18,443,United States,0
+35e6d308,443,United States,0
+e4d170f6,80,United States,0
+4d252b74,443,United States,0
+5ee76f74,443,United States,0
+f2660176,443,United States,0
+28701690,443,United States,0
+68ef0ec0,443,Portugal,0
+5c63ea74,443,United States,0
+0a219107,443,United States,0
+7b758ec8,443,United States,0
+12febc77,443,United States,0
+1f7d3ed6,443,United States,0
+4938766b,443,Netherlands,0
+cacdc394,443,United States,0
+01315481,443,United States,0
+fafbe49f,443,Portugal,0
+0f156b3f,443,United States,0
+1948622e,443,United States,0
+b8155914,443,United States,0
+8462a778,443,United States,0
+35e18252,443,United States,0
+233aa31f,443,United States,0
+e7c4151f,443,United States,0
+1c2cd0eb,6969,Russian Federation,0
+33ff8f6a,443,United States,0
+90e41a41,80,United States,0
+34637359,443,United States,0
+0b825e8c,443,United States,0
+f69e9e82,443,United States,0
+97c3277f,5222,United States,0
+c726d787,443,United States,0
+84371135,443,United States,0
+8a8587dd,443,United States,0
+6028af6d,443,United States,0
+484c5b16,443,United States,0
+1027cfd4,443,United States,0
+9e365f10,22224,United States,0
+bbb89d9b,443,United States,0
+ae457cbd,443,United States,0
+44721fe7,443,United States,0
+8882aca0,443,United States,0
+c52bb350,443,United States,0
+efd04115,443,Portugal,0
+0170a116,443,United States,0
+0d6b21ea,443,United States,0
+daa95d6b,80,United States,0
+30e44d59,80,United States,0
+320bbb6e,443,United States,0
+761f85ab,1337,Chile,0
+9fbe09e2,443,United States,0
+b35eea07,443,United States,0
+85893e58,53,United States,0
+a66e52f4,80,United States,0
+660e7c84,443,United States,0
+057b5300,443,United States,0
+e9a0b167,443,United States,0
+50cd289b,443,United States,0
+3983aeb5,443,United States,0
+4d252b74,443,United States,0
+63c91915,443,United States,0
+40f4290e,443,United States,0
+6f07e16c,443,United States,0
+21230cf7,443,United States,0
+eae0449e,443,United States,0
+87e4e490,443,United States,0
+3135b5cd,443,France,0
+bb694085,6363,Romania,0
+6f2e445c,443,United States,0
+8f0428b8,443,United States,0
+5a003edb,443,United States,0
+a839d5fe,3482,United States,0
+1b8a91a4,443,United States,0
+dbf026a3,443,Portugal,0
+d91607a8,443,United States,0
+9fbe09e2,5223,United States,0
+99a74062,443,United States,0
+bcefbb43,443,United States,0
+03e4206d,443,United States,0
+1e8f71a4,443,United States,0
+e4bae5ec,443,United States,0
+1769e728,80,Portugal,0
+abe20e99,53,China,0
+2532e0a6,443,United States,0
+ac8d0c07,443,United States,0
+4b1c6eaa,443,United States,0
+fafbe49f,443,United States,0
+ffbf41d3,443,United States,0
+e2283559,443,United States,0
+d84253f9,443,United States,0
+effd0505,443,United States,0
+a5dbaedd,80,Portugal,0
+723f6d1f,443,United States,0
+3692613e,443,United States,0
+79c6067b,443,Portugal,0
+a6e649c1,443,United States,0
+ee93ab9a,443,Portugal,0
+a1edb153,443,United States,0
+8cb64a06,443,United States,0
+f138a732,443,United States,0
+7086212c,443,United States,0
+0170a116,443,Netherlands,0
+bfffd610,49669,Portugal,0
+5617c3cd,27053,United States,0
+c617f2a7,443,United States,0
+a3ce8c51,443,Portugal,0
+a4475fbd,443,United States,0
+8903a78e,443,United States,0
+73414a5f,443,United States,0
+b2970332,443,United States,0
+f9c66513,32294,Brazil,0
+9d5313a8,443,Germany,0
+fabc9525,443,United States,0
+21f75ba5,443,United States,0
+f6a90955,443,Macao,0
+228127f4,443,United States,0
+3214f3d2,443,United States,0
+01fa42f6,443,United States,0
+1c2cd0eb,2710,France,0
+12cf6919,993,United States,0
+a60a17bb,443,United States,0
+d329f187,443,United States,0
+4506a96d,443,United States,0
+1e81013f,443,United States,0
+824d56ac,3482,United States,0
+d0e84cee,443,United States,0
+b35d4d31,443,United States,0
+d7755354,135,Portugal,0
+0bd7c17c,443,United States,0
+7c8f522f,443,United States,0
+69320618,443,United States,0
+1ebe43a7,443,United States,0
+8ca170c2,443,Netherlands,0
+1001f86f,443,United States,0
+c18cceb1,443,United States,0
+1347ee02,443,United States,0
+3163d4aa,443,United States,0
+41726b99,443,United States,0
+cafdaea7,443,Portugal,0
+0c340067,443,United States,0
+b632020c,445,Portugal,0
+183535c3,80,Portugal,0
+c7bd2234,443,Portugal,0
+0de97ee3,443,United States,0
+b87ccb26,443,United States,0
+e5a3059a,443,United States,0
+dbd8b64f,443,United States,0
+dddf1a45,443,United States,0
+18198cd4,9876,Moldova,0
+44b89ee4,443,United States,0
+d60443a0,3478,United States,0
+c80db8ae,443,United States,0
+8ce9607e,143,Portugal,0
+d3f0e128,443,United States,0
+321f1523,443,United States,0
+320bbb6e,443,United States,0
+dc33acfd,1032,Portugal,0
+7c58edd6,80,Portugal,0
+e8bea274,443,United States,0
+05aaee22,443,United States,0
+b98852f1,80,United States,0
+31882714,443,United States,0
+4da277de,443,United States,0
+3845d5ba,443,United States,0
+8776f832,443,United States,0
+9c2c3f9a,443,United States,0
+25a6a1a3,443,United States,0
+c23f9845,3480,United States,0
+352e9aca,443,United States,0
+73941b51,443,United States,0
+8be964db,443,United States,0
+ea7cfe5b,443,United States,0
+d223c796,443,United States,0
+70c0efb1,443,Portugal,0
+b85cf7d7,443,United States,0
+3fd97539,3482,United States,0
+faedd9db,443,United States,0
+3a79ac59,5223,United States,0
+0a6d1701,443,United States,0
+0d94bf21,443,United States,0
+b6e37bbc,3480,United States,0
+4ed1709c,443,United States,0
+a7e1a928,443,United States,0
+0ec73b25,443,United States,0
+bef2d78e,443,United States,0
+53e4c311,443,United States,0
+7e54c7af,443,United States,0
+d5fc152c,3478,United States,0
+7552d115,443,United States,0
+6f71db74,500,Portugal,0
+9fef48eb,443,United States,0
+4893a89a,80,United States,0
+8fe1079a,443,Netherlands,0
+36f012da,443,Portugal,0
+254ac6d9,443,United States,0
+7d97f912,443,United States,0
+b9ecf348,443,United Kingdom,0
+c50e8b48,443,United States,0
+35badf3d,443,Portugal,0
+e8a2b945,443,United States,0
+23e9a24a,5222,United States,0
+adcb234d,389,Portugal,0
+7e4afcd4,443,United States,0
+690a4021,443,United States,0
+8b7e8383,443,United States,0
+bb4c340f,443,United States,0
+18e85260,443,United States,0
+f1682107,443,United States,0
+842b10e7,443,United States,0
+41c68192,443,United States,0
+0b6bd7c0,443,China,0
+8903a78e,443,United Kingdom,0
+8c760033,443,Germany,0
+bb694085,6363,United States,0
+19f31062,443,United States,0
+903331ec,443,United States,0
+835266c8,443,United States,0
+d10b6af1,443,United States,0
+f7a04af5,6969,United Kingdom,0
+60b11237,443,United States,0
+dd25832b,443,United States,0
+b8df7f8f,443,United States,0
+a8c28cdc,5223,United States,0
+dbbc78a1,443,Netherlands,0
+a60fe147,443,Portugal,0
+cf60e691,443,United States,0
+17f090a9,443,United States,0
+d080153f,443,United States,0
+d4de8745,443,Portugal,0
+4d61a797,443,United States,0
+10c1e706,443,United States,0
+a3ce8c51,443,United States,0
+826b4204,80,South Korea,0
+7eda35db,443,United States,0
+c9682ab7,443,United States,0
+c9aafbaa,389,Portugal,0
+0455b4b5,443,United States,0
+b7dcdecf,443,United States,0
+9a7a495a,443,United States,0
+1f3174bf,443,United States,0
+65f3df87,9993,United States,0
+8db5c0a0,4222,Singapore,0
+a9f08fc8,5222,United States,0
+123c38f1,443,United Kingdom,0
+07642376,443,United States,0
+f1890533,443,United States,0
+90e41a41,443,United States,0
+ebd578ce,443,United States,0
+69a0130d,443,France,0
+99c11572,443,United States,0
+07d93b31,443,United States,0
+cc344301,443,United States,0
+18029bc6,443,United States,0
+bb694085,6363,Estonia,0
+75808144,443,United States,0
+b4a7b1b4,3482,United States,0
+3015894c,443,United States,0
+324c7390,443,United States,0
+cf61bb63,443,United States,0
+879e3172,443,United States,0
+cafdaea7,443,United States,0
+d6da1bc9,443,United States,0
+ca1c7a38,443,United States,0
+95db63f0,9993,United States,0
+f78eafd2,443,United States,0
+69027b15,443,Netherlands,0
+95c39b97,443,United States,0
+48513283,443,United States,0
+4b5640cd,443,United States,0
+beac9037,443,United States,0
+ac36b459,443,United States,0
+b96f108c,80,Portugal,0
+8bfc9d3f,443,United States,0
+1a589d15,443,United States,0
+7e6ca153,443,United States,0
+7e2aa885,443,United States,0
+fc327d26,4070,United States,0
+d62408ea,443,United States,0
+46846026,443,United States,0
+138f546d,123,United States,0
+8cb64a06,443,United States,0
+bb340d23,443,United States,0
+faf8d14b,3482,United States,0
+063cf451,443,United States,0
+6530c09f,443,United States,0
+18198cd4,9876,United Kingdom,0
+60e25e4d,3480,United States,0
+da64a6c3,443,United States,0
+9c2bd0eb,443,United States,0
+661a9c28,443,United States,0
+24a5b615,443,United States,0
+ae320ad7,443,United States,0
+f7a04af5,1337,Netherlands,0
+99988997,5223,United States,0
+ab7fe483,443,United States,0
+9d6fb249,443,United States,0
+3983aeb5,5223,United States,0
+95db63f0,443,United States,0
+69a0130d,443,United States,0
+6e19f3b4,443,United States,0
+2505b55b,443,United States,0
+c62efa73,443,Czech Republic,0
+2f4b09f9,443,United States,0
+0df717a9,443,United States,0
+2b64b52b,443,Netherlands,0
+0d173860,443,United States,0
+f54c0401,443,United States,0
+00b9cb56,443,United States,0
+6f07e16c,443,United States,0
+eb8a5ccd,80,United States,0
+62faf07f,443,United States,0
+d6b33694,10001,United States,0
+8635853f,443,United States,0
+01c8873a,80,United States,0
+d0bf9690,443,Netherlands,0
+1b0ce7c9,443,Portugal,0
+35e18252,443,United States,0
+ede3dbe9,445,Portugal,0
+f5c2c5ec,443,United States,0
+0df717a9,443,United States,0
+723f6d1f,80,Portugal,0
+ca3ca578,443,United States,0
+f831b4a4,443,United States,0
+210da867,80,Portugal,0
+39c17818,443,United States,0
+f78161e3,443,United States,0
+cccad94e,443,United States,0
+bb4c340f,6969,Russia,0
+8efb18cc,88,Portugal,0
+6f2e445c,443,United States,0
+9c04f9b6,53,United States,0
+a16f48e4,443,United States,0
+70c0efb1,443,United States,0
+32fd3fa4,53,Switzerland,0
+87dfa4a2,443,United States,0
+7552d115,443,United States,0
+4324f66f,443,United States,0
+b8f61efc,443,Luxembourg,0
+4c860ff9,443,United States,0
+b8e81468,443,United States,0
+ab40e19c,443,United States,0
+80cd6e87,443,Virgin Islands,0
+9230d8b7,443,United Kingdom,0
+0d1f0a9c,443,United States,0
+daa95d6b,443,United States,0
+f40a2f57,443,United States,0
+4b707b64,443,United States,0
+3060aa4a,443,Luxembourg,0
+487def32,443,United States,0
+68bf016e,443,United States,0
+2a476208,443,United States,0
+d1d9b865,443,United States,0
+5704e801,443,United States,0
+1c2cd0eb,80,Norway,0
+183cd389,443,United States,0
+e7b50226,443,United States,0
+1f4c15d5,443,United States,0
+decdef2d,443,United States,0
+8e305f29,443,United States,0
+56c1fdf2,443,United States,0
+31bed7a5,443,Netherlands,0
+30166f4b,443,United States,0
+b32ec49a,443,United States,0
+1329b8c0,443,United States,0
+45981642,443,United States,0
+67bab3e8,443,United States,0
+537f7547,443,United States,0
+55ad2218,443,France,0
+08321637,2710,United States,0
+e572b49f,443,United States,0
+2a476208,443,United States,0
+80856d6e,443,United States,0
+9621651d,443,United States,0
+259a14b5,88,Portugal,0
+825dd46e,443,United States,0
+7272209b,443,United States,0
+990cc78b,443,Netherlands,0
+d080153f,5223,United States,0
+57131db3,443,United States,0
+d2c844c7,3480,United States,0
+a36abe8c,443,United States,0
+0170a116,443,United States,0
+5641383a,443,United States,0
+28e0bdca,443,United States,0
+ff5ce7fc,443,United States,0
+b87ccb26,443,France,0
+2b7ed796,443,United States,0
+7e945fc3,443,United States,0
+9b257cad,80,United States,0
+cac200f6,443,United States,0
+3789eb3a,443,Portugal,0
+1aba51f8,80,United States,0
+8a270d4e,443,United States,0
+a1d7c7e9,443,United States,0
+95f23ed4,3482,United States,0
+7d6950c0,443,United States,0
+af392f23,443,United States,0
+4ee49b59,443,United States,0
+2563e547,443,United States,0
+3bfac59e,443,United States,0
+dbd8b64f,443,United States,0
+b15d5370,443,Portugal,0
+1372482f,80,United States,0
+477d3027,443,United States,0
+990cc78b,443,United States,0
+c0afdc38,443,United States,0
+b244d142,443,United States,0
+7d97f912,443,United States,0
+cbcca248,443,United States,0
+33a95c69,443,United States,0
+0b2a7b07,993,United States,0
+79e8f478,443,United States,0
+ac040c33,443,United States,0
+e1e4c7b8,443,United States,0
+6dca4303,443,United States,0
+4f91d8c9,443,United States,0
+19bd5036,80,United States,0
+72d9f85b,443,United States,0
+18e6a924,443,United States,0
+4da22dbb,80,United States,0
+8444d281,443,United States,0
+78734702,443,Luxembourg,0
+2b64b52b,443,United States,0
+8bdb4132,443,United States,0
+1e597011,443,United States,0
+f6a9caef,443,United States,0
+b0e7ffbb,80,United States,0
+f1890533,443,United States,0
+5704e801,443,United States,0
+cd6f91b4,80,United States,0
+1c2cd0eb,80,Norway,0
+673c79db,443,United States,0
+7941d433,443,United States,0
+a3e51164,443,United States,0
+d5e3d12a,443,United States,0
+e9a13ea7,443,United States,0
+ebc6b638,443,United States,0
+2069cdf4,443,United States,0
+e07cfdcf,443,United States,0
+a810d119,80,United States,0
+567d79b4,443,United States,0
+4ca55901,443,United States,0
+52d82625,443,United States,0
+2fb539e2,443,United States,0
+387f88c3,443,United States,0
+a0d175b4,88,Portugal,0
+092a28e3,5222,United States,0
+1f296792,1032,Portugal,0
+1f1ec3e2,443,United States,0
+514d3bc2,443,United States,0
+bbf9ee82,3480,United States,0
+3c133de5,443,United States,0
+3ecd3008,80,United States,0
+8536da9d,443,United States,0
+45556937,443,Portugal,0
+a4989fec,443,Netherlands,0
+9f319153,443,United Kingdom,0
+d92f69b5,443,United States,0
+1abcc392,443,United States,0
+56170a66,80,United States,0
+327b83f6,443,Israel,0
+40188abd,443,United States,0
+67a5a179,443,United States,0
+3f9b3c26,443,United States,0
+bb7fa0da,443,United States,0
+58fed4af,443,United States,0
+96d51857,443,United States,0
+0bfa0835,443,United States,0
+56eb9e4c,443,United States,0
+cd014aed,443,United States,0
+4cd86317,443,United States,0
+4ee49b59,443,United States,0
+03aec668,443,United States,0
+8536da9d,443,United States,0
+347d069b,443,Portugal,0
+40ac3b97,443,Portugal,0
+f1890533,80,United States,0
+9091a2d3,443,United States,0
+1ef37ea8,443,Portugal,0
+30166f4b,443,United States,0
+237fe573,443,United States,0
+0a219107,443,United States,0
+3ef475ec,2710,United States,0
+68bf016e,443,United States,0
+614f5b26,443,United States,0
+3a0ef95c,443,United States,0
+66e70a16,443,United States,0
+bbae75f2,4000,United States,0
+99a74062,6969,United States,0
+183535c3,80,United States,0
+cd64df64,443,United States,0
+353ba5d6,443,United States,0
+14aa9053,443,United States,0
+39c17818,443,United States,0
+922a72da,443,United States,0
+ee835dca,443,Portugal,0
+149d5fe4,443,Netherlands,0
+3ad3169e,443,United States,0
+32e69bea,443,United States,0
+29b982b0,443,United States,0
+5ceddb75,443,United States,0
+55ad2218,443,United States,0
+ade497b5,6969,United States,0
+b3ee1943,443,United States,0
+a28d6800,443,United States,0
+49177374,9191,Portugal,0
+dc9e714f,443,United States,0
+ba7b9299,443,United States,0
+866c7373,443,United States,0
+7853c0e7,443,United States,0
+70328132,443,United States,0
+ab254b69,443,United States,0
+3ef475ec,80,Norway,0
+e07cfdcf,443,United Kingdom,0
+56c1fdf2,443,United States,0
+d9ac0320,443,United States,0
+34f6d259,80,United States,0
+3344a13d,443,United States,0
+217241c0,443,United States,0
+d33e5de7,443,United States,0
+a0c9fefa,443,United States,0
+e8bea274,443,United States,0
+7d5529b0,443,United States,0
+350fbe5f,443,United States,0
+a2c43d7c,443,United States,0
+24a8bf90,443,United States,0
+0665d6ce,443,United States,0
+6ea025a3,443,United States,0
+18be67bf,443,Netherlands,0
+ee87e676,443,United States,0
+cccad94e,17301,France,0
+dfccc740,80,United States,0
+db9566fb,6447,Germany,0
+c8800abc,443,United States,0
+e9a0b167,443,United States,0
+7fad50a0,443,United States,0
+a6118f9a,80,United States,0
+75db4436,443,Russia,0
+efb83ed6,443,Netherlands,0
+e108fc65,443,United States,0
+ab40e19c,443,United States,0
+66c40550,443,United States,0
+841919bb,443,United States,0
+aa3c4266,443,United States,0
+2dfaa287,443,Germany,0
+dab8a999,443,United States,0
+431651c0,443,United States,0
+1cd173c3,80,Portugal,0
+45216b13,443,United States,0
+cb077538,80,Hong Kong,0
+6294b5b6,443,United States,0
+ad68741a,443,United States,0
+4ac90c9b,443,United States,0
+9d6f34fd,58461,Russian Federation,0
+dbbc78a1,443,United States,0
+c2fa2e26,443,United States,0
+a4c26ecd,443,United States,0
+c4bfb0c7,443,United States,0
+c324e1f5,443,United States,0
+2034e8be,80,Portugal,0
