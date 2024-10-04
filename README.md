@@ -1,4 +1,4 @@
-# Aprendizagem Aplicada à Segurança (2023)
+# Aprendizagem Aplicada à Segurança (2024)
 
 ## Theoretical material
 
