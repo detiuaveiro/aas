@@ -22,3 +22,4 @@ mlxtend>=0.23.0
 tensorflow-cpu>=2.14.0
 scikeras>=0.1.8
 exectimeit>=0.1.1
+imbalanced-learn>=0.13.0

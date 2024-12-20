@@ -1,14 +1,15 @@
 ---
-title: Practial Project AAS
+title: Practial Project AAS 2
 author: Mário Antunes
 institute: Universidade de Aveiro
-date: November 29, 2024
+date: January 16, 2024
 ---
 
 # Introduction
 
-This document details the necessary information for the realization of the practical project for the AAS course.
+This document details the necessary information for the realization of the practical project for the AAS course in the second evaluation phase.
 As stated at the beginning of the course, the practical project is worth 50% of the final grade.
+For this project it is allowed to continue the work from the first project with the same group.
 
 The main objective of this work is to develop an application that applies the topics discussed within the course within the privacy and security environment.
 Each student is encouraged to propose a topic, that may be aligned with another course project, a scholarship, or the Master's Dissertation.
@@ -26,19 +27,22 @@ In Section [Deadline and Repository](#deadline-and-repository) you can find more
 
 # Deadline and Repository
 
-The project should be delivered through this [link](https://classroom.github.com/a/oRVeUWxj). 
-All of the resources should be accessible through the repository (if there are issues with files larger than 100 Mb, please contact the professor).
+The project should be delivered through this link: [https://classroom.github.com/a/T4AxjIjJ](https://classroom.github.com/a/T4AxjIjJ). All of the resources should be accessible through the repository (if there are issues with files larger than 100 Mb, please contact the professor).
 
 The repository should contain:
 
 1. The code for the application;
 2. A README.md file with sufficient detail to use the application;
-3. A report (10-page maximum of content; in PDF) with the description of the application and solution.
+3. A report (10-page maximum of content; in PDF) with the description of the application and solution. The report should contain:
+	- Project description and motivation;
+	- Data gathering process;
+	- ML application on the data and 
+	- Results and discussion.
 
 The work can be done individually or in pairs. 
 Please use your student number as the project/team name.
 
-The deadline for the project is 14/01/2025 at 23:59.
+The deadline for the project is 25/01/2024 at 11:59 PM.
 
 # Resources
 
@@ -53,5 +57,4 @@ It is exptected that the list of resources increases as time progresses.
 6. [JOE Sandbox - Analyses Overview](https://www.joesandbox.com/analysispaged/0)
 7. [Malware Bazaar](https://bazaar.abuse.ch/browse/)
 8. [E-Mail Header Analyzer (MHA)](https://github.com/gcsuaveiro/email-header-analyzer)
-9. [E-Mail Headar SPAM detection example](https://www.kaggle.com/code/maharshipandya/email-spam-classification-98)
-10. [Unveiling Network Threats: Anomaly Detection in Intrusion Detection Systems](https://github.com/detiuaveiro/anomaly_dectection_ids)
+9. [Unveiling Network Threats: Anomaly Detection in Intrusion Detection Systems](https://github.com/detiuaveiro/anomaly_dectection_ids)
