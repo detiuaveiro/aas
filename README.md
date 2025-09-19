@@ -17,79 +17,24 @@ The notebooks can be found [here](notebooks/)
 
 ## Schedule
 
-<table>
-    <tr>
-        <th>Date</th>
-        <th>Class</th>
-        <th>Topic</th>
-    </tr>
-    <tr>
-        <td>20/09/2024</td>
-        <td>1</td>
-        <td>Introduction</td>
-    </tr>
-    <tr>
-        <td>27/09/2024</td>
-        <td>2</td>
-        <td rowspan="3">SPAM Detector</td>
-    </tr>
-    <tr>
-        <td>04/10/2024</td>
-        <td>3</td>
-    </tr>
-    <tr>
-        <td>11/10/2024</td>
-        <td>4</td>
-    </tr>
-    <tr>
-        <td>18/10/2024</td>
-        <td>5</td>
-        <td rowspan="3" >Anomaly Detection</td>
-    </tr>
-    <tr>
-        <td>25/10/2024</td>
-        <td>6</td>
-    </tr>
-    <tr>
-        <td>08/11/2024</td>
-        <td>7</td>
-    </tr>
-    <tr>
-        <td>15/11/2024</td>
-        <td>8</td>
-        <td>Mid-term Exam</td>
-    </tr>
-    <tr>
-        <td>10/11/2024</td>
-        <td>9</td>
-        <td rowspan="3">Malware Analysis</td>
-    </tr>
-    <tr>
-        <td>17/11/2024</td>
-        <td>10</td>
-    </tr>
-    <tr>
-        <td>24/11/2024</td>
-        <td>11</td>
-    </tr>
-    <tr>
-        <td>01/12/2024</td>
-        <td>12</td>
-        <td rowspan="4">Project</td>
-    </tr>
-    <tr>
-        <td>08/12/2024</td>
-        <td>13</td>
-    </tr>
-    <tr>
-        <td>15/12/2024</td>
-        <td>14</td>
-    </tr>
-    <tr>
-        <td>22/12/2024</td>
-        <td>15</td>
-    </tr>
-</table>
+Can find the spreadsheet [here](aas_plan.ods).
+
+| Date       | Class | Topic              |
+|-----------:|------:|:-------------------|
+| 20-09-2025 | 1     | Class Presentation |
+| 27-09-2025 | 2     | SPAM Detector      |
+| 04-10-2025 | 3     |                    |
+| 11-10-2025 | 4     |                    |
+| 18-10-2025 | 5     | Anomaly Detection  |
+| 25-10-2025 | 6     |                    |
+| 01-11-2025 | 7     |                    |
+| 08-11-2025 | 8     | Mid-term Exam      |
+| 15-11-2025 | 9     | Malware Analysis   | 
+| 22-11-2025 | 10    |                    | 
+| 29-11-2025 | 11    |                    |
+| 06-12-2025 | 12    | Project            |
+| 13-12-2025 | 13    |                    |
+| 20-12-2025 | 14    |                    |
 
 ## Bibliography
 
