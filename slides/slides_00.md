@@ -2,7 +2,7 @@
 title: Aprendizagem Aplicada à Segurança
 author: Mário Antunes
 institute: Universidade de Aveiro
-date: September 20, 2024
+date: September 19, 2025
 header-includes:
  - \usetheme[sectionpage=none,numbering=fraction,progressbar=frametitle]{metropolis}
  - \usepackage{longtable,booktabs}
