@@ -55,6 +55,61 @@ In many real-world problems, we **do not have labels** for what is an anomaly. W
 
 We will explore several methods to build this model.
 
+# Pre-processing
+
+## The Problem: Categorical Data {.allowframebreaks}
+
+The models we will discuss (K-Means, GMM, PCA, Autoencoders) are mathematical. They operate on **numerical vectors.**
+
+They **cannot** directly process categorical text features (e.g., `protocol: "TCP"`, `user: "admin"`).
+
+**Why?**
+
+* **Distance Models (K-Means):** How do you calculate the distance between "TCP" and "UDP"?
+* **Probabilistic Models (GMM):** How do you fit a Gaussian (bell curve) to text labels?
+* **Gradient Models (Autoencoders):** You cannot multiply an input like "admin" by a weight during training (backpropagation).
+
+We **must** convert these categories into numbers first. This is **Feature Encoding**.
+
+## Method 1: Label Encoding {.allowframebreaks}
+
+This method assigns a unique integer to each unique category.
+
+**Example:** A feature `protocol` with values `[TCP, UDP, HTTP, TCP]`
+
+...would be encoded as: `[0, 1, 2, 0]`
+
+* `TCP = 0`
+* `UDP = 1`
+* `HTTP = 2`
+
+**The Problem:** This creates a **false ordinal relationship**. The model now thinks `HTTP (2)` is "larger" than `UDP (1)` and that the "distance" between `TCP (0)` and `HTTP (2)` is twice that of `TCP (0)` and `UDP (1)`. This is usually wrong and will confuse distance-based models.
+
+## Method 2: One-Hot Encoding (OHE) {.allowframebreaks}
+
+This method creates a new **binary (0/1)** feature for *each* unique category.
+
+**Example:** `[TCP, UDP, HTTP]`
+
+...becomes three new columns:
+
+| | `is_TCP` | `is_UDP` | `is_HTTP` |
+| :--- | :---: | :---: | :---: |
+| **TCP** | 1 | 0 | 0 |
+| **UDP** | 0 | 1 | 0 |
+| **HTTP**| 0 | 0 | 1 |
+
+**The Benefit:** No false ordinal relationship. All categories are now geometrically equidistant. This is the **preferred method** for most anomaly detection models.
+
+**The Drawback:** If a feature has 10,000 unique categories (e.g., `user_id`), OHE will create 10,000 new columns, which can be computationally expensive (Curse of Dimensionality).
+
+## Encoding Comparison {.allowframebreaks}
+
+| Method | How it Works | Best For | Cons |
+| :--- | :--- | :--- | :--- |
+| **Label Encoding** | Maps N categories to integers `[0, 1...N-1]`. | **Ordinal data** (e.g., `low`, `medium`, `high`). Tree-based models (like Isolation Forest). | Creates a false ordinal relationship. **Bad for distance/gradient models.** |
+| **One-Hot Encoding** | Maps N categories to N binary (0/1) features. | **Nominal data** (no order). Distance, density, and gradient models (K-Means, GMM, PCA, AE). | **Curse of Dimensionality**: Can create thousands of features. |
+
 # Clustering
 
 ## Method 1: K-Means Clustering
