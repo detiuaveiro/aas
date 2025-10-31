@@ -1,10 +1,24 @@
 ---
 title: Aprendizagem Aplicada à Segurança
+subtitle: Malware Detection
 author: Mário Antunes
 institute: Universidade de Aveiro
-date: November 10, 2023
+date: November 14, 2025
+toc: true
+toc-title: "Table of Contents"
+bibliography: "references.bib"
+colorlinks: true
+highlight-style: tango
+mainfont: NotoSans
 header-includes:
- - \usetheme[numbering=fraction,progressbar=frametitle]{metropolis}
+ - \usetheme[sectionpage=none,numbering=fraction,progressbar=frametitle]{metropolis}
+ - \usepackage{longtable,booktabs}
+ - \usepackage{etoolbox}
+ - \AtBeginEnvironment{longtable}{\small}
+ - \AtBeginEnvironment{cslreferences}{\small}
+ - \AtBeginEnvironment{Shaded}{\tiny}
+ - \AtBeginEnvironment{verbatim}{\tiny}
+ - \setmonofont[Contextuals={Alternate}]{FiraCodeNerdFontMono-Retina}
 ---
 
 # Context
@@ -51,31 +65,23 @@ What makes Clop so interesting and dangerous, however, is not how it’s deploye
 
 # How To Recognize Malware
 
-## How To Recognize Malware
+## How To Recognize Malware {.allowframebreaks}
 
 1. **Signature-based detection:** Signature-based detection uses known digital indicators of malware to identify suspicious behavior. Lists of indicators of compromise (IOCs) can be used to identify a breach. While IOCs can be effective in identifying malicious activity, they are reactive in nature.
 
 2. **Static file analysis:** Examining a file's code, without running it, to identify signs of malicious intent. File names, hashes, strings such as IP addresses, and file header data can all be evaluated to determine whether a file is malicious.
 
-## How To Recognize Malware #2
-
 3. **Dynamic malware analysis:** Dynamic malware analysis executes suspected malicious code in a safe environment called a sandbox. This closed system enables security professionals to watch and study the malware in action without the risk of letting it infect their system or escape into the enterprise network.
 
 4. **Dynamic monitoring of mass file operations:** Observing mass file operations such as rename or delete commands to identify signs of tampering or corruption. Dynamic monitoring often uses a file integrity monitoring tool to track and analyze the integrity of file systems through both reactive forensic auditing and proactive rules-based monitoring.
-
-## How To Recognize Malware #3
 
 5. **File extensions blocklist:** File extensions are letters occurring after a period in a file name, indicating the format of the file. This classification can be used by criminals to package malware for delivery. As a result, a common security method is to list known malicious file extension types in a "blocklist" to prevent unsuspecting users from downloading or using the dangerous file.
 
 6. **Application allowlist:** The opposite of a blocklist/blocklisting, where an organization authorizes a system to use applications on an approved list. Allowlisting can be very effective in preventing nefarious applications through rigid parameters. However, it can be difficult to manage and reduce an organization’s operational speed and flexibility.
 
-## How To Recognize Malware #4
-
 7. **Malware honeypot:** A malware honeypot mimics a software application or an application programming interface (API) to draw out malware attacks in a controlled, non-threatening environment. Similarly, a honeypot file is a decoy file to draw and detect attackers. In doing so, security teams can analyze the attack techniques and develop or enhance antimalware solutions to address these specific vulnerabilities, threats or actors.
 
 8. **Cyclic redundancy check (CRC):** A calculation on a collection of data, such as a file, to confirm its integrity. One of the most common checksums used is a CRC, which involves analysis of both value and position of a group of data. Checksumming can be effective for identifying corruption in data but is not foolproof for determining tampering.
-
-## How To Recognize Malware #5
 
 9. **File entropy:** As threat intelligence and cybersecurity evolves, adversaries increasingly create dynamic malware executables to avoid detection. This results in modified files that have high entropy levels. As a result, a file’s data change measured through entropy can identify potential malware.
 

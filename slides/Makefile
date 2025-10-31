@@ -8,7 +8,7 @@ all: $(ALL_PDF)
 pdf: $(ALL_PDF)
 
 %.pdf: %.md references.bib
-	pandoc -t beamer -s --slide-level 2 --bibliography=references.bib --pdf-engine=lualatex -o $@ $<
+	pandoc -s --to=beamer --citeproc --slide-level=2 --pdf-engine=lualatex -o $@ $<
 
 clean:
 	rm -rf *.pdf

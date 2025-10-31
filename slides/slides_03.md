@@ -1,12 +1,25 @@
 ---
 title: Aprendizagem Aplicada à Segurança
+subtitle: Anomaly Detection
 author: Mário Antunes
 institute: Universidade de Aveiro
-date: October 14, 2023
+date: October 17, 2025
+toc: true
+toc-title: "Table of Contents"
+bibliography: "references.bib"
+colorlinks: true
+highlight-style: tango
+mainfont: NotoSans
 header-includes:
- - \usetheme[numbering=fraction,progressbar=frametitle]{metropolis}
+ - \usetheme[sectionpage=none,numbering=fraction,progressbar=frametitle]{metropolis}
+ - \usepackage{longtable,booktabs}
+ - \usepackage{etoolbox}
+ - \AtBeginEnvironment{longtable}{\small}
+ - \AtBeginEnvironment{cslreferences}{\small}
+ - \AtBeginEnvironment{Shaded}{\tiny}
+ - \AtBeginEnvironment{verbatim}{\tiny}
+ - \setmonofont[Contextuals={Alternate}]{FiraCodeNerdFontMono-Retina}
 ---
-
 # Context
 
 ## Context
