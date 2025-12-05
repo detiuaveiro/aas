@@ -7,8 +7,8 @@ ALL_PDF := $(filter-out README.pdf, $(ALL_PDF))
 all: $(ALL_PDF)
 pdf: $(ALL_PDF)
 
-%.pdf: %.md references.bib
-	pandoc --bibliography=references.bib --pdf-engine=lualatex -o $@ $<
+%.pdf: %.md
+	pandoc --pdf-engine=lualatex -o $@ $<
 
 clean:
 	rm -rf *.pdf
