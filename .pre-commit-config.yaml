@@ -1,0 +1,34 @@
+# The CI gate, moved to commit time.
+#
+# Every Python hook below is `language: system`, calling tools already installed
+# in the environment and reading `pyproject.toml`.
+#
+# Install with: pre-commit install
+# Run over everything once: pre-commit run --all-files
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=2048]
+
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff check (python & notebooks)
+        entry: ruff check
+        language: system
+        types_or: [python, jupyter]
+
+      - id: compile-materials
+        name: compile course materials (pandoc / latexmk)
+        entry: make all
+        language: system
+        files: '(\.md$|\.tex$|\.bib$|Makefile|Makefile\.inc|config\.yml|defaults\.yml)$'
+        pass_filenames: false

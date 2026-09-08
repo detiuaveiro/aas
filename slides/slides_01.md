@@ -9,7 +9,7 @@ toc-title: "Table of Contents"
 bibliography: "references.bib"
 colorlinks: true
 highlight-style: tango
-mainfont: NotoSans
+mainfont: Noto Sans
 header-includes:
  - \usetheme[sectionpage=none,numbering=fraction,progressbar=frametitle]{metropolis}
  - \usepackage{longtable,booktabs}
@@ -18,7 +18,7 @@ header-includes:
  - \AtBeginEnvironment{cslreferences}{\small}
  - \AtBeginEnvironment{Shaded}{\tiny}
  - \AtBeginEnvironment{verbatim}{\tiny}
- - \setmonofont[Contextuals={Alternate}]{FiraCodeNerdFontMono-Retina}
+ - \setmonofont[Contextuals={Alternate}]{FiraCode Nerd Font Mono}
 ---
 
 # Machine Learning
@@ -44,7 +44,7 @@ This graph shows the history of Artificial Intelligence, often described in "wav
 
 # What is ML (Why should I Care)?
 
-## What is ML 
+## What is ML
 
 **What does machine learning mean?**
 
@@ -58,7 +58,7 @@ At its core, **Machine Learning (ML)** is the capability of a machine to improve
 
 When it gets a new email, it uses this model to make a prediction (spam or not spam). It can then incorporate the result of that trial (was it right or wrong?) back into the model to continuously improve, essentially learning from trial and error.
 
-## The Machine Learning Process i 
+## The Machine Learning Process i
 
 ![](figures/mlprocess.drawio.pdf)
 
@@ -83,7 +83,7 @@ Building a useful ML model involves a standard workflow, which is highly iterati
 * **Step 5: Data Visualization**
     After evaluation (and often during the initial data exploration), you transform results and data into visual graphs. This is crucial for understanding complex patterns and communicating your findings to stakeholders.
 
-## What is ML 
+## What is ML
 
 This diagram shows the flow of data in ML:
 
@@ -217,7 +217,7 @@ Models can be further broken down into:
 
 * **Induction symbolic reasoning:** Learns by creating a set of human-readable logical rules (e.g., Decision Trees, which produce IF-THEN rules).
 * **Neural Networks:** Models inspired by the structure of the human brain, using interconnected nodes ("neurons") in layers to learn complex patterns.
-* **Evolutionary algorithms:** Uses concepts from Darwinian evolution, like selection, mutation, and crossover, to "evolve" a population of potential solutions toward an optimal one (e.g., Genetic Algorithms). 
+* **Evolutionary algorithms:** Uses concepts from Darwinian evolution, like selection, mutation, and crossover, to "evolve" a population of potential solutions toward an optimal one (e.g., Genetic Algorithms).
 
 ---
 

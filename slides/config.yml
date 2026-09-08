@@ -1,0 +1,15 @@
+subtitle: Aprendizagem Aplicada à Segurança
+author: Mário Antunes
+institute: Universidade de Aveiro
+date: 2026
+colorlinks: true
+highlight-style: tango
+mainfont: Noto Sans
+sansfont: Noto Sans
+monofont: FiraCode Nerd Font Mono
+theme: metropolis
+themeoptions:
+  - sectionpage=none
+  - numbering=fraction
+  - progressbar=frametitle
+bibliography: "references.bib"

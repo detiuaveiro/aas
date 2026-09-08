@@ -9,7 +9,7 @@ toc-title: "Table of Contents"
 bibliography: "references.bib"
 colorlinks: true
 highlight-style: tango
-mainfont: NotoSans
+mainfont: Noto Sans
 header-includes:
  - \usetheme[sectionpage=none,numbering=fraction,progressbar=frametitle]{metropolis}
  - \usepackage{longtable,booktabs}
@@ -18,7 +18,7 @@ header-includes:
  - \AtBeginEnvironment{cslreferences}{\small}
  - \AtBeginEnvironment{Shaded}{\tiny}
  - \AtBeginEnvironment{verbatim}{\tiny}
- - \setmonofont[Contextuals={Alternate}]{FiraCodeNerdFontMono-Retina}
+ - \setmonofont[Contextuals={Alternate}]{FiraCode Nerd Font Mono}
 ---
 
 # SPAM
@@ -55,7 +55,7 @@ header-includes:
 
 ![](figures/spam-traffic.png)
 
-# SPAM Detection 
+# SPAM Detection
 
 ## SPAM Detection
 
@@ -65,17 +65,17 @@ header-includes:
 
 ## Binary Classification
 
-* Binary classification is the task of classifying the elements of a set into two groups (each called class) on the basis of a classification rule. 
-* For this application one message can either be spam or ham. 
+* Binary classification is the task of classifying the elements of a set into two groups (each called class) on the basis of a classification rule.
+* For this application one message can either be spam or ham.
 
 ![](figures/Binary-Classification.png){ width=75%}
 
-# Text Mining 
+# Text Mining
 
 ## Text Mining
 
-* Text mining is the process of deriving high-quality information from text. 
-* Combines concepts from Machine Learning, Linguistic and statistical analysis. 
+* Text mining is the process of deriving high-quality information from text.
+* Combines concepts from Machine Learning, Linguistic and statistical analysis.
 * In this area we will explore the methods used to rank words/tokens and the BoW model.
 
 
@@ -88,12 +88,12 @@ header-includes:
 
 ## Natural Language Processing (NLP)
 
-* NLP gives the computers the ability to understand text. 
+* NLP gives the computers the ability to understand text.
 * Combines *Sintax* and *Semantic* into the analysis.
-* One famous exemples are the Large Language Models (LLMs) that power OpenAI Chat GPT. 
+* One famous exemples are the Large Language Models (LLMs) that power OpenAI Chat GPT.
 
 
-# Classification Model 
+# Classification Model
 
 ## Classification Model
 
@@ -109,7 +109,7 @@ header-includes:
 :::
 ::::
 
-# Model Evaluation 
+# Model Evaluation
 
 ## Model Evaluation
 

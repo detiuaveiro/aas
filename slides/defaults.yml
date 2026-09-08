@@ -1,0 +1,8 @@
+resource-path:
+  - "."
+  - "figures"
+  - "../assets"
+  - "../assets/figures"
+include-in-header:
+  - "header.tex"
+citeproc: true

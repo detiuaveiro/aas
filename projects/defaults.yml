@@ -1,0 +1,6 @@
+resource-path:
+  - "."
+  - "../assets"
+  - "../assets/figures"
+include-in-header:
+  - "header.tex"

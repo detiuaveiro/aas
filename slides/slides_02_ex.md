@@ -9,7 +9,7 @@ toc-title: "Table of Contents"
 bibliography: "references.bib"
 colorlinks: true
 highlight-style: tango
-mainfont: NotoSans
+mainfont: Noto Sans
 header-includes:
  - \usetheme[sectionpage=none,numbering=fraction,progressbar=frametitle]{metropolis}
  - \usepackage{longtable,booktabs}
@@ -18,7 +18,7 @@ header-includes:
  - \AtBeginEnvironment{cslreferences}{\small}
  - \AtBeginEnvironment{Shaded}{\tiny}
  - \AtBeginEnvironment{verbatim}{\tiny}
- - \setmonofont[Contextuals={Alternate}]{FiraCodeNerdFontMono-Retina}
+ - \setmonofont[Contextuals={Alternate}]{FiraCode Nerd Font Mono}
 ---
 
 # Spam Detection

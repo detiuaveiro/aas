@@ -1,0 +1,28 @@
+[project]
+name = "aas"
+version = "0.1.0"
+description = "Educational material and support files for Aprendizagem Aplicada à Segurança (AAS)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Mário Antunes", email = "mario.antunes@ua.pt"}
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[tool.basedpyright]
+typeCheckingMode = "basic"
+failOnWarnings = false
+include = ["notebooks"]
+
+[tool.ruff]
+line-length = 120
+include = ["*.py", "*.pyi", "**/pyproject.toml", "*.ipynb"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]

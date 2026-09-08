@@ -24,7 +24,7 @@ It is strongly recommended to run this project inside a virtual environment to a
 
 ### 1. Extract the compressed file
 ```bash
-tar xvf [compressed_file].tar.xz 
+tar xvf [compressed_file].tar.xz
 cd [your-project]
 ````
 

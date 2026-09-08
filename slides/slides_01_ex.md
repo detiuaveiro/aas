@@ -9,7 +9,7 @@ toc-title: "Table of Contents"
 bibliography: "references.bib"
 colorlinks: true
 highlight-style: tango
-mainfont: NotoSans
+mainfont: Noto Sans
 header-includes:
  - \usetheme[sectionpage=none,numbering=fraction,progressbar=frametitle]{metropolis}
  - \usepackage{longtable,booktabs}
@@ -18,7 +18,7 @@ header-includes:
  - \AtBeginEnvironment{cslreferences}{\small}
  - \AtBeginEnvironment{Shaded}{\tiny}
  - \AtBeginEnvironment{verbatim}{\tiny}
- - \setmonofont[Contextuals={Alternate}]{FiraCodeNerdFontMono-Retina}
+ - \setmonofont[Contextuals={Alternate}]{FiraCode Nerd Font Mono}
 ---
 
 # Optimization Concepts
@@ -135,7 +135,7 @@ $\vec{x}_{t+1} = \vec{x}_{t} - \alpha \times \nabla f(\vec{x}_{t})$
 
 **1. The Model:**
 
-$h(x, m, b) = m \times x + b$  
+$h(x, m, b) = m \times x + b$
 
 * The parameters we need to find are $m$ (slope) and $b$ (intercept).
 

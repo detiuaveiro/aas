@@ -9,7 +9,7 @@ toc-title: "Table of Contents"
 bibliography: "references.bib"
 colorlinks: true
 highlight-style: tango
-mainfont: NotoSans
+mainfont: Noto Sans
 header-includes:
  - \usetheme[sectionpage=none,numbering=fraction,progressbar=frametitle]{metropolis}
  - \usepackage{longtable,booktabs}
@@ -18,7 +18,7 @@ header-includes:
  - \AtBeginEnvironment{cslreferences}{\small}
  - \AtBeginEnvironment{Shaded}{\tiny}
  - \AtBeginEnvironment{verbatim}{\tiny}
- - \setmonofont[Contextuals={Alternate}]{FiraCodeNerdFontMono-Retina}
+ - \setmonofont[Contextuals={Alternate}]{FiraCode Nerd Font Mono}
 ---
 # Context
 
@@ -26,13 +26,13 @@ header-includes:
 
 It is becoming difficult to identify Cybersecurity attacks. These attacks can originate internally due to malicious intent or negligent actions or externally by malware, target attacks, and APT (Advanced Persistent Threats).
 
-But insider threats are more challenging and can cause more damage than external threats because they have already entered the network. 
+But insider threats are more challenging and can cause more damage than external threats because they have already entered the network.
 
 These activities present unknown threats and can steal, destroy or alter the assets.
 
 ## Context #2
 
-Earlier firewalls, web gateways, and some other intrusion prevention tools are enough to be secure, but now hackers and cyber attackers can bypass approximately all these defense systems. 
+Earlier firewalls, web gateways, and some other intrusion prevention tools are enough to be secure, but now hackers and cyber attackers can bypass approximately all these defense systems.
 
 Therefore with making these prevention systems strong, it is also equally essential to use detection. So that if hackers get into the network, the system should be able to detect their presence.
 
@@ -42,7 +42,7 @@ Therefore with making these prevention systems strong, it is also equally essent
 
 ## Context #4
 
-**Signature detection** requires knowing what to look for and comparing hashes or other strings to identify a match. Signature detection is a common feature found within antivirus and IPS/IDS products. 
+**Signature detection** requires knowing what to look for and comparing hashes or other strings to identify a match. Signature detection is a common feature found within antivirus and IPS/IDS products.
 
 **Behavior detection** looks for malicious or other known behavior characteristics and alarms the SOC when a match is made. An example is identifying port scanning or a file attempting to encrypt your hard drive, which is an indication of ransomware behavior. Antimalware and sandboxes are examples of tools that heavily leverage behavior detection capabilities.
 
@@ -78,7 +78,7 @@ Common reasons for outliers are:
 
 Anomalies can be broadly categorized as:
 
-- Point anomalies: A single instance of data is anomalous if it's too far off from the rest. 
+- Point anomalies: A single instance of data is anomalous if it's too far off from the rest.
 
 - Contextual anomalies: The abnormality is context specific. This type of anomaly is common in time-series data.
 
@@ -110,7 +110,7 @@ Anomalies can be broadly categorized as:
 
 ## Clustering
 
-Type of **unsupervised learning method**. 
+Type of **unsupervised learning method**.
 Generally, it is used as a process to find meaningful structure, explanatory underlying processes, generative features, and groupings inherent in a set of examples.
 ![](figures/clustering.png)
 
@@ -158,7 +158,7 @@ In several situations it is desirable to recover all individual sources from the
 
 # Auto Encoders
 
-## Neural Networks 
+## Neural Networks
 
 ![](figures/NeuralNetworkZoo_01.png)
 
@@ -168,8 +168,8 @@ In several situations it is desirable to recover all individual sources from the
 
 ## Auto Encoders
 
-- Autoencoders are an unsupervised learning technique in which we leverage neural networks for the task of representation learning. 
-- Specifically, we'll design a neural network architecture such that we impose a bottleneck in the network which forces a compressed knowledge representation of the original input. 
+- Autoencoders are an unsupervised learning technique in which we leverage neural networks for the task of representation learning.
+- Specifically, we'll design a neural network architecture such that we impose a bottleneck in the network which forces a compressed knowledge representation of the original input.
 
 If the input features were each **independent** of one another, this compression and subsequent reconstruction would be a very **difficult task**.
 However, if some sort of structure exists in the data (ie. correlations between input features), this structure can be learned and consequently leveraged when forcing the input through the network's bottleneck.
@@ -194,7 +194,7 @@ However, if some sort of structure exists in the data (ie. correlations between 
 
 - This path length, averaged over a forest of such random trees, is a measure of normality and our decision function.
 
-**Random partitioning** produces noticeably shorter paths for anomalies. 
+**Random partitioning** produces noticeably shorter paths for anomalies.
 Hence, when a forest of random trees collectively produce shorter path lengths for particular samples, they are highly likely to be **anomalies**.
 
 ## Anomaly Detection - IsolationForest #2
@@ -203,7 +203,7 @@ Hence, when a forest of random trees collectively produce shorter path lengths f
 
 ## Anomaly Detection - Local Outlier Factor
 
-- Local Outlier Factor (LOF) measures the local deviation of the density of a given sample with respect to its neighbors. 
+- Local Outlier Factor (LOF) measures the local deviation of the density of a given sample with respect to its neighbors.
 
 - It is local in that the anomaly score depends on how isolated the object is with respect to the surrounding neighborhood.
 
@@ -230,7 +230,7 @@ Hence, when a forest of random trees collectively produce shorter path lengths f
 ## Feature Scalling
 
 - Feature scaling is the process of normalizing the range of features in a dataset.
-- Real-world datasets often contain features that are varying in degrees of magnitude, range, and units. 
+- Real-world datasets often contain features that are varying in degrees of magnitude, range, and units.
 - Therefore, in order for machine learning models to interpret these features on the same scale, we need to perform feature scaling.
 
 # Resources

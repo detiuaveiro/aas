@@ -1,0 +1,111 @@
+<svg width="512" height="128" viewBox="0 0 512 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow-red-clean" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#BF616A"/>
+    </marker>
+    <marker id="arrow-green-clean" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#A3BE8C"/>
+    </marker>
+    <marker id="arrow-loop-clean" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#4C566A"/>
+    </marker>
+  </defs>
+
+  <!-- Nord Light Background Card -->
+  <rect width="512" height="128" rx="16" fill="#ECEFF4"/>
+  <rect width="508" height="124" x="2" y="2" rx="14" fill="none" stroke="#D8DEE9" stroke-width="2"/>
+
+  <g transform="translate(0, 10)">
+
+    <!-- 1. ADVERSARY (Left at x=75, y=46) -->
+    <g transform="translate(75, 46)">
+      <text y="-34" text-anchor="middle" fill="#BF616A" font-family="monospace" font-size="9" font-weight="bold">ADVERSARY</text>
+      
+      <!-- Container card -->
+      <circle r="26" fill="#E5E9F0" stroke="#BF616A" stroke-width="1.8"/>
+      
+      <!-- Shoulders -->
+      <path d="M -19 16.5 C -19 7.8 -10 3.1 0 2.1 C 10 3.1 19 7.8 19 16.5 Z" fill="#3B4252"/>
+      <!-- Hood / Head -->
+      <path d="M -11.8 3.5 C -11.8 -5.2 -6.6 -16.5 0 -16.5 C 6.6 -16.5 11.8 -5.2 11.8 3.5 C 11.8 8 6.6 9 0 9 C -6.6 9 -11.8 8 -11.8 3.5 Z" fill="#2E3440" stroke="#4C566A" stroke-width="1.2"/>
+      <!-- Face Mask / Visor -->
+      <path d="M -7.5 -2.6 Q 0 -0.9 7.5 -2.6 Q 7.5 2.6 0 2.6 Q -7.5 2.6 -7.5 -2.6 Z" fill="#434C5E"/>
+      <!-- Glowing Red Eyes -->
+      <circle cx="-3.8" cy="-1.0" r="1.6" fill="#BF616A"/>
+      <circle cx="3.8" cy="-1.0" r="1.6" fill="#BF616A"/>
+    </g>
+
+    <!-- Attack Stream: From Adversary (x=101) directly to AI Shield (x=230) -->
+    <path d="M 103 46 H 228" fill="none" stroke="#BF616A" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arrow-red-clean)"/>
+
+    <!-- 2. AI SHIELD (Center at x=256, y=46) -->
+    <g transform="translate(256, 46)">
+      <text y="-34" text-anchor="middle" fill="#5E81AC" font-family="monospace" font-size="9" font-weight="bold">AI SHIELD</text>
+
+      <!-- Shield Frame -->
+      <path d="M -24 -24 L 24 -24 C 24 -24, 30 14, 0 34 C -30 14, -24 -24, -24 -24 Z" fill="#5E81AC" stroke="#2E3440" stroke-width="2" stroke-linejoin="round"/>
+      <!-- Inner Plate -->
+      <path d="M -20 -20 L 20 -20 C 20 -20, 25 12, 0 29 C -25 12, -20 -20, -20 -20 Z" fill="#81A1C1"/>
+
+      <!-- Neural Network Topology -->
+      <line x1="-12" y1="-10" x2="0" y2="-16" stroke="#ECEFF4" stroke-width="1.2" opacity="0.85"/>
+      <line x1="12" y1="-10" x2="0" y2="-16" stroke="#ECEFF4" stroke-width="1.2" opacity="0.85"/>
+      <line x1="-12" y1="-10" x2="-8" y2="6" stroke="#ECEFF4" stroke-width="1.2" opacity="0.85"/>
+      <line x1="-12" y1="-10" x2="8" y2="6" stroke="#ECEFF4" stroke-width="1.2" opacity="0.85"/>
+      <line x1="12" y1="-10" x2="-8" y2="6" stroke="#ECEFF4" stroke-width="1.2" opacity="0.85"/>
+      <line x1="12" y1="-10" x2="8" y2="6" stroke="#ECEFF4" stroke-width="1.2" opacity="0.85"/>
+      <line x1="-8" y1="6" x2="0" y2="18" stroke="#ECEFF4" stroke-width="1.2" opacity="0.85"/>
+      <line x1="8" y1="6" x2="0" y2="18" stroke="#ECEFF4" stroke-width="1.2" opacity="0.85"/>
+      
+      <!-- Nodes -->
+      <circle cx="0" cy="-16" r="3.5" fill="#88C0D0" stroke="#2E3440" stroke-width="1"/>
+      <circle cx="-12" cy="-10" r="3" fill="#A3BE8C" stroke="#2E3440" stroke-width="1"/>
+      <circle cx="12" cy="-10" r="3" fill="#A3BE8C" stroke="#2E3440" stroke-width="1"/>
+      <circle cx="-8" cy="6" r="3" fill="#88C0D0" stroke="#2E3440" stroke-width="1"/>
+      <circle cx="8" cy="6" r="3" fill="#88C0D0" stroke="#2E3440" stroke-width="1"/>
+      <circle cx="0" cy="18" r="3.5" fill="#ECEFF4" stroke="#2E3440" stroke-width="1.2"/>
+
+      <!-- Impact spark directly on the shield surface at x=-24, y=0 -->
+      <circle cx="-24" cy="0" r="2.5" fill="#EBCB8B"/>
+      <line x1="-24" y1="0" x2="-30" y2="-8" stroke="#BF616A" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="-24" y1="0" x2="-30" y2="8" stroke="#BF616A" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+
+    <!-- Verified Green Flow: From AI Shield (x=282) directly to Secure Assets (x=400) -->
+    <path d="M 284 46 H 397" fill="none" stroke="#A3BE8C" stroke-width="2" marker-end="url(#arrow-green-clean)"/>
+
+    <!-- 3. SECURE ASSETS (Right at x=430, y=46) -->
+    <g transform="translate(430, 46)">
+      <text y="-34" text-anchor="middle" fill="#A3BE8C" font-family="monospace" font-size="9" font-weight="bold">PROTECTED ASSETS</text>
+
+      <!-- Server Rack -->
+      <rect x="-28" y="-22" width="56" height="44" rx="4" fill="#2E3440" stroke="#4C566A" stroke-width="1.5"/>
+      
+      <rect x="-24" y="-18" width="48" height="10" rx="2" fill="#3B4252"/>
+      <circle cx="-18" cy="-13" r="1.5" fill="#A3BE8C"/>
+      <circle cx="-13" cy="-13" r="1.5" fill="#88C0D0"/>
+      <line x1="-6" y1="-13" x2="18" y2="-13" stroke="#4C566A" stroke-width="1.5" stroke-dasharray="2 2"/>
+
+      <rect x="-24" y="-5" width="48" height="10" rx="2" fill="#3B4252"/>
+      <circle cx="-18" cy="0" r="1.5" fill="#A3BE8C"/>
+      <circle cx="-13" cy="0" r="1.5" fill="#88C0D0"/>
+      <line x1="-6" y1="0" x2="18" y2="0" stroke="#4C566A" stroke-width="1.5" stroke-dasharray="2 2"/>
+
+      <rect x="-24" y="8" width="48" height="10" rx="2" fill="#3B4252"/>
+      <circle cx="-18" cy="13" r="1.5" fill="#A3BE8C"/>
+      <circle cx="-13" cy="13" r="1.5" fill="#A3BE8C"/>
+      <line x1="-6" y1="13" x2="18" y2="13" stroke="#4C566A" stroke-width="1.5" stroke-dasharray="2 2"/>
+
+      <!-- Green Security Badge with Lock -->
+      <g transform="translate(22, -18)">
+        <circle cx="0" cy="0" r="9" fill="#A3BE8C" stroke="#ECEFF4" stroke-width="1.5"/>
+        <path d="M -3 -1 H 3 V 4 H -3 Z" fill="#2E3440"/>
+        <path d="M -2 -1 V -3 C -2 -4 2 -4 2 -3 V -1" fill="none" stroke="#2E3440" stroke-width="1.2"/>
+      </g>
+    </g>
+
+    <!-- Clean Return Loop (Bottom) -->
+    <path d="M 430 74 C 430 106, 256 106, 256 84" fill="none" stroke="#4C566A" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arrow-loop-clean)"/>
+
+  </g>
+</svg>

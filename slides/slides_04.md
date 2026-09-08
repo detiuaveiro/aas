@@ -9,7 +9,7 @@ toc-title: "Table of Contents"
 bibliography: "references.bib"
 colorlinks: true
 highlight-style: tango
-mainfont: NotoSans
+mainfont: Noto Sans
 header-includes:
  - \usetheme[sectionpage=none,numbering=fraction,progressbar=frametitle]{metropolis}
  - \usepackage{longtable,booktabs}
@@ -18,7 +18,7 @@ header-includes:
  - \AtBeginEnvironment{cslreferences}{\small}
  - \AtBeginEnvironment{Shaded}{\tiny}
  - \AtBeginEnvironment{verbatim}{\tiny}
- - \setmonofont[Contextuals={Alternate}]{FiraCodeNerdFontMono-Retina}
+ - \setmonofont[Contextuals={Alternate}]{FiraCode Nerd Font Mono}
 ---
 
 # Context
@@ -47,7 +47,7 @@ de Guzman was never charged with a crime, because nothing he did was illegal in 
 
 ## CryptoLocker ransomware (2013)
 
-CryptoLocker became famous for its rapid spread and its powerful asymmetric encryption that was (at the time) uniquely difficult to break. 
+CryptoLocker became famous for its rapid spread and its powerful asymmetric encryption that was (at the time) uniquely difficult to break.
 
 It also became famous due to something unusual in the malware world: a happy ending. In 2014, the U.S. DoJ and peer agencies overseas managed to take control of the Gameover Zeus botnet, and restore the files of CryptoLocker victims free of charge. Unfortunately, CryptoLocker spread via good old-fashioned phishing as well, and variants are still around.
 
@@ -59,7 +59,7 @@ In this case, the malware found and took over IoT gadgets (mostly CCTV cameras) 
 
 ## Clop ransomware (2019-Present)
 
-Clop (sometimes written Cl0p) is another ransomware variant that emerged on the scene in 2019 and has grown increasingly prevalent since. In addition to preventing victims from accessing their data, Clop allows the attacker to withdraw that data as well. 
+Clop (sometimes written Cl0p) is another ransomware variant that emerged on the scene in 2019 and has grown increasingly prevalent since. In addition to preventing victims from accessing their data, Clop allows the attacker to withdraw that data as well.
 
 What makes Clop so interesting and dangerous, however, is not how it’s deployed, but by whom. It’s at the forefront of a trend called Ransomware-as-a-Service, in which a professionalized group of hackers does all the work for whoever will pay them enough (or share in a percentage of the ransomware riches they extract from victims).
 
@@ -92,7 +92,7 @@ What makes Clop so interesting and dangerous, however, is not how it’s deploye
 ## Malware Detection
 
 An efficient, robust and scalable malware recognition module is the key component of every cybersecurity product.
-Malware recognition modules decide if an object is a threat, based on the data they have collected on it. 
+Malware recognition modules decide if an object is a threat, based on the data they have collected on it.
 This data may be collected at different phases:
 
 - Pre-execution phase data is anything you can tell about a file without executing it. This may include executable file format descriptions, code descriptions, binary data statistics, text strings and information extracted via code emulation and other similar data.
@@ -112,7 +112,7 @@ Today, machine learning boosts malware detection using various kinds of data on 
 ### Unsupervised learning
 
 The goal is to discover the structure of the data or the law of data generation.
- 
+
 Large unlabeled datasets are available to cybersecurity vendors and the cost of their manual labeling by experts is high – this makes unsupervised learning valuable for threat detection.
 
 ## Machine learning Approaches #2

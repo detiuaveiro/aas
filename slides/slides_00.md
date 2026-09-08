@@ -8,7 +8,7 @@ toc-title: "Table of Contents"
 bibliography: "references.bib"
 colorlinks: true
 highlight-style: tango
-mainfont: NotoSans
+mainfont: Noto Sans
 header-includes:
  - \usetheme[sectionpage=none,numbering=fraction,progressbar=frametitle]{metropolis}
  - \usepackage{longtable,booktabs}
@@ -17,7 +17,7 @@ header-includes:
  - \AtBeginEnvironment{cslreferences}{\small}
  - \AtBeginEnvironment{Shaded}{\tiny}
  - \AtBeginEnvironment{verbatim}{\tiny}
- - \setmonofont[Contextuals={Alternate}]{FiraCodeNerdFontMono-Retina}
+ - \setmonofont[Contextuals={Alternate}]{FiraCode Nerd Font Mono}
 nocite: |
   @halder:2018, @chio:2018, @parisi:2019, @tsukerman:2019, @mueller:2019
 ---
@@ -71,9 +71,9 @@ nocite: |
 
 ## Grading
 
-- 50% Theory + 50% Practice 
+- 50% Theory + 50% Practice
 - Discrete: 25% Mid-term Exam + 25% Final Exam + 50% Project
-- Final: 50% Final Exame + 50% Project 
+- Final: 50% Final Exame + 50% Project
 
 # Class Schedule
 
@@ -89,8 +89,8 @@ nocite: |
 | 24-10-2025 | 6     |                    |
 | 31-10-2025 | 7     |                    |
 | 07-11-2025 | 8     | Mid-term Exam      |
-| 15-11-2025 | 9     | Malware Analysis   | 
-| 21-11-2025 | 10    |                    | 
+| 15-11-2025 | 9     | Malware Analysis   |
+| 21-11-2025 | 10    |                    |
 | 28-11-2025 | 11    |                    |
 | 05-12-2025 | 12    | Project            |
 | 12-12-2025 | 13    |                    |
