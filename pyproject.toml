@@ -1,9 +1,9 @@
 [project]
 name = "aas"
-version = "0.1.0"
+version = "0.2.0"
 description = "Educational material and support files for Aprendizagem Aplicada à Segurança (AAS)"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 license = {text = "MIT"}
 authors = [
     {name = "Mário Antunes", email = "mario.antunes@ua.pt"}
@@ -13,6 +13,62 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+# Runtime dependencies of every notebook (lower bounds = versions the material was last tested with).
+dependencies = [
+    # environment
+    "jupyterlab>=4.6.4",
+    "ipykernel>=7.3.0",
+    "ipywidgets>=8.1.9",
+    "nbconvert>=7.17.1",
+    "tqdm>=4.70.1",
+    "joblib>=1.6.0",
+    "requests>=2.34.2",
+    # numerics and data
+    "numpy>=2.5.3",
+    "scipy>=1.18.1",
+    "sympy>=1.14.0",
+    "pandas>=3.0.6",
+    "polars>=1.44.2",
+    "pyarrow>=25.0.1",
+    # plots
+    "matplotlib>=3.11.2",
+    "seaborn>=0.13.2",
+    "wordcloud>=1.9.6",
+    "yellowbrick>=1.5",
+    # classic ML
+    "scikit-learn>=1.9.1",
+    "imbalanced-learn>=0.14.2",
+    "statsmodels>=0.15.0",
+    "mlxtend>=0.25.0",
+    "optuna>=5.0.0",
+    # deep learning: Keras 3 on the JAX backend (no TensorFlow)
+    "keras>=3.15.1",
+    "jax[cpu]>=0.11.2",
+    "scikeras>=0.13.0",
+    # NLP
+    "nltk>=3.10.3",
+    "fasttext>=0.9.3",
+    # derivative-free optimisation
+    "pyBlindOpt>=0.5.0",
+]
+
+[dependency-groups]
+# Small-language-model embeddings (spam classes 2-3, SLM step). CPU wheels are enough.
+slm = [
+    "sentence-transformers>=6.1.0",
+    "torch>=2.14.0",
+]
+# Only needed by the anomaly / Android notebooks.
+extra = [
+    "Faker>=40.39.0",
+    "geopy>=2.5.0",
+    "Cartopy>=0.26.0",
+    "exectimeit>=0.2.1",
+]
+
+[tool.setuptools]
+# Course repository, not a library: install the dependencies only.
+py-modules = []
 
 [tool.basedpyright]
 typeCheckingMode = "basic"
@@ -22,7 +78,15 @@ include = ["notebooks"]
 [tool.ruff]
 line-length = 120
 include = ["*.py", "*.pyi", "**/pyproject.toml", "*.ipynb"]
+extend-exclude = ["practice/*/src", "practice/*/guide_*.ipynb"]  # guide sources (<<SOL / <<TODO markers) and student notebooks with TODO cells
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I"]
 ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+# notebooks set KERAS_BACKEND / matplotlib backends before importing
+"*.ipynb" = ["E402"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["spamlib"]
