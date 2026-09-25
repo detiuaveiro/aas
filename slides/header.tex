@@ -10,3 +10,29 @@
 \AtBeginEnvironment{verbatim}{\scriptsize}
 \AtBeginEnvironment{Highlighting}{\scriptsize}
 \AtBeginEnvironment{cslreferences}{\tiny}
+
+% --- TikZ / pgfplots: figures are embedded in the markdown as ```{=latex} blocks ---
+\usepackage{adjustbox}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,calc,backgrounds,matrix,decorations.pathmorphing}
+\definecolor{aasred}{HTML}{B03A2E}
+\definecolor{aasblue}{HTML}{1F618D}
+\definecolor{aasgreen}{HTML}{1E8449}
+\definecolor{aasgold}{HTML}{B9770E}
+\definecolor{aasgrey}{HTML}{5D6D7E}
+\tikzset{
+  box/.style={draw=aasgrey, rounded corners=2pt, fill=white, align=center, minimum height=7mm, inner sep=3pt, font=\footnotesize},
+  atk/.style={box, draw=aasred, fill=aasred!10},
+  dfn/.style={box, draw=aasblue, fill=aasblue!10},
+  neu/.style={box, fill=aasgrey!10},
+  ok/.style={box, draw=aasgreen, fill=aasgreen!10},
+  arr/.style={-{Stealth[length=2.2mm]}, thick, aasgrey},
+  arratk/.style={-{Stealth[length=2.2mm]}, thick, aasred},
+  note/.style={font=\scriptsize, text=aasgrey, align=center},
+}
+\pgfplotsset{
+  aasplot/.style={width=0.86\linewidth, height=0.56\textheight, tick label style={font=\scriptsize}, label style={font=\footnotesize},
+    legend style={font=\scriptsize, draw=none, fill=white, fill opacity=0.8, text opacity=1}, grid=major, grid style={gray!25}},
+}
