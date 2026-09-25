@@ -164,3 +164,34 @@ cython_debug/
 # Grade sheets
 /*.csv
 /*.xlsx
+
+# --- agentic / assistant helper files (local only) ---
+.agent/
+.claude/
+.goose/
+.gemini/
+.antigravity/
+CLAUDE.local.md
+AGENTS.local.md
+
+# --- Python build and cache artefacts ---
+build/
+dist/
+*.egg-info/
+*.pyc
+.ruff_cache/
+.ipynb_checkpoints/
+.cache/
+
+# --- LaTeX / pandoc intermediate files ---
+*.aux
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.nav
+*.snm
+*.toc
+*.vrb
+*.out
+*.bbl
+*.blg
