@@ -48,10 +48,10 @@ Classes begin on **14 September 2026** and end on **22 December 2026**.
 
 | # | TP1 (Fri) | Lecture Topic (1h) | Practical Lab Guide (2h) | Evaluation & Milestones |
 |---|:---|:---|:---|:---|
-| **01** | 18-Sep | **Course Presentation & Machine Learning in Cybersecurity**<br>Threat landscape, ML pipeline in security, false positives vs. false negatives, ROC/AUC metrics. | `notebooks/00-intro/`<br>Environment setup, security dataset exploratory analysis. | Course overview |
-| **02** | 25-Sep | **Optimization Algorithms for Security Models**<br>Cost functions, gradient-based vs. derivative-free optimizers (PSO, Differential Evolution) in security parameter tuning. | `slides/slides_01_ex.md` & `notebooks/00-intro/`<br>Implementing and visualizing metaheuristic optimizers. | Optimization lab |
-| **03** | 02-Oct | **SPAM Detection I: Text Mining & Feature Engineering**<br>Tokenization, N-grams, TF-IDF representations, Naive Bayes probabilistic classification for spam filtering. | `notebooks/01-spam/`<br>Text pre-processing, feature extraction, and Naive Bayes baseline. | Module 1 begins |
-| **04** | 09-Oct | **SPAM Detection II: Advanced Classifiers & Concept Drift**<br>Ensemble methods, SVM for text classification, handling evolving spam campaigns and concept drift. | `slides/slides_02_ex.md` & `notebooks/01-spam/`<br>Classifying spam with ensemble models; evaluating drift over time. | Module 1 wrap-up |
+| **01** | 18-Sep | **Course Presentation & AI/ML for Security (defence and offence)**<br>What ML does for attackers and defenders, learning as optimisation, base rates, attacks on ML-based detectors. Slides: `slides_01.pdf` (optimisation in depth is the appendix). | `notebooks/00-intro/`<br>Core path: 02 (calculus), 04 (gradient descent), 11 (attack lab); 00-01 maths refresher, 03 PSO, 05-10 self-study. | Course overview |
+| **02** | 25-Sep | **SPAM Detection I: from Naive Bayes to small language models**<br>The ladder: discrete NB, counts and log tricks, TF-IDF, logistic regression, model comparison, fastText, SLM embeddings, attacks on the filter. Slides: `slides_02.pdf`. | `practice/spam/guide_01.pdf`<br>Notebook `guide_01.ipynb` to fill in (solution in `practice/spam/solution/`); demos: `notebooks/01-spam/` 00-04. | Module 1 begins |
+| **03** | 02-Oct | **SPAM Detection II: linear models, fastText and embeddings**<br>Logistic regression with autodiff, sub-word embeddings, frozen SLM embeddings, label efficiency. Slides: `slides_02.pdf` (maths in the appendix). | `practice/spam/guide_02.pdf`<br>Notebook `guide_02.ipynb` (solution in `practice/spam/solution/`); demos: `notebooks/01-spam/` 05-06. | Module 1 |
+| **04** | 09-Oct | **SPAM Detection III: breaking the filter** (optional guide 3)<br>Good-word and obfuscation attacks, black-box search, surrogate models, poisoning through user feedback. | `practice/spam/guide_03.pdf`<br>Notebook `guide_03.ipynb` (solution in `practice/spam/solution/`); demo: `notebooks/01-spam/notebook_07.ipynb`. | Module 1 wrap-up |
 | **05** | 16-Oct | **Anomaly Detection I: Foundations & Statistical Methods**<br>Intrusion detection paradigms, signature vs. anomaly detection, Gaussian models, Mahalanobis distance. | `notebooks/02-anomaly/`<br>Statistical outlier detection on network telemetry. | Module 2 begins |
 | **06** | 23-Oct | **Anomaly Detection II: High-Dimensional & Unsupervised Models**<br>Isolation Forests, One-Class SVMs, Local Outlier Factor (LOF), Autoencoders for anomaly scoring. | `slides/slides_03_ex.md` & `notebooks/02-anomaly/`<br>Building and benchmarking Isolation Forests and Autoencoders on netflow data. | Unsupervised lab |
 | **07** | 30-Oct | **Adversarial Machine Learning & Evasion Attacks**<br>Attacking ML systems: data poisoning, adversarial perturbation, model evasion, defense-in-depth strategies. | `notebooks/02-anomaly/`<br>Simulating evasion attacks against anomaly detectors; robustness evaluation. | Mid-Term review |
@@ -69,15 +69,16 @@ Classes begin on **14 September 2026** and end on **22 December 2026**.
 
 Adopted from the streamlined educational template:
 * **`slides/`**: Lecture presentations written in Pandoc Markdown, compiled into Beamer PDFs using the `metropolis` theme.
-* **`practice/`**: 2-hour laboratory guides written in Pandoc Markdown, compiled into clean A4 PDFs.
+* **`practice/`**: 2-hour laboratory guides written in Pandoc Markdown, compiled into clean A4 PDFs. `practice/spam/` holds three guides (the third, on attacks, is optional) with a notebook to fill in (`guide_0N.ipynb`) and the reference solutions (`solution/`); the sources with `<<SOL`/`<<TODO` markers are in `practice/spam/src/`.
 * **`projects/`**: Specification, guidelines, and rubrics for the Security Project.
 * **`notebooks/`**: Interactive Jupyter notebooks with runnable code for each practical lab session:
-  * `00-intro/`: Optimization and introductory models
+  * `00-intro/`: maths (probability, linear algebra, calculus), optimisation (PSO, gradient descent), classifiers, foundations, attack lab
   * `01-spam/`: Spam detection and text mining
   * `02-anomaly/`: Anomaly detection and unsupervised models
   * `03-malware/`: Static and dynamic malware analysis
   * `04-extra/`: Advanced topics, network flow, and LLMs in security
 * **`datasets/`**: Reference dataset loaders and samples.
+* **`pyproject.toml`**: dependencies (single source of truth). Install with `pip install .`; small-language-model labs need `pip install --group slm --extra-index-url https://download.pytorch.org/whl/cpu`. Keras runs on the JAX backend (no TensorFlow).
 * **`Makefile`**: Master build coordinator featuring parallel execution and a visual progress bar.
 * **`Makefile.inc`**: Shared compilation engine caching intermediate LaTeX files in `/dev/shm` RAM disk for maximum compilation speed.
 * **`.pre-commit-config.yaml`**: Pre-commit quality gate verifying file formatting, linting Python and Jupyter notebooks with `ruff`, and compiling all course materials.
