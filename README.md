@@ -79,9 +79,11 @@ Adopted from the streamlined educational template:
   * `04-extra/`: Advanced topics, network flow, and LLMs in security
 * **`datasets/`**: Reference dataset loaders and samples.
 * **`pyproject.toml`**: dependencies (single source of truth). Install with `pip install .`; small-language-model labs need `pip install --group slm --extra-index-url https://download.pytorch.org/whl/cpu`. Keras runs on the JAX backend (no TensorFlow).
-* **`Makefile`**: Master build coordinator featuring parallel execution and a visual progress bar.
+* **`Makefile`**: Master build coordinator featuring parallel execution and a visual progress bar. `make venv` creates the Python environment (`venv/`): NumPy is compiled against the system OpenBLAS when `pkg-config` and a compiler find it, otherwise the prebuilt wheel is used (`NUMPY_SOURCE=yes|no` forces either).
 * **`Makefile.inc`**: Shared compilation engine caching intermediate LaTeX files in `/dev/shm` RAM disk for maximum compilation speed.
 * **`.pre-commit-config.yaml`**: Pre-commit quality gate verifying file formatting, linting Python and Jupyter notebooks with `ruff`, and compiling all course materials.
+
+**Environment.** Create the Python environment with `make venv` (it builds `venv/` and installs the dependencies from `pyproject.toml`), then `source venv/bin/activate` and `jupyter lab notebooks/`. Use the Makefile rather than installing packages by hand, so that everyone has the same environment. On Debian/Ubuntu/WSL install `python3-venv build-essential pkg-config libopenblas-dev` first; on macOS, `brew install openblas pkg-config`. Without OpenBLAS the target falls back to the prebuilt NumPy wheel. **If `make venv` fails or a notebook does not run, notify the professor** ([`mario.antunes@ua.pt`](mailto:mario.antunes@ua.pt)) with your operating system, the output of `python3 --version` and the last lines of the error.
 
 ---
 
