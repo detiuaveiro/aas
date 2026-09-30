@@ -4,8 +4,6 @@ subtitle: Malware Detection as a Multi-Class Problem
 author: Mário Antunes
 institute: Universidade de Aveiro
 date: November 14, 2025
-toc: true
-toc-title: "Table of Contents"
 bibliography: "references.bib"
 colorlinks: true
 highlight-style: tango

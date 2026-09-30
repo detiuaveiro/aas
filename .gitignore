@@ -166,7 +166,7 @@ cython_debug/
 /*.xlsx
 
 # --- agentic / assistant helper files (local only) ---
-.agent/
+.agents/
 .claude/
 .goose/
 .gemini/

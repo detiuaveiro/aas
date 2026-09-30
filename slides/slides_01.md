@@ -4,8 +4,6 @@ subtitle: "Class 1: Using AI/ML to Break Security"
 author: Mário Antunes
 institute: Universidade de Aveiro
 date: September 18, 2026
-toc: true
-toc-title: "Table of Contents"
 bibliography: "references.bib"
 colorlinks: true
 highlight-style: tango

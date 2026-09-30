@@ -4,8 +4,6 @@ subtitle: Unsupervised Anomaly Detection
 author: Mário Antunes
 institute: Universidade de Aveiro
 date: October 17, 2025
-toc: true
-toc-title: "Table of Contents"
 bibliography: "references.bib"
 colorlinks: true
 highlight-style: tango
