@@ -1,6 +1,6 @@
 # Makefile
 SHELL := /bin/bash
-.PHONY: all clean venv
+.PHONY: all clean venv llama-models llama-up llama-down llama-check
 .DEFAULT_GOAL := all
 
 # Python environment: a clean venv. When pkg-config finds OpenBLAS and a C/C++ compiler
@@ -40,6 +40,20 @@ venv:
 	@$(VENV)/bin/pip install .; rc=$$?; rm -rf build aas.egg-info; exit $$rc
 	$(VENV)/bin/python -c "import numpy as np; b = np.show_config(mode='dicts')['Build Dependencies']['blas']; print('NumPy', np.__version__, 'BLAS:', b['name'], b['version'], b.get('lib directory', ''))"
 
+
+# llama.cpp servers for the spam labs (see notebooks/01-spam/llama/README.md). PROFILE = gpu (Vulkan, default) | cpu | "gpu chat".
+LLAMA_DIR := notebooks/01-spam/llama
+PROFILE ?= gpu
+llama-models:
+	$(VENV)/bin/python $(LLAMA_DIR)/download_model.py
+	$(VENV)/bin/python $(LLAMA_DIR)/download_model.py --repo second-state/All-MiniLM-L6-v2-Embedding-GGUF --quant f16
+llama-up:
+	cd $(LLAMA_DIR) && docker compose $(foreach p,$(PROFILE),--profile $(p)) up -d
+llama-down:
+	cd $(LLAMA_DIR) && docker compose --profile gpu --profile cpu --profile chat down
+llama-check:
+	$(VENV)/bin/python $(LLAMA_DIR)/check_embed.py
+	$(VENV)/bin/python $(LLAMA_DIR)/check_embed.py --mini
 
 all clean:
 	@term_cols=$$(tput cols 2>/dev/null || echo 80); \

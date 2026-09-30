@@ -1,0 +1,63 @@
+# llama.cpp servers for the spam labs (Vulkan backend: AMD, Intel and NVIDIA GPUs; the cpu profile needs no GPU).
+#   docker compose --profile gpu up -d        Nomic Embed Text v2 MoE on http://127.0.0.1:8080 and all-MiniLM-L6-v2 on :8082
+#   docker compose --profile cpu up -d        same, CPU only (macOS, Windows, machines without a GPU)
+#   docker compose --profile gpu --profile chat up -d   adds the chat model on :8081 (class 04)
+# Models are read from ./models (see download_model.py). Ports are bound to localhost only.
+name: aas-llama
+
+x-llama: &llama
+  image: ghcr.io/ggml-org/llama.cpp:${LLAMA_TAG:-server-vulkan-b11243}
+  restart: unless-stopped
+  volumes:
+    - ./models:/models:ro
+  healthcheck:
+    test: ["CMD", "curl", "-sf", "http://localhost:8080/health"]
+    interval: 5s
+    timeout: 3s
+    retries: 60
+    start_period: 10s
+
+x-gpu: &gpu
+  devices:
+    - /dev/dri:/dev/dri
+  group_add:
+    - "${RENDER_GID:-0}"
+
+services:
+  embed:
+    <<: [*llama, *gpu]
+    profiles: [gpu]
+    ports: ["127.0.0.1:${EMBED_PORT:-8080}:8080"]
+    command: >
+      -m /models/${EMBED_GGUF:-nomic-embed-text-v2-moe.Q8_0.gguf}
+      --embeddings --host 0.0.0.0 --port 8080
+      -c 512 -b 512 -ub 512 -np 1 -ngl 99
+
+  # Small embedder for comparisons and as the independent judge of meaning (class 03-04). 22 M parameters: the CPU is enough.
+  embed-mini:
+    <<: *llama
+    profiles: [gpu, cpu]
+    ports: ["127.0.0.1:${MINI_PORT:-8082}:8080"]
+    command: >
+      -m /models/${MINI_GGUF:-all-MiniLM-L6-v2-ggml-model-f16.gguf}
+      --embeddings --pooling mean --host 0.0.0.0 --port 8080
+      -c 512 -b 512 -ub 512 -np 1 -ngl 0
+
+  embed-cpu:
+    <<: *llama
+    profiles: [cpu]
+    ports: ["127.0.0.1:${EMBED_PORT:-8080}:8080"]
+    command: >
+      -m /models/${EMBED_GGUF:-nomic-embed-text-v2-moe.Q8_0.gguf}
+      --embeddings --host 0.0.0.0 --port 8080
+      -c 512 -b 512 -ub 512 -np 1 -ngl 0
+
+  # Class 04: paraphrase attacker (Gemma 4 12B, chosen by benchmark). Thinking is switched off per request (chat_template_kwargs), not here.
+  chat:
+    <<: [*llama, *gpu]
+    profiles: [chat]
+    ports: ["127.0.0.1:${CHAT_PORT:-8081}:8080"]
+    command: >
+      -m /models/${CHAT_GGUF:-gemma-4-12b-it-Q4_K_M.gguf}
+      --host 0.0.0.0 --port 8080
+      -c 4096 -np 4 -ub 1024 -ngl 99 --jinja

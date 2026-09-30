@@ -48,16 +48,13 @@ dependencies = [
     # NLP
     "nltk>=3.10.3",
     "fasttext>=0.9.3",
+    "gensim>=4.4.0",
+    "compress-fasttext>=0.1.5",
     # derivative-free optimisation
     "pyBlindOpt>=0.5.0",
 ]
 
 [dependency-groups]
-# Small-language-model embeddings (spam classes 2-3, SLM step). CPU wheels are enough.
-slm = [
-    "sentence-transformers>=6.1.0",
-    "torch>=2.14.0",
-]
 # Only needed by the anomaly / Android notebooks.
 extra = [
     "Faker>=40.39.0",
@@ -89,4 +86,4 @@ ignore = ["E501"]
 "*.ipynb" = ["E402"]
 
 [tool.ruff.lint.isort]
-known-first-party = ["spamlib"]
+known-first-party = ["spamlib", "llamalib", "attacklib"]
