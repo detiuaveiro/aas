@@ -41,19 +41,21 @@ venv:
 	$(VENV)/bin/python -c "import numpy as np; b = np.show_config(mode='dicts')['Build Dependencies']['blas']; print('NumPy', np.__version__, 'BLAS:', b['name'], b['version'], b.get('lib directory', ''))"
 
 
-# llama.cpp servers for the spam labs (see notebooks/01-spam/llama/README.md). PROFILE = gpu (Vulkan, default) | cpu | "gpu chat".
+# llama-swap + llama.cpp for the labs (see notebooks/01-spam/llama/README.md). PROFILE = gpu (Vulkan, default) | cpu | "gpu webui" (adds Open WebUI).
 LLAMA_DIR := notebooks/01-spam/llama
 PROFILE ?= gpu
 llama-models:
 	$(VENV)/bin/python $(LLAMA_DIR)/download_model.py
 	$(VENV)/bin/python $(LLAMA_DIR)/download_model.py --repo second-state/All-MiniLM-L6-v2-Embedding-GGUF --quant f16
+	$(VENV)/bin/python $(LLAMA_DIR)/download_model.py --repo unsloth/gemma-4-E2B-it-qat-GGUF --quant UD-Q4_K_XL
 llama-up:
 	cd $(LLAMA_DIR) && docker compose $(foreach p,$(PROFILE),--profile $(p)) up -d
 llama-down:
-	cd $(LLAMA_DIR) && docker compose --profile gpu --profile cpu --profile chat down
+	cd $(LLAMA_DIR) && docker compose --profile gpu --profile cpu --profile webui down
 llama-check:
 	$(VENV)/bin/python $(LLAMA_DIR)/check_embed.py
 	$(VENV)/bin/python $(LLAMA_DIR)/check_embed.py --mini
+	$(VENV)/bin/python $(LLAMA_DIR)/check_embed.py --chat
 
 all clean:
 	@term_cols=$$(tput cols 2>/dev/null || echo 80); \

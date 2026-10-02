@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""Smoke test for a llama.cpp embedding server (Nomic Embed Text v2 MoE on :8080, all-MiniLM-L6-v2 on :8082).
+"""Smoke test for the llama-swap endpoint (:8080): the embedders `nomic` (Nomic Embed Text v2 MoE) and `minilm` (all-MiniLM-L6-v2) and the `chat` model.
 
 Waits for /health, embeds a few SMS through the OpenAI-compatible /v1/embeddings endpoint and checks: unit norm,
 semantic sanity (two spam messages are closer to each other than to a ham message), the Matryoshka truncation
 (Nomic only: first 256 dimensions, renormalised) and, with --bench, the throughput.
 
     ./check_embed.py                     # Nomic on http://127.0.0.1:8080
-    ./check_embed.py --mini              # all-MiniLM-L6-v2 on http://127.0.0.1:8082
+    ./check_embed.py --mini              # all-MiniLM-L6-v2
+    ./check_embed.py --chat              # one short completion of the chat model (Gemma 4 E2B)
     ./check_embed.py --bench 200         # also time 200 messages
 """
 
@@ -38,13 +39,28 @@ def wait_ready(url, timeout):
     sys.exit(f"FAIL: {url}/health not ready after {timeout}s (docker compose logs)")
 
 
-def embed(url, texts, prefix):
-    r = requests.post(
-        f"{url}/v1/embeddings", json={"input": [prefix + t for t in texts], "model": "embed"}, timeout=120
-    )
+def embed(url, texts, prefix, model="nomic"):
+    r = requests.post(f"{url}/v1/embeddings", json={"input": [prefix + t for t in texts], "model": model}, timeout=120)
     r.raise_for_status()
     data = sorted(r.json()["data"], key=lambda d: d["index"])
     return np.array([d["embedding"] for d in data], dtype=np.float32)
+
+
+def check_chat(url):
+    """One short completion: proves that llama-swap can start the chat model and that thinking is off (content, not reasoning)."""
+    t0 = time.time()
+    r = requests.post(
+        f"{url}/v1/chat/completions",
+        json={"model": "chat", "messages": [{"role": "user", "content": "Say hello in five words."}], "max_tokens": 40},
+        timeout=600,
+    )
+    r.raise_for_status()
+    msg = r.json()["choices"][0]["message"]
+    ok = bool((msg.get("content") or "").strip()) and not msg.get("reasoning_content")
+    print(
+        f"chat: {'OK' if ok else 'FAIL'} in {time.time() - t0:.1f}s (includes loading the model): {(msg.get('content') or '')!r}"
+    )
+    return ok
 
 
 def matryoshka(e, dim):
@@ -54,17 +70,23 @@ def matryoshka(e, dim):
 
 def main():
     ap = argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0])
-    ap.add_argument("--mini", action="store_true", help="test the MiniLM server (:8082, no prefix) instead of Nomic")
-    ap.add_argument("--url", help="server URL (default: 8080 for Nomic, 8082 for MiniLM)")
+    ap.add_argument("--mini", action="store_true", help="test MiniLM (no prefix) instead of Nomic")
+    ap.add_argument("--chat", action="store_true", help="test the chat model instead of an embedder")
+    ap.add_argument("--url", default="http://127.0.0.1:8080", help="llama-swap URL")
     ap.add_argument("--timeout", type=int, default=120, help="seconds to wait for the server")
     ap.add_argument("--bench", type=int, default=0, metavar="N", help="time N messages")
     args = ap.parse_args()
-    url = args.url or ("http://127.0.0.1:8082" if args.mini else "http://127.0.0.1:8080")
+    url = args.url
+    if args.chat:
+        print(f"{url}: ready after {wait_ready(url, args.timeout):.1f}s")
+        print("PASS" if check_chat(url) else "FAIL")
+        sys.exit(0)
+    model = "minilm" if args.mini else "nomic"
     prefix = "" if args.mini else NOMIC_PREFIX
     ok = True
 
     print(f"{url}: ready after {wait_ready(url, args.timeout):.1f}s")
-    e = embed(url, SAMPLES, prefix)
+    e = embed(url, SAMPLES, prefix, model)
     print(f"embeddings: {e.shape}")
     norms = np.linalg.norm(e, axis=1)
     good = bool(np.allclose(norms, 1.0, atol=1e-3))
@@ -92,7 +114,7 @@ def main():
         texts = [SAMPLES[i % len(SAMPLES)] + f" {i}" for i in range(args.bench)]
         t0 = time.time()
         for i in range(0, len(texts), 16):
-            embed(url, texts[i : i + 16], prefix)
+            embed(url, texts[i : i + 16], prefix, model)
         dt = time.time() - t0
         print(f"throughput: {len(texts) / dt:.1f} messages/s ({1000 * dt / len(texts):.1f} ms/message, batches of 16)")
 

@@ -1,33 +1,38 @@
-# Local llama.cpp servers for the spam labs
+# Local language models for the labs: llama-swap + llama.cpp
 
-Small language models served by [llama.cpp](https://github.com/ggml-org/llama.cpp) in Docker, through its **Vulkan** backend (runs on AMD, Intel and NVIDIA GPUs without vendor-specific stacks). The notebooks talk to the server over HTTP (OpenAI-compatible API), so the same code works with a GPU, on a CPU, or on the instructor's machine.
+Small language models served by [llama.cpp](https://github.com/ggml-org/llama.cpp) in Docker, through its **Vulkan** backend (runs on AMD, Intel and NVIDIA GPUs without vendor-specific stacks), behind [llama-swap](https://github.com/mostlygeek/llama-swap): **one endpoint** (`http://127.0.0.1:8080`, OpenAI-compatible API) and the `model` field of the request picks the model. llama-swap starts the `llama-server` of that model on demand and stops it when the memory policy or the idle timeout says so. The notebooks only send HTTP requests, so the same code works with a GPU, on a CPU, or on the instructor's machine.
 
-| Service | Profile | Model | Port | Used by |
-|:--|:--|:--|--:|:--|
-| `embed` | `gpu` | Nomic Embed Text v2 MoE (Q8_0, 512 MB) | 8080 | class 03: notebook 07, guide 02_02 |
-| `embed-cpu` | `cpu` | same, CPU only | 8080 | machines without a usable GPU |
-| `embed-mini` | `gpu`, `cpu` | all-MiniLM-L6-v2 (F16, 46 MB), always on the CPU | 8082 | class 03: notebooks 06, 07; class 04: judge of meaning and one of the victims |
-| `chat` | `chat` | Gemma 4 12B, Q4_K_M (7.1 GB), chosen by benchmark | 8081 | class 04: paraphrase attacker (optional; the notebooks ship its outputs) |
+| `model` | Model | Size | Used by |
+|:--|:--|--:|:--|
+| `nomic` | Nomic Embed Text v2 MoE, Q8_0 | 512 MB | class 03: notebook 07, guide 02_02; class 04: victim |
+| `minilm` | all-MiniLM-L6-v2, F16, always on the CPU | 46 MB | class 03: notebooks 06, 07; class 04: judge of meaning and victim |
+| `chat` | Gemma 4 E2B (unsloth, QAT Q4_K_XL), 8k context, thinking off | 2.6 GB | class 12: Open WebUI and the context-tampering notebook (`04-extra/notebook_02`); class 04: optional paraphrase attacker |
+
+**Memory.** The three models together need about 3.2 GB. llama-swap loads each one on the first request (a few seconds for `chat`) and unloads `chat` after 10 minutes without requests, so an idle stack holds almost nothing. By default llama-swap keeps *one* model in memory; the `matrix` entry of `llama-swap.yaml` lets the three run together (the embedders are used together, Nomic as victim and MiniLM as judge, swapping them would cost seconds per query).
 
 ## Quick start (from the repository root)
 
 ```
 make venv                 # once: Python environment
-make llama-models         # downloads the two GGUF files (Nomic 512 MB, MiniLM 46 MB) into notebooks/01-spam/llama/models/ (checksum verified, resumable)
-make llama-up             # starts the two embedding servers (PROFILE=cpu if you have no GPU)
-make llama-check          # smoke test of both: health, unit norm, semantic sanity, Matryoshka
+make llama-models         # downloads the three GGUF files (Nomic 512 MB, MiniLM 46 MB, Gemma 4 E2B 2.6 GB) into notebooks/01-spam/llama/models/ (checksum verified, resumable)
+make llama-up             # starts llama-swap (PROFILE=cpu if you have no GPU; PROFILE="gpu webui" adds Open WebUI)
+make llama-check          # smoke test: health, unit norm, semantic sanity, Matryoshka, one chat completion
 make llama-down
 ```
 
 Without `make`: `docker compose --profile gpu up -d` in this folder, then `python check_embed.py`.
+
+## Open WebUI (class 12)
+
+`PROFILE="gpu webui"` also starts [Open WebUI](https://github.com/open-webui/open-webui) on http://127.0.0.1:3000, connected to llama-swap. It has no login (single user, bound to localhost) and its background requests (titles, tags, follow-ups) are off, so the chat history is exactly what you see. Pick `chat` in the model list. You can **edit an assistant message** (pencil icon) and continue the conversation: the model then answers from a history it never produced, which is what the context-tampering notebook does in code. Chats are kept in the Docker volume `aas-llama_webui`; `docker compose --profile webui down -v` deletes them.
 
 ## Requirements
 
 * Docker with Compose v2. Linux: your user must be able to run `docker`.
 * **GPU profile (Linux):** a GPU with a Vulkan driver (Mesa RADV/ANV, or the NVIDIA driver) and `/dev/dri` on the host. The container runs as root, so no group setup is normally needed; with rootless Docker or Podman set `RENDER_GID` (the numeric group of `/dev/dri/renderD128`) in `.env`.
 * **NVIDIA:** install the NVIDIA Container Toolkit and add `NVIDIA_DRIVER_CAPABILITIES=graphics,compute,utility` to the service environment; the Vulkan ICD comes with the driver.
-* **macOS, Windows/WSL2, no GPU:** use `--profile cpu`. (Docker Desktop on macOS has no GPU access; run llama.cpp natively with Metal if you want it.)
-* The image tag is pinned in `.env.example` (`LLAMA_TAG`); update it on purpose, not with `latest`.
+* **macOS, Windows/WSL2, no GPU:** use `PROFILE=cpu` (`--profile cpu`). (Docker Desktop on macOS has no GPU access; run llama.cpp natively with Metal if you want it.)
+* The image tags are pinned in `compose.yml` (`SWAP_TAG`, `SWAP_TAG_CPU`: llama-swap and llama.cpp versions together; `WEBUI_TAG`); update them on purpose, not with `latest`.
 
 ## Downloading models
 
@@ -39,33 +44,33 @@ Without `make`: `docker compose --profile gpu up -d` in this folder, then `pytho
 ./download_model.py --repo <user/repo> --quant <label>      # any other GGUF repository
 ```
 
-A token for gated repositories is read from the `HF_TOKEN` environment variable; it is never stored or printed. To use another file, copy `.env.example` to `.env` and set `EMBED_GGUF`.
+A token for gated repositories is read from the `HF_TOKEN` environment variable; it is never stored or printed. To use another file, change the `-m` path in `llama-swap.yaml` (the file is watched: llama-swap reloads it without a restart).
 
 ## Fidelity of the converted models
 
 Measured against the original PyTorch models (one-off check when the course was prepared, not needed by students): MiniLM F16 GGUF: cosine 1.00000 on 300 messages (identical vectors); Nomic v2 MoE Q8_0: cosine >= 0.999 (Q4_K_M: mean 0.985). The course itself needs **no PyTorch**.
 
-## Using the servers
+## Using the endpoint
 
 ```
-POST http://127.0.0.1:8080/v1/embeddings   {"input": ["search_document: ..."], "model": "embed"}     # Nomic
-POST http://127.0.0.1:8082/v1/embeddings   {"input": ["..."], "model": "embed"}                       # MiniLM, no prefix
+POST http://127.0.0.1:8080/v1/embeddings        {"model": "nomic",  "input": ["search_document: ..."]}
+POST http://127.0.0.1:8080/v1/embeddings        {"model": "minilm", "input": ["..."]}                 # no prefix
+POST http://127.0.0.1:8080/v1/chat/completions  {"model": "chat",   "messages": [{"role": "user", "content": "..."}]}
+GET  http://127.0.0.1:8080/v1/models            # the chat model (the embedders are unlisted, but callable)
+GET  http://127.0.0.1:8080/running              # the models loaded right now
 ```
 
-Nomic v2 needs a **task prefix** at the start of every text (`search_document: ` for messages, `search_query: ` for queries). The server returns L2-normalised 768-d vectors; to use the Matryoshka property keep the first 256 (or 384, 512) values and normalise again.
+Nomic v2 needs a **task prefix** at the start of every text (`search_document: ` for messages, `search_query: ` for queries). The server returns L2-normalised 768-d vectors; to use the Matryoshka property keep the first 256 (or 384, 512) values and normalise again. Python clients: `llamalib.py` (embeddings, URL from `LLAMA_URL`) and `attacklib.paraphrase` (chat).
 
-## The chat model (class 04, optional)
+## The chat model
 
-The level-2 attack notebook can ask a local chat model to paraphrase a message with its payload protected. The paraphrases used in class are shipped in `datasets/spam_paraphrases.json`, so **you do not need this service**; run it only to generate your own (`AAS_CHAT=live`).
+`chat` is small on purpose: 2.6 GB instead of 7 GB or more, 13 tokens/s on an integrated GPU (Radeon 860M), and it fits the memory of a student laptop. It is enough for the class: it follows instructions, keeps a conversation and is *derailable*, which the tampering notebook needs. Thinking is off by default (`--reasoning off`); a request can turn it on with `"chat_template_kwargs": {"enable_thinking": true}`. The context is 8192 tokens (the chat demos use a few hundred). One slot (`-np 1`): parallel requests queue.
 
-```
-./download_model.py --repo unsloth/gemma-4-12b-it-GGUF --quant Q4_K_M     # 7.1 GB
-docker compose --profile gpu --profile chat up -d chat                     # http://127.0.0.1:8081
-```
+The paraphrases of class 04 (`datasets/spam_paraphrases.json`) were generated once with Gemma 4 12B Q4_K_M, which was chosen by a benchmark on 2026-09-30 (0% refusals against 2 to 2.5% for Qwen3.5-9B, 80 to 88% of the paraphrases with the payload intact). They are shipped, so **you do not need a bigger model**. `attacklib.paraphrase` (`AAS_CHAT=live`) uses `chat` by default; the small model refuses and breaks placeholders more often, so expect fewer valid paraphrases. To use another model add an entry to `llama-swap.yaml` (the file is reloaded without a restart) and pass `model=`.
 
-Needs about 8 GB of free (V)RAM. Speed on an integrated GPU: about 3-4 tokens/s in total over four parallel requests, i.e. 15 s per message. Thinking is disabled per request (`chat_template_kwargs.enable_thinking=false`).
+## Why llama-swap
 
-**Why Gemma 4 12B** (benchmark of 2026-09-30: 40 to 100 spam messages, payload replaced by placeholders, four parallel requests; details in the course repository notes): against Qwen3.5-9B (Q4_K_M, 5.7 GB) it had 0% refusals (Qwen 2 to 2.5%), 100% valid placeholder use (Qwen 90 to 98%), 80 to 88% of the paraphrases with the payload intact (Qwen 68 to 85%) and a similar evasion rate (9 to 19% of the messages against the word-based filters, 0% against the embedding filters). Qwen3.5-9B is about 2 times faster; because the paraphrases are generated once and cached, reliability counted more than speed. Qwen3.5-9B remains a fine choice on a small GPU.
+Before 2026-10-02 the course ran one `llama-server` container per model, each with its own port. llama-swap replaces them because: one URL and one `model` name instead of three ports and three environment variables; models are loaded on demand and the chat model is unloaded when idle (RAM); Open WebUI and any OpenAI-compatible client see the models in one place; adding a model is one entry in `llama-swap.yaml`. The price: one more component (pinned image), and a wait of a few seconds on the first request.
 
 ## Troubleshooting
 
@@ -73,6 +78,8 @@ Needs about 8 GB of free (V)RAM. Speed on an integrated GPU: about 3-4 tokens/s 
 |:--|:--|
 | `ggml_vulkan: No devices found` | `/dev/dri` not passed to the container (use the `gpu` profile), no Vulkan driver on the host (`vulkaninfo --summary`), or an old image lacking the Mesa GL/EGL libraries (fixed in the pinned tag). |
 | `permission denied` on `/dev/dri/renderD128` | rootless Docker or a restricted device: set `RENDER_GID` in `.env`. |
-| Server up but slow | the `cpu` profile is running, or the GPU is shared; `docker compose logs embed`. |
-| Health check never becomes healthy | the GGUF file is missing or truncated: run `make llama-models` again. |
-| Port 8080 in use | set `EMBED_PORT` in `.env` and pass `--url` to `check_embed.py`. |
+| First request after a swap is slow | the GGUF is loading; `curl localhost:8080/running` shows what is in memory. |
+| `model not found` | the `model` field is not one of `nomic`, `minilm`, `chat`. |
+| Request fails after a long wait | the GGUF file is missing or truncated (run `make llama-models` again); `docker compose logs llama-swap` shows the `llama-server` error. |
+| Server up but slow | the `cpu` profile is running, or the GPU is shared. |
+| Port 8080 in use | set `LLAMA_PORT` in `.env` and `LLAMA_URL` in your shell. |

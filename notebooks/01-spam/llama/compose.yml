@@ -1,0 +1,67 @@
+# llama-swap in front of llama.cpp for the labs: ONE endpoint, http://127.0.0.1:8080 (OpenAI-compatible), the request field `model` picks the model.
+#   docker compose --profile gpu up -d                   Vulkan: AMD, Intel and NVIDIA GPUs
+#   docker compose --profile cpu up -d                   CPU only (macOS, Windows, machines without a GPU)
+#   docker compose --profile gpu --profile webui up -d   adds Open WebUI on http://127.0.0.1:3000 (chat with the `chat` model)
+# Models (llama-swap.yaml): nomic, minilm, chat, paraphrase. Policy: one chat model and one embedder in memory at most.
+# GGUF files are read from ./models (see download_model.py). Ports are bound to localhost only.
+name: aas-llama
+
+x-swap: &swap
+  restart: unless-stopped
+  ports: ["127.0.0.1:${LLAMA_PORT:-8080}:8080"]
+  volumes:
+    - ./models:/models:ro
+    - ./llama-swap.yaml:/app/config.yaml:ro
+  healthcheck:
+    test: ["CMD", "curl", "-sf", "http://localhost:8080/health"]
+    interval: 5s
+    timeout: 3s
+    retries: 60
+    start_period: 5s
+
+services:
+  llama-swap:
+    <<: *swap
+    image: ghcr.io/mostlygeek/llama-swap:${SWAP_TAG:-v261-vulkan-b11347}
+    profiles: [gpu]
+    environment:
+      NGL: "99"
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - "${RENDER_GID:-0}"
+
+  llama-swap-cpu:
+    <<: *swap
+    image: ghcr.io/mostlygeek/llama-swap:${SWAP_TAG_CPU:-v261-cpu-b11347}
+    profiles: [cpu]
+    environment:
+      NGL: "0"
+
+  # Chat UI for the `chat` model (class 12: edit the assistant's turns by hand, the notebook does it in code). Single user, no login, localhost only.
+  webui:
+    image: ghcr.io/open-webui/open-webui:${WEBUI_TAG:-v0.11.4-slim}
+    profiles: [webui]
+    restart: unless-stopped
+    ports: ["127.0.0.1:${WEBUI_PORT:-3000}:8080"]
+    volumes:
+      - webui:/app/backend/data
+    environment:
+      ENABLE_PERSISTENT_CONFIG: "False" # the environment below always wins: otherwise the connection saved by the first start (volume) overrides it
+      ENABLE_OLLAMA_API: "False"
+      ENABLE_OPENAI_API: "True"
+      OPENAI_API_BASE_URL: http://llama-swap:8080/v1
+      OPENAI_API_KEY: none # llama-swap has no key; Open WebUI wants a non-empty value
+      WEBUI_AUTH: "False" # cannot be changed once the first account exists: `docker compose down -v` resets it
+      WEBUI_NAME: AAS chat
+      ENABLE_TITLE_GENERATION: "False" # no hidden background requests to the model: the chat history stays exactly what the user sees
+      ENABLE_TAGS_GENERATION: "False"
+      ENABLE_FOLLOW_UP_GENERATION: "False"
+      ENABLE_AUTOCOMPLETE_GENERATION: "False"
+      ENABLE_VERSION_UPDATE_CHECK: "False"
+      ANONYMIZED_TELEMETRY: "False"
+      DO_NOT_TRACK: "True"
+      SCARF_NO_ANALYTICS: "True"
+
+volumes:
+  webui:
