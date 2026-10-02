@@ -51,7 +51,7 @@ def build_victims(
     """Train the filters of the ladder on the training split. Returns {key: Victim} in the order of `which`.
 
     keys: nb_presence, nb_counts, tfidf_lr, fasttext (supervised), vectors_lr (in-domain fastText vectors + LR),
-    minilm_lr and nomic_lr (need the llama.cpp servers, see llama/README.md).
+    minilm_lr and nomic_lr (need the llama-swap endpoint, see llama/README.md).
     """
     from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
     from sklearn.linear_model import LogisticRegression
@@ -413,7 +413,7 @@ def op_camouflage(sentences):
 
 
 # ---------------------------------------------------------------------------------------------------------------------
-# Paraphrase by a local chat model (llama.cpp `chat` service), with the payload protected by placeholders
+# Paraphrase by a local chat model (llama-swap model `chat`, Gemma 4 E2B), with the payload protected by placeholders
 # ---------------------------------------------------------------------------------------------------------------------
 
 PARAPHRASES = sl.DATA.parent / "spam_paraphrases.json"
@@ -452,7 +452,7 @@ def restore(text, items):
     return text
 
 
-def paraphrase(messages, url="http://127.0.0.1:8081", n=1, style="plain", workers=4, temperature=0.7):
+def paraphrase(messages, url=None, model="chat", n=1, style="plain", workers=4, temperature=0.7):
     """Ask the chat model for `n` paraphrases per message. Returns {message: [valid paraphrases]}.
 
     Valid = no refusal, every placeholder exactly once, and the payload (after restoring) intact. Thinking is switched off per request.
@@ -460,6 +460,10 @@ def paraphrase(messages, url="http://127.0.0.1:8081", n=1, style="plain", worker
     from concurrent.futures import ThreadPoolExecutor
 
     import requests
+
+    import llamalib as ll
+
+    url = url or ll.URL
 
     def ask(msg):
         body, items = protect(msg)
@@ -469,6 +473,7 @@ def paraphrase(messages, url="http://127.0.0.1:8081", n=1, style="plain", worker
             r = requests.post(
                 f"{url}/v1/chat/completions",
                 json={
+                    "model": model,
                     "messages": [{"role": "user", "content": PROMPTS[style].format(msg=body)}],
                     "temperature": temperature,
                     "top_p": 0.9,
