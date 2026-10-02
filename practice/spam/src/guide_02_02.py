@@ -7,7 +7,7 @@
 #
 # Read `guide_02_02.pdf` first. Time: about 2 hours. Cells marked **(given)** are complete.
 #
-# **Requirements.** `make venv` (no PyTorch, no TensorFlow), and for parts D and E the servers: `make llama-models` then
+# **Requirements.** `make venv` (no PyTorch, no TensorFlow), and for parts D and E the llama-swap stack: `make llama-models` then
 # `make llama-up` from the repository root (`PROFILE=cpu` without a usable GPU). Set `AAS_W2V=skip` to skip the 1.7 GB Google News download.
 
 # %%
@@ -28,7 +28,7 @@ from sklearn.preprocessing import StandardScaler
 
 LIB = next(p for p in (Path("../../notebooks/01-spam"), Path("../../../notebooks/01-spam")) if p.exists())  # student / solution folder
 sys.path.insert(0, str(LIB.resolve()))
-import llamalib as ll  # noqa: E402  (client for the local llama.cpp server)
+import llamalib as ll  # noqa: E402  (client for the local llama-swap endpoint)
 import spamlib as sl  # noqa: E402  (data, tokenizer, metrics, pre-trained loaders)
 
 # %% [markdown]
@@ -181,7 +181,7 @@ print(f"recall on leet-speak spam: TF-IDF {rec_tfidf:.3f}   fastText in-domain {
 # %% [markdown]
 # ## Part D. A small sentence embedder (MiniLM)
 #
-# `all-MiniLM-L6-v2` (22 M parameters) maps a whole message to one 384-d vector. It runs in its own llama.cpp server (port 8082, CPU), stays **frozen**,
+# `all-MiniLM-L6-v2` (22 M parameters) maps a whole message to one 384-d vector. It is the `minilm` model of the llama-swap endpoint (llama.cpp, CPU), stays **frozen**,
 # and you train only the probe. The client `ll.embed_mini` caches the vectors on disk.
 
 # %%
@@ -211,12 +211,12 @@ pair = [
     "Ok I'll be home at 7, want me to pick up dinner?",
 ]
 # <<TODO
-# TODO: r = requests.post(f"{ll.URL}/v1/embeddings", json={"input": ["search_document: " + t for t in pair], "model": "embed"}, timeout=60)
+# TODO: r = requests.post(f"{ll.URL}/v1/embeddings", json={"input": ["search_document: " + t for t in pair], "model": "nomic"}, timeout=60)
 #       e = np.array([d["embedding"] for d in r.json()["data"]])
 raise NotImplementedError
 # TODO>>
 # <<SOL
-r = requests.post(f"{ll.URL}/v1/embeddings", json={"input": ["search_document: " + t for t in pair], "model": "embed"}, timeout=60)
+r = requests.post(f"{ll.URL}/v1/embeddings", json={"input": ["search_document: " + t for t in pair], "model": "nomic"}, timeout=60)
 e = np.array([d["embedding"] for d in r.json()["data"]])
 # SOL>>
 print("shape:", e.shape, "norms:", np.linalg.norm(e, axis=1).round(3))

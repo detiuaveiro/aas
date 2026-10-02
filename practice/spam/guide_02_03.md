@@ -34,7 +34,7 @@ You play the **attacker** against the filters of the previous guides, at two lev
 | **Constraint** | level 2: payload, meaning and a normal look |
 
 * **Notebook to complete:** `guide_02_03.ipynb`. **Time:** about 2 hours (suggested: A 10 min, B 30, C 20, D 35, E 25). **Prerequisites:** Guides 1 and 2 and the lecture of class 4.
-* **Requirements:** `make venv`. You also need the llama.cpp servers (`make llama-up`, see Guide 2): the MiniLM server is the *judge of meaning* in part D, the Nomic server is an optional third victim (`AAS_SLM=skip` leaves the Nomic victim out). Set `AAS_W2V=skip` to skip the Google News download in part D (no synonym operator then).
+* **Requirements:** `make venv`. You also need the llama-swap stack (`make llama-up`, see Guide 2): the `minilm` model is the *judge of meaning* in part D, `nomic` is an optional third victim (`AAS_SLM=skip` leaves the Nomic victim out). Set `AAS_W2V=skip` to skip the Google News download in part D (no synonym operator then).
 
 # Background
 
@@ -86,7 +86,7 @@ You play the **attacker** against the filters of the previous guides, at two lev
 * **Universal suffix:** find a single 8-word suffix, on training spam only, that evades most of the test spam (`al.universal_trigger`). Which words does it contain?
 * **Poisoning:** send spam with a rare trigger token, labelled *not spam*, into the training set (notebook 10, part A). Which model is more vulnerable, and why? Try a label-noise filter.
 * **Judge:** use Nomic instead of MiniLM as the judge of meaning. Does the useful ASR change?
-* **Paraphrase:** use the paraphrases of `datasets/spam_paraphrases.json` (made by Gemma 4 12B with the payload protected by placeholders) as one more operator (`al.op_paraphrase`).
+* **Paraphrase:** use the paraphrases of `datasets/spam_paraphrases.json` (made by a local Gemma 4 model with the payload protected by placeholders) as one more operator (`al.op_paraphrase`).
 
 # Grading
 

@@ -359,7 +359,7 @@ What must survive a rewrite, found with regular expressions:
 \begin{tikzpicture}[node distance=6mm, every node/.style={font=\scriptsize}]
   \node[neu, text width=2.6cm] (a) {spam SMS\\`Call \textbf{09066368470} to claim \textbf{£1500}`};
   \node[dfn, text width=2.6cm, right=of a] (b) {placeholders\\`Call [P1] to claim [P2]`};
-  \node[atk, text width=2.3cm, right=of b] (c) {chat model\\(llama.cpp, Vulkan)};
+  \node[atk, text width=2.3cm, right=of b] (c) {chat model\\(llama-swap, \texttt{chat})};
   \node[dfn, text width=2.6cm, right=of c] (d) {restore\\`Give 09066368470 a call, \ldots`};
   \foreach \s/\t in {a/b,b/c,c/d} {\draw[arr] (\s) -- (\t);}
 \end{tikzpicture}

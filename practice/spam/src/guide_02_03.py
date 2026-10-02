@@ -10,7 +10,7 @@
 # > **Scope.** Attacks on *our own* models, in the lab, on the public SMS corpus. No real numbers, links or infrastructure. The techniques are the
 # > standard way to measure how fragile a model is.
 #
-# **Requirements.** `make venv`; the llama.cpp servers (`make llama-up`): MiniLM is the judge of meaning in part D, Nomic an optional third victim (`AAS_SLM=skip` leaves the Nomic victim out).
+# **Requirements.** `make venv`; the llama-swap stack (`make llama-up`): `minilm` is the judge of meaning in part D, `nomic` an optional third victim (`AAS_SLM=skip` leaves the Nomic victim out).
 
 # %%
 import os
@@ -44,7 +44,7 @@ spam_test = [t for t, lab in zip(X_test, y_test) if lab == 1]
 WHICH = ["nb_counts", "tfidf_lr"] + ([] if os.environ.get("AAS_SLM") == "skip" else ["nomic_lr"])
 try:
     V = al.build_victims(X_train, y_train, which=WHICH)
-except RuntimeError as exc:  # llama.cpp server not running
+except RuntimeError as exc:  # llama-swap stack not running
     print("Nomic victim skipped:", exc)
     V = al.build_victims(X_train, y_train, which=["nb_counts", "tfidf_lr"])
 for v in V.values():

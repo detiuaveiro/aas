@@ -354,27 +354,28 @@ Nomic asks for `search_document: ` in front of each text. F1 with a 95% bootstra
 * The intervals overlap: **for a classification probe the prefix is irrelevant** here. It matters for retrieval (queries versus documents).
 * Do not read a difference of 0.005 as an effect without an interval: 1,024 messages, about 130 spam.
 
-# Serving a Model with llama.cpp
+# Serving Models with llama.cpp and llama-swap
 
 ## Why a server?
 
 ```{=latex}
 \begin{adjustbox}{max width=\linewidth,center}
-\begin{tikzpicture}[node distance=16mm, every node/.style={font=\scriptsize}]
+\begin{tikzpicture}[node distance=9mm, every node/.style={font=\scriptsize}]
   \node[neu, text width=2.2cm] (n) {notebook /\\application};
-  \node[dfn, text width=2.6cm, right=of n] (s) {\texttt{llama-server}\\(Docker)};
-  \node[neu, text width=2.2cm, right=of s] (g) {GGUF file\\512 MB};
-  \node[atk, text width=2.2cm, below=6mm of s] (v) {Vulkan\\GPU or CPU};
-  \draw[arr] (n) -- node[above, note] {HTTP, JSON} (s);
-  \draw[arr] (s) -- (g);
-  \draw[arr] (s) -- (v);
+  \node[dfn, text width=2.6cm, right=of n] (s) {\texttt{llama-swap}\\:8080};
+  \node[neu, text width=3.4cm, right=of s] (g) {\texttt{llama-server} + GGUF\\\texttt{nomic}, \texttt{minilm}, \texttt{chat}};
+  \node[atk, text width=2.2cm, right=of g] (v) {Vulkan\\GPU or CPU};
+  \draw[arr] (n) -- node[above, note] {HTTP} (s);
+  \draw[arr] (s) -- node[above, note] {\texttt{model}} (g);
+  \draw[arr] (g) -- (v);
 \end{tikzpicture}
 \end{adjustbox}
 ```
 
-* **Separation:** the application sends text and receives vectors; **no PyTorch, no TensorFlow**, no model in the notebook process; several notebooks share one model.
-* **Same API as commercial services** (`/v1/embeddings`, OpenAI-compatible).
-* **llama.cpp** [@llamacpp]: C++ inference engine for quantised models, on CPUs and (Vulkan) most GPUs.
+* **Separation:** text in, vectors out; **no PyTorch, no TensorFlow**, no model in the notebook process; notebooks share one model.
+* **Same API as commercial services** (`/v1/embeddings`, `/v1/chat/completions`).
+* **llama.cpp** [@llamacpp]: C++ engine for quantised models, on CPUs and (Vulkan) most GPUs.
+* **llama-swap**: one endpoint; the `model` field picks the `llama-server`, loaded on demand.
 
 ## GGUF and quantisation
 
@@ -393,7 +394,7 @@ Nomic asks for `search_document: ` in front of each text. F1 with a 95% bootstra
 ## Vulkan: one GPU backend for everybody
 
 * **Vulkan** is a cross-vendor graphics and compute API: AMD, Intel and NVIDIA drivers all implement it. No ROCm, no CUDA, no vendor container.
-* The container only needs the device: `/dev/dri`. Without a GPU, the same image runs on the CPU (`--profile cpu`).
+* The container only needs the device: `/dev/dri`. Without a GPU, the same stack runs on the CPU (`--profile cpu`).
 
 | Backend (messages/s, batches of 16) | speed |
 |:--------------------------------------------|------:|
@@ -407,18 +408,35 @@ Nomic asks for `search_document: ` in front of each text. F1 with a 95% bootstra
 
 ```yaml
 services:
-  embed:
-    image: ghcr.io/ggml-org/llama.cpp:server-vulkan-b11243   # pinned build
+  llama-swap:
+    image: ghcr.io/mostlygeek/llama-swap:v261-vulkan-b11347
     profiles: [gpu]
     devices: ["/dev/dri:/dev/dri"]
-    volumes: ["./models:/models:ro"]
-    ports: ["127.0.0.1:8080:8080"]      # localhost only
-    command: -m /models/nomic-embed-text-v2-moe.Q8_0.gguf
-             --embeddings -c 512 -np 1 -ngl 99
-    healthcheck: {test: ["CMD","curl","-sf","localhost:8080/health"]}
+    volumes: ["./models:/models:ro",
+              "./config.yaml:/app/config.yaml:ro"]
+    ports: ["127.0.0.1:8080:8080"]
 ```
 
-* `--embeddings`: embedding endpoint only. `-ngl 99`: all layers on the GPU. A second service `embed-mini` serves MiniLM on port 8082 (CPU). `make llama-up llama-check`.
+* **Pinned** image; one port, bound to localhost. `make llama-up llama-check`. Open WebUI (`webui` profile) comes in class 12.
+* The models live in `config.yaml`, not in the Compose file.
+
+## Which model is loaded: llama-swap
+
+```yaml
+models:
+  nomic:
+    cmd: llama-server --port ${PORT} --embeddings
+         -m /models/nomic-embed-text-v2-moe.Q8_0.gguf -ngl 99
+  minilm:
+    cmd: llama-server --port ${PORT} --embeddings -ngl 0 ...
+  chat:                              # Gemma 4 E2B, Q4
+    cmd: llama-server --port ${PORT} -c 8192 ...
+    ttl: 300
+```
+
+* `${PORT}`: chosen by llama-swap. **Policy** (matrix): at most one chat model and one embedder in memory.
+* The **first request** after a swap waits while the GGUF loads (seconds); then it is as fast as a direct server.
+* `-ngl 99`: all layers on the GPU; MiniLM stays on the CPU.
 
 ## Getting the model
 
@@ -427,7 +445,7 @@ python download_model.py --repo nomic-ai/nomic-embed-text-v2-moe-GGUF --quant Q8
 python download_model.py --repo second-state/All-MiniLM-L6-v2-Embedding-GGUF --quant f16
 ```
 
-* Nomic (512 MB) and MiniLM (46 MB); `make llama-models` fetches both. From Hugging Face; **resumable** (HTTP Range), **verified** (SHA-256 of the file against the Hub metadata), skips a file that is already good.
+* Nomic (512 MB) and MiniLM (46 MB); `make llama-models` fetches both (and the small chat model for class 12). From Hugging Face; **resumable** (HTTP Range), **verified** (SHA-256 of the file against the Hub metadata), skips a file that is already good.
 * A token for gated repositories comes from the environment (`HF_TOKEN`); it is never stored or printed.
 * Pin what you run: image **tag**, model **file**, **checksum**. A `latest` tag is a supply-chain risk in a security course.
 
@@ -435,12 +453,12 @@ python download_model.py --repo second-state/All-MiniLM-L6-v2-Embedding-GGUF --q
 
 ```
 POST http://127.0.0.1:8080/v1/embeddings
-{"input": ["search_document: <message>", ...]}
+{"model": "nomic", "input": ["search_document: <message>", ...]}
 ```
 
 * Response: `data[i].embedding`, 768 floats, **already L2-normalised**.
 * Batch 16 to 64 messages per request; cache the vectors on disk (the model file name is part of the key).
-* About 19 ms per message, batched or not: with `-np 1` the server handles them one after another.
+* About 19 ms per message, batched or not: with `-np 1` the server handles them one after another. `"model": "minilm"` on the same URL reaches MiniLM.
 
 # Results
 
@@ -515,15 +533,15 @@ Notebooks in `notebooks/01-spam/`:
 | **05** | Word2Vec and fastText: in-domain vs pre-trained, OOV, few labels |
 | **06** | SLM embeddings (MiniLM, Nomic) through llama.cpp: probe, few labels, Keras head, cost |
 | **07** | Nomic v2 MoE through llama.cpp: prefix, Matryoshka, new campaign, throughput |
-| `llama/` | Docker Compose stack, GGUF download script, smoke test |
+| `llama/` | Docker Compose stack, llama-swap config, GGUF download script, smoke test |
 
-* **Practice guide** `practice/spam/guide_02_02`: word vectors, MiniLM, then your own llama.cpp server. Fill-in notebook; solution published afterwards.
+* **Practice guide** `practice/spam/guide_02_02`: word vectors, MiniLM, then your own llama.cpp stack (llama-swap). Fill-in notebook; solution published afterwards.
 
 ## Take-aways
 
 * **Vectors** add similarity to a bag of words: **in-domain** with plenty of unlabelled text from the same stream; **pre-trained** only if it covers your vocabulary.
 * **Sentence embeddings** lead with few labels or a **new campaign**, at 85 to 475 times the cost.
-* Run models as a **service** (llama.cpp, GGUF, Vulkan); **pin** image, file and checksum.
+* Run models as a **service** (llama.cpp behind llama-swap, GGUF, Vulkan); **pin** image, file and checksum.
 * Report **intervals** and compare with a **fair baseline**.
 * **Next class:** we attack every model on the ladder.
 
