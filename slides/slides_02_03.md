@@ -79,7 +79,7 @@ $$
 
 * **payload:** phone numbers, short codes, links, amounts, call to action: unchanged.
 * **meaning:** an *independent* embedder (not the victim) keeps the visible text close, $\tau=0.7$.
-* **looks normal:** invisible edits (look-alike letters, zero-width spaces) or fluent ones (a benign sentence, synonyms, a paraphrase); no junk.
+* **looks normal:** invisible edits (look-alike letters such as a Cyrillic "а" for "a", zero-width spaces: characters a human cannot see) or fluent ones (a benign sentence, synonyms, a paraphrase); no junk.
 
 ## How we measure
 
@@ -111,8 +111,8 @@ Seven filters, trained on the same 4,095 messages, each wrapped as `score(messag
 | TF-IDF + logistic regression | 0.907 |
 | fastText (supervised) | 0.915 |
 | fastText vectors + LR | 0.907 |
-| MiniLM (22 M) + LR | 0.930 |
-| Nomic v2 MoE (475 M) + LR | 0.930 |
+| MiniLM (22 M) + LR | 0.938 |
+| EmbeddingGemma 2 (270 M) + LR (**EG**) | 0.938 |
 
 # Level 1: Counter Examples
 
@@ -168,7 +168,7 @@ Share of the caught spam that flips with $k$ appended words (best words by llr; 
 ```
 
 * The attacker only *asks the filter for a score*: **derivative-free optimisation**, the family of PSO and genetic algorithms of class 1.
-* Candidates come from **public knowledge**: the 40 most frequent words of everyday chat, not the victim's data. Cost: about 250 to 390 **queries** per message.
+* Candidates come from **public knowledge**: the 40 most frequent words of everyday chat, not the victim's data. Cost: about 250 to 400 **queries** per message.
 
 ## Result: a dozen harmless words
 
@@ -179,10 +179,10 @@ Share of the spam that evades after appending up to $b$ words (20 messages; budg
 | NB counts | 0.05 | 0.05 | 0.10 | 0.15 | 0.30 | 0.55 | **1.00** |
 | fastText vectors + LR | 0.05 | 0.15 | 0.15 | 0.25 | 0.50 | 0.65 | **1.00** |
 | fastText | 0.05 | 0.10 | 0.15 | 0.25 | 0.30 | 0.50 | 0.80 |
-| MiniLM + LR | 0.05 | 0.10 | 0.10 | 0.20 | 0.30 | 0.50 | 0.70 |
+| MiniLM + LR | 0.05 | 0.10 | 0.15 | 0.25 | 0.35 | 0.50 | 0.65 |
 | TF-IDF + LR | 0.05 | 0.05 | 0.15 | 0.15 | 0.20 | 0.25 | 0.55 |
 | NB presence | 0.05 | 0.05 | 0.15 | 0.15 | 0.20 | 0.35 | 0.45 |
-| Nomic v2 MoE + LR | 0.05 | 0.05 | 0.05 | 0.10 | 0.20 | 0.30 | 0.45 |
+| EmbeddingGemma 2 + LR | 0.15 | 0.15 | 0.15 | 0.15 | 0.15 | 0.20 | **0.20** |
 
 ## What words did it choose? The pattern
 
@@ -191,10 +191,10 @@ Share of the spam that evades after appending up to $b$ words (20 messages; budg
 | NB (presence, counts) | `gt`, `lt`, `but`, `my`, `ok`, `when` |
 | TF-IDF + LR | `gt`, `ok`, `lt`, `my`, `it`, `me` |
 | fastText vectors + LR | `gt` |
-| MiniLM + LR | `me`, `can`, `is`, `how`, `when`, `with` |
-| Nomic v2 MoE + LR | `when`, `gt`, `lt`, `go`, `if`, `what` |
+| MiniLM + LR | `me`, `when`, `is`, `how`, `we`, `it` |
+| EmbeddingGemma 2 + LR | `me`, `when`, `lt`, `not`, `what` |
 
-* **Pattern:** *the cheapest evidence to fake is a common chat word that never appears in spam.* The same few words work against every family of model.
+* **Pattern:** *the cheapest evidence to fake is a common chat word that never appears in spam.* The same few words work against every model; the larger embedder needs far more of them (**20%** after 12 words, 15 points of that already missed).
 * The attacker did **not** need the victim's data: a list of common words and the score were enough.
 
 ## Dilution: bury the spam in benign text
@@ -204,11 +204,12 @@ TF-IDF vectors are L2-normalised and embeddings average over tokens: benign text
 | Victim | 0 | 1 | 2 | 4 | 8 |
 |:----------------------|-----:|-----:|-----:|-----:|-----:|
 | fastText vectors + LR | 0.09 | 0.38 | 0.73 | 0.99 | 1.00 |
+| NB presence | 0.05 | 0.20 | 0.40 | 0.81 | 1.00 |
 | NB counts | 0.05 | 0.19 | 0.35 | 0.84 | 1.00 |
 | fastText | 0.09 | 0.22 | 0.46 | 0.81 | 1.00 |
 | TF-IDF + LR | 0.09 | 0.19 | 0.33 | 0.66 | 0.97 |
-| MiniLM + LR | 0.07 | 0.14 | 0.18 | 0.22 | **0.46** |
-| Nomic v2 MoE + LR | 0.07 | 0.07 | 0.13 | 0.15 | **0.22** |
+| MiniLM + LR | 0.06 | 0.10 | 0.16 | 0.21 | **0.45** |
+| EmbeddingGemma 2 + LR | 0.06 | 0.11 | 0.16 | 0.21 | **0.25** |
 
 * **Pattern:** *length is an attack surface for averaging models.* The Transformer embedders resist far better.
 
@@ -229,14 +230,14 @@ TF-IDF vectors are L2-normalised and embeddings average over tokens: benign text
 
 Spam still **caught** (lower is better for the attacker); clean recall in the first row:
 
-| Disguise | NB-p | NB-c | LR | fT | fT-vec | MiniLM | Nomic |
+| Disguise | NB-p | NB-c | LR | fT | fT-vec | MiniLM | EG |
 |:----------|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
-| none | 0.946 | 0.953 | 0.907 | 0.915 | 0.907 | 0.930 | 0.930 |
-| leet | 0.930 | 0.946 | 0.845 | 0.884 | 0.814 | 0.938 | 0.930 |
-| spaces | 0.953 | 0.961 | 0.814 | 0.806 | 0.752 | 0.907 | 0.907 |
-| dots | 0.953 | 0.961 | 0.814 | **0.698** | 0.752 | 0.860 | 0.899 |
-| homoglyph | 0.938 | 0.930 | **0.806** | 0.860 | 0.775 | 0.915 | 0.907 |
-| zero-width | 0.961 | 0.953 | 0.829 | 0.868 | 0.891 | 0.930 | 0.868 |
+| none | 0.946 | 0.953 | 0.907 | 0.915 | 0.907 | 0.938 | 0.938 |
+| leet | 0.930 | 0.946 | 0.845 | 0.876 | 0.814 | 0.953 | 0.922 |
+| spaces | 0.953 | 0.961 | 0.814 | 0.806 | 0.752 | 0.930 | 0.876 |
+| dots | 0.953 | 0.961 | 0.814 | **0.698** | 0.752 | 0.884 | 0.891 |
+| homoglyph | 0.938 | 0.930 | **0.806** | 0.860 | 0.775 | 0.915 | 0.884 |
+| zero-width | 0.961 | 0.953 | 0.829 | 0.868 | 0.891 | 0.938 | 0.922 |
 
 * Naive Bayes barely moves (its evidence is spread over hundreds of words) but is the weakest against *appended* words: **each family has its own cheapest attack**. Recall never collapses: spam is **redundant**.
 
@@ -249,8 +250,8 @@ One **8-word suffix**, found on 30 *training* spam and never tuned on the test s
 | NB presence | 0.05 | 0.36 | `gt lt but my how so me it` |
 | fastText vec. + LR | 0.09 | 0.43 | `gt my lt me so we how it` |
 | TF-IDF + LR | 0.09 | 0.26 | `lt gt it can my me that so` |
-| MiniLM + LR | 0.07 | 0.22 | `me it can if the are and how` |
-| Nomic + LR | 0.07 | 0.16 | `gt it lt not can my in if` |
+| MiniLM + LR | 0.06 | 0.19 | `me it can not and if the we` |
+| EmbeddingGemma + LR | 0.06 | 0.13 | `but me my if gt in not get` |
 
 * Weaker than the per-message search, but **no queries at attack time**: it can be pasted into a whole campaign.
 
@@ -258,35 +259,35 @@ One **8-word suffix**, found on 30 *training* spam and never tuned on the test s
 
 Share of the spam that evades ($=1-$recall), same 130 test spam (search rows: 20 messages):
 
-| Pattern | NB-p | NB-c | LR | fT | fT-vec | MiniLM | Nomic |
+| Pattern | NB-p | NB-c | LR | fT | fT-vec | MiniLM | EG |
 |:---------------------|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
-| clean (no attack) | 0.05 | 0.05 | 0.09 | 0.09 | 0.09 | 0.07 | 0.07 |
-| 12 words, greedy | 0.45 | **1.00** | 0.55 | 0.80 | **1.00** | 0.70 | 0.45 |
-| 4 ham messages | 0.81 | 0.84 | 0.66 | 0.81 | **0.99** | 0.22 | 0.15 |
-| disguise: dots | 0.05 | 0.04 | 0.19 | 0.30 | 0.25 | 0.14 | 0.10 |
-| disguise: homoglyph | 0.06 | 0.07 | 0.19 | 0.14 | 0.22 | 0.09 | 0.09 |
-| universal 8 words | 0.36 | 0.31 | 0.26 | 0.27 | 0.43 | 0.22 | 0.16 |
+| clean (no attack) | 0.05 | 0.05 | 0.09 | 0.09 | 0.09 | 0.06 | 0.06 |
+| 12 words, greedy | 0.45 | **1.00** | 0.55 | 0.80 | **1.00** | 0.65 | 0.20 |
+| 4 ham messages | 0.81 | 0.84 | 0.66 | 0.81 | **0.99** | 0.21 | 0.21 |
+| disguise: dots | 0.05 | 0.04 | 0.19 | 0.30 | 0.25 | 0.12 | 0.11 |
+| disguise: homoglyph | 0.06 | 0.07 | 0.19 | 0.14 | 0.22 | 0.09 | 0.12 |
+| universal 8 words | 0.36 | 0.31 | 0.26 | 0.27 | 0.43 | 0.19 | 0.13 |
 
-* **No model is robust to everything.** The most robust one here (Nomic) still loses 45% to a dozen words.
+* **No model is robust to everything**; EG is the hardest: at most 21% evades any pattern.
 
 ## Transfer: attack one model, hit another
 
 Share that evades (row: crafted against, column: tested on; greedy 12-word messages):
 
-| Crafted against | NB-p | NB-c | LR | fT | fT-vec | MiniLM | Nomic |
+| Crafted against | NB-p | NB-c | LR | fT | fT-vec | MiniLM | EG |
 |:----------|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
-| NB counts | 0.15 | **1.00** | 0.15 | 0.05 | 0.85 | 0.05 | 0.05 |
-| TF-IDF + LR | 0.15 | 0.50 | **0.55** | 0.10 | 0.80 | 0.10 | 0.10 |
-| fastText vectors | 0.05 | 0.25 | 0.10 | 0.05 | **1.00** | 0.05 | 0.05 |
-| MiniLM + LR | 0.05 | 0.05 | 0.10 | 0.15 | 0.35 | **0.70** | 0.05 |
-| Nomic + LR | 0.10 | 0.15 | 0.15 | 0.20 | 0.45 | 0.10 | **0.45** |
+| NB counts | 0.15 | **1.00** | 0.15 | 0.05 | 0.85 | 0.05 | 0.15 |
+| TF-IDF + LR | 0.15 | 0.50 | **0.55** | 0.10 | 0.80 | 0.10 | 0.15 |
+| fastText vectors | 0.05 | 0.25 | 0.10 | 0.05 | **1.00** | 0.05 | 0.15 |
+| MiniLM + LR | 0.05 | 0.05 | 0.10 | 0.10 | 0.25 | **0.65** | 0.15 |
+| EG + LR | 0.05 | 0.05 | 0.10 | 0.05 | 0.45 | 0.10 | **0.20** |
 
-* A per-message greedy attack **transfers poorly**, mostly between similar models. That is not robustness: the attacker optimised for *another* model.
+* A greedy attack **transfers poorly**, mostly between similar models: the attacker optimised for *another* model.
 
 ## Level 1: what we learned
 
-* **Accuracy is not security:** every victim scores F1 above 0.93 on clean data and has a cheap counter example.
-* Each family has its **own cheapest pattern**: repetition and hammy words (Naive Bayes), dilution and disguise (TF-IDF, vectors), zero-width characters and long benign text (embedders).
+* **Accuracy is not security:** F1 above 0.93 for every victim; the word models have a cheap counter example, EmbeddingGemma a rare, long one.
+* Each family has its **own cheapest pattern**: repetition and hammy words (Naive Bayes), dilution and disguise (TF-IDF, vectors), long benign text (MiniLM); EmbeddingGemma resists them all.
 * **Reading the weights is the strongest attack**; black-box search needs only queries; some blind spots are **data artefacts**.
 * But many of these examples are **useless to a scammer**: junk is visible, a disguised number does not dial. Next: level 2.
 
@@ -343,7 +344,7 @@ What must survive a rewrite, found with regular expressions:
 ```
 
 * **Cheap constraints first** (payload, edits), then the victim scores the candidates, then the judge only checks the best ones: fewer embedder calls.
-* The judge is **independent**: MiniLM (Nomic when the victim is MiniLM); an attacker gains nothing from the victim's own embedder.
+* The judge is **independent**: MiniLM (EmbeddingGemma when the victim is MiniLM, its cosines rescaled so that unrelated = 0 and $\tau$ means the same); an attacker gains nothing from the victim's own embedder.
 
 ## Fluent edits: camouflage and synonyms
 
@@ -369,18 +370,18 @@ What must survive a rewrite, found with regular expressions:
 * The **payload survives by construction**; a paraphrase with a lost or duplicated placeholder is rejected. Thinking is switched off per request.
 * Paraphrases are generated **once** and shipped (`datasets/spam_paraphrases.json`): students need no GPU.
 
-## Which model? A benchmark
+## Is a 2B model good enough?
 
-40 to 100 training spam, 4 parallel requests, Q4_K_M, integrated GPU. Rule in advance: best useful ASR with **zero refusals**, ties to the faster.
+100 training spam with a payload, **Gemma 4 E2B** (4 bit, 2.6 GB), integrated GPU. Rule: no refusals, payload kept $\geq$ 70%.
 
-| Model, prompt | refusals | placeholders | payload | s/msg | evasion |
-|:------------------------|-----:|-----:|-----:|-----:|:----------|
-| Qwen 9B, plain | 2% | 98% | 85% | 7.0 | 1 to 4% |
-| Gemma 12B, plain | 0% | 100% | 80% | 17.0 | 0 to 6% |
-| Qwen 9B, casual | 2.5% | 90% | 68% | 8.7 | 15 to 19% |
-| **Gemma 12B, casual** | **0%** | **100%** | **88%** | 14.8 | 9 to 15% |
+| Prompt | refuse | [P] kept | payload | s/msg | words | embedders |
+|:--------|-----:|-----:|-----:|-----:|:----------|:--------|
+| plain | 0% | 98% | 81% | 2.1 | 2.5 to 3.7% | 0% |
+| **casual** | **0%** | **89%** | **74%** | 2.3 | 15 to 18% | 0 to 5.5% |
 
-* Evasion ties (noise); only Gemma has no refusals and keeps the payload more often: **Gemma 4 12B**, generated once. A casual rewrite beats 9 to 19% of the word filters, **0%** of the embedders.
+*[P] kept*: every placeholder returned exactly once. *words, embedders*: share of the spam that evades.
+
+* The **small model is enough**: no refusals; the guard drops the 19 to 26% that break the payload. *Casual* evades 4 to 7 times more.
 
 ## Level 1 versus level 2
 
@@ -388,14 +389,14 @@ What must survive a rewrite, found with regular expressions:
 
 | Victim | L1 ASR | L1 + payload | **L2 useful** | edits | queries |
 |:----------------------|-----:|-----:|-----:|-----:|-----:|
-| Naive Bayes (counts) | 1.00 | 0.38 | **0.51** | 13.6 | 347 |
+| Naive Bayes (counts) | 1.00 | 0.38 | **0.51** | 13.6 | 346 |
 | TF-IDF + LR | 0.97 | 0.21 | **0.79** | 12.4 | 205 |
-| fastText | 1.00 | 0.29 | **0.76** | 13.3 | 275 |
-| fastText vectors + LR | 1.00 | 0.19 | **0.95** | 13.5 | 201 |
-| MiniLM + LR | 0.67 | 0.11 | **1.00** | 9.7 | 112 |
-| Nomic v2 MoE + LR | 0.60 | 0.30 | **0.90** | 10.6 | 244 |
+| fastText | 1.00 | 0.29 | **0.76** | 13.3 | 272 |
+| fastText vectors + LR | 1.00 | 0.19 | **0.95** | 13.5 | 198 |
+| MiniLM + LR | 0.56 | 0.11 | **1.00** | 9.6 | 112 |
+| EmbeddingGemma 2 + LR | 0.38 | 0.00 | **0.75** | 11.3 | 316 |
 
-* Level 1's headline ASR **overstates the threat** (0.11 to 0.38 keep the payload); level 2 evades **0.51 to 1.00**, and the embedders fall to fluent camouflage.
+* Level 1's headline ASR **overstates the threat** (0.00 to 0.38 keep the payload); level 2 evades **0.51 to 1.00**, and the embedders fall to fluent camouflage (0.75 and 1.00).
 
 ## Which operator does the work?
 
@@ -408,22 +409,22 @@ Useful ASR, one operator at a time and all together:
 | fastText | 0.05 | 0.13 | 0.45 | **0.76** |
 | fastText vectors + LR | 0.05 | 0.22 | 0.49 | **0.95** |
 | MiniLM + LR | 0.00 | 0.56 | 1.00 | **1.00** |
-| Nomic v2 MoE + LR | 0.10 | 0.40 | 0.60 | **0.90** |
+| EmbeddingGemma 2 + LR | 0.00 | 0.25 | 0.25 | **0.75** |
 
-* **Camouflage** is the strongest single operator, **synonyms** matter for the embedders (they react to *meaning*), **invisible** edits alone hardly move a score. Together they **add up**.
+* **Camouflage** is the strongest single operator (tied with synonyms for EmbeddingGemma), **synonyms** matter for the embedders (they react to *meaning*), **invisible** edits alone hardly move a score. Together they **add up**.
 
 ## The paraphrase as one more operator
 
-Useful ASR with a 40-word visible-edit budget (35 of the 40 messages have a stored paraphrase):
+Useful ASR with a 40-word visible-edit budget (32 of the 40 messages have a stored paraphrase):
 
 | Victim | paraphrase alone | + camouflage, synonyms, invisible |
 |:----------------------|-----:|-----:|
-| Naive Bayes (counts) | 0.09 | 0.94 |
-| TF-IDF + LR | 0.06 | 0.94 |
-| fastText | 0.12 | 0.97 |
-| fastText vectors + LR | 0.21 | 1.00 |
-| MiniLM + LR | 0.12 | 1.00 |
-| Nomic v2 MoE + LR | 0.00 | 0.89 |
+| Naive Bayes (counts) | 0.10 | 0.97 |
+| TF-IDF + LR | 0.06 | 0.97 |
+| fastText | 0.06 | 0.94 |
+| fastText vectors + LR | 0.43 | 1.00 |
+| MiniLM + LR | 0.00 | 1.00 |
+| EmbeddingGemma 2 + LR | 0.00 | 0.71 |
 
 * Alone it barely evades; **in the search** it is one more edit to combine. The 40-word budget is not comparable with the 15-word one.
 
@@ -446,15 +447,15 @@ Useful ASR of the combined attack by family (the messages of the run: 3 to 12 pe
 
 Share that evades (row: crafted against, column: tested on; useful examples only):
 
-| Crafted against | NB | LR | fastText | vectors | MiniLM | Nomic |
+| Crafted against | NB | LR | fastText | vectors | MiniLM | EG |
 |:----------------|----:|----:|----:|----:|----:|----:|
-| NB | 1.00 | 0.45 | 0.25 | 1.00 | 0.30 | 0.05 |
-| LR | 0.27 | 1.00 | 0.50 | 0.80 | 0.17 | 0.10 |
-| fastText | 0.17 | 0.14 | 1.00 | 0.79 | 0.14 | 0.10 |
-| MiniLM | 0.22 | 0.00 | 0.11 | 0.56 | 1.00 | 0.44 |
-| Nomic | 0.22 | 0.33 | 0.44 | 0.56 | **0.78** | 1.00 |
+| NB | 1.00 | 0.45 | 0.25 | 1.00 | 0.25 | 0.10 |
+| LR | 0.27 | 1.00 | 0.50 | 0.80 | 0.13 | 0.03 |
+| fastText | 0.17 | 0.14 | 1.00 | 0.79 | 0.03 | 0.03 |
+| MiniLM | 0.11 | 0.11 | 0.11 | 0.44 | 1.00 | 0.33 |
+| EG | 0.00 | 0.00 | 0.17 | 0.83 | **0.83** | 1.00 |
 
-* Camouflage and synonyms are **model-independent**. **The stronger the model beaten, the more transferable the example**: craft once against a public surrogate, send to everybody.
+* Camouflage and synonyms are **model-independent**: better than level 1 (up to 0.83). Transfer follows the **kind of evidence** (dense with dense, sparse with sparse).
 
 # Poisoning the Feedback Loop
 
@@ -539,21 +540,21 @@ Run the attacks against the model on the *training* spam, add the successful mes
 
 ## Labs and practice guide
 
-| Notebook (`notebooks/01-spam/`) | Content |
+| Notebook | Content |
 |:------------------|:-----------------------------------------------|
 | **08** | level 1: NB is additive, greedy search, dilution, disguises, universal suffix, catalogue, transfer |
 | **09** | level 2: payload guard, useful examples, operators, paraphrase, scam families |
 | **10** | poisoning, normalisation, adversarial training, ensemble, label-only API |
 
-* **Practice guide** `practice/spam/guide_02_03`: NB and LR counter examples, dilution, the payload check, a constrained search, normalisation and one round of adversarial training. Fill-in notebook; solution published afterwards.
+* Notebooks 08 and 09 need `make llama-up` (`AAS_SLM=skip`: no embedding victims).
+* **Guide** `practice/spam/guide_02_03`: counter examples, payload check, constrained search, normalisation, adversarial training.
 
 ## Take-aways
 
-* **Accuracy is not security.** Every filter with F1 above 0.93 has a cheap counter example; each model family has its **own** cheapest pattern.
+* **Accuracy is not security.** Every filter has a counter example (cheap for word models, rare for EmbeddingGemma), each family its **own** cheapest pattern.
 * **Reading the weights is the strongest attack**; black-box search needs only queries; some blind spots are **data artefacts** (`gt`, `lt`).
 * A **useful** example keeps payload, meaning and a normal look: it changes *which* attacks work (camouflage wins) by **diluting** or **hiding** the evidence.
-* A campaign reuses a **recipe per scam family**: harden **per family**.
-* Every defence has a **cost and an answer**: measure the next round.
+* A campaign reuses a **recipe per scam family**: harden **per family**. Every defence has a **cost and an answer**.
 
 # Appendix: The Mathematics
 

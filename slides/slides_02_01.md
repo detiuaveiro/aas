@@ -252,8 +252,12 @@ $$
 z=\mathbf{w}\cdot\mathbf{x}+b,\qquad P(\text{spam}\mid\mathbf{x})=\sigma(z)=\frac{1}{1+e^{-z}}
 $$
 
-* Both give a **linear** score; NB's weights are log-odds $\log\frac{P(w\mid\text{spam})}{P(w\mid\text{ham})}$, LR's are optimised.
+* Both give a **linear** score: NB's weights are log-odds $\log\frac{P(w\mid\text{spam})}{P(w\mid\text{ham})}$, LR's are optimised.
 * Loss (cross-entropy) with L2: $\;J=-\frac1n\sum_i\big[y_i\log\sigma(z_i)+(1-y_i)\log\sigma(-z_i)\big]+\frac\lambda2\lVert\mathbf{w}\rVert^2$.
+
+## Regularisation and training
+
+* The L2 term $\frac\lambda2\lVert\mathbf{w}\rVert^2$ is **regularisation**: it shrinks the weights, so rare words cannot be memorised (*overfitting*). scikit-learn's `C` is $1/\lambda$: small `C`, strong regularisation; we choose it by cross-validation on the training set.
 * **Stable** form: `log_sigmoid`; gradient $\frac1nX^\top(\sigma(X\mathbf{w}+b)-\mathbf{y})+\lambda\mathbf{w}$, trained with **gradient descent** or **L-BFGS**.
 
 ## What the weights say

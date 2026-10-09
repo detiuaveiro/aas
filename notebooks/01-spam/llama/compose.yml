@@ -1,9 +1,12 @@
 # llama-swap in front of llama.cpp for the labs: ONE endpoint, http://127.0.0.1:8080 (OpenAI-compatible), the request field `model` picks the model.
-#   docker compose --profile gpu up -d                   Vulkan: AMD, Intel and NVIDIA GPUs
-#   docker compose --profile cpu up -d                   CPU only (macOS, Windows, machines without a GPU)
-#   docker compose --profile gpu --profile webui up -d   adds Open WebUI on http://127.0.0.1:3000 (chat with the `chat` model)
-# Models (llama-swap.yaml): nomic, minilm, chat, paraphrase. Policy: one chat model and one embedder in memory at most.
-# GGUF files are read from ./models (see download_model.py). Ports are bound to localhost only.
+# The "unified" llama-swap images bundle llama-swap and llama.cpp (llama-server) per GPU family; `make llama-up` picks the profile with
+# `detect_gpu.sh`, or start one by hand:
+#   docker compose --profile cuda13 up -d   NVIDIA Ampere..Blackwell (A100, RTX 30/40/50xx, H100, DGX Spark)
+#   docker compose --profile cuda up -d     NVIDIA Pascal..Ada (GTX 10xx, RTX 20xx; CUDA 12)
+#   docker compose --profile vulkan up -d   AMD, Intel and other Vulkan GPUs
+#   docker compose --profile cpu up -d      no GPU (macOS, Windows, VMs): the Vulkan image with zero offloaded layers
+#   add --profile webui for Open WebUI on http://127.0.0.1:3000 (chat with the `chat` model)
+# Models (llama-swap.yaml): chat, embgemma, minilm. GGUF files are read from ./models (see download_model.py). Ports are bound to localhost only.
 name: aas-llama
 
 x-swap: &swap
@@ -11,7 +14,13 @@ x-swap: &swap
   ports: ["127.0.0.1:${LLAMA_PORT:-8080}:8080"]
   volumes:
     - ./models:/models:ro
-    - ./llama-swap.yaml:/app/config.yaml:ro
+    - ./llama-swap.yaml:/etc/llama-swap/config/config.yaml:ro
+  environment: &swap-env
+    LLAMA_SWAP_LISTEN: 0.0.0.0:8080 # must stay on 0.0.0.0: a container that binds its own loopback is not reachable through the published port
+    NGL: "99" # GPU layers; read by llama-swap.yaml as ${env.NGL}
+  networks:
+    default:
+      aliases: [llama-swap] # Open WebUI reaches the active variant under one name
   healthcheck:
     test: ["CMD", "curl", "-sf", "http://localhost:8080/health"]
     interval: 5s
@@ -19,23 +28,43 @@ x-swap: &swap
     retries: 60
     start_period: 5s
 
+x-nvidia: &nvidia
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            count: all
+            capabilities: [gpu]
+
+# Image tag = the floating unified-<backend> tag (latest build). To pin a build set SWAP_TAG=<date>, e.g. 2026-10-07 (tag unified-<backend>-2026-10-07).
 services:
-  llama-swap:
+  llama-swap-cuda13:
+    <<: [*swap, *nvidia]
+    image: ghcr.io/mostlygeek/llama-swap:unified-cuda13${SWAP_TAG:+-}${SWAP_TAG:-}
+    profiles: [cuda13]
+
+  llama-swap-cuda:
+    <<: [*swap, *nvidia]
+    image: ghcr.io/mostlygeek/llama-swap:unified-cuda${SWAP_TAG:+-}${SWAP_TAG:-}
+    profiles: [cuda]
+
+  llama-swap-vulkan:
     <<: *swap
-    image: ghcr.io/mostlygeek/llama-swap:${SWAP_TAG:-v261-vulkan-b11347}
-    profiles: [gpu]
-    environment:
-      NGL: "99"
+    image: ghcr.io/mostlygeek/llama-swap:unified-vulkan${SWAP_TAG:+-}${SWAP_TAG:-}
+    profiles: [vulkan]
     devices:
       - /dev/dri:/dev/dri
     group_add:
       - "${RENDER_GID:-0}"
 
+  # No unified CPU image exists: the Vulkan image runs llama.cpp on the CPU when no layer is offloaded and no device is passed.
   llama-swap-cpu:
     <<: *swap
-    image: ghcr.io/mostlygeek/llama-swap:${SWAP_TAG_CPU:-v261-cpu-b11347}
+    image: ghcr.io/mostlygeek/llama-swap:unified-vulkan${SWAP_TAG:+-}${SWAP_TAG:-}
     profiles: [cpu]
     environment:
+      <<: *swap-env
       NGL: "0"
 
   # Chat UI for the `chat` model (class 12: edit the assistant's turns by hand, the notebook does it in code). Single user, no login, localhost only.

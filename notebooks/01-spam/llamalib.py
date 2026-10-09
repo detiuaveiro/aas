@@ -1,5 +1,5 @@
 """Client for the local llama-swap endpoint (see `llama/README.md`): one URL, the `model` field picks the embedder:
-`nomic` (Nomic Embed Text v2 MoE) or `minilm` (all-MiniLM-L6-v2).
+`embgemma` (EmbeddingGemma 2) or `minilm` (all-MiniLM-L6-v2).
 
 `embed` returns L2-normalised vectors and caches them on disk, so a notebook pays the
 encoding cost once. The Matryoshka property is applied on the client: the full 768-d vector is cached, `dim` truncates it
@@ -15,15 +15,15 @@ import numpy as np
 import requests
 
 URL = os.environ.get("LLAMA_URL", "http://127.0.0.1:8080")  # llama-swap: every model behind one endpoint
-NOMIC = "nomic"  # Nomic Embed Text v2 MoE (475 M)
+EMBG = "embgemma"  # EmbeddingGemma 2 (270 M text tower, Q4 GGUF 176 MB)
 MINI = "minilm"  # all-MiniLM-L6-v2 (22 M): comparison and judge of meaning
 CACHE = Path(__file__).resolve().parent / ".cache"
-DOC = "search_document: "  # Nomic v2 needs a task prefix on every text
-QUERY = "search_query: "
+DOC = "title: none | text: "  # EmbeddingGemma expects a task prefix on every text (this one is for a document without a title)
+QUERY = "task: search result | query: "
 HINT = "Start the server with `make llama-up` (repository root) and check it with `make llama-check`."
 
 
-def model_id(model=NOMIC, url=URL):
+def model_id(model=EMBG, url=URL):
     """File name of the GGUF behind `model` (part of the cache key). The first call may load the model (llama-swap), hence the long timeout."""
     try:
         return Path(requests.get(f"{url}/upstream/{model}/props", timeout=120).json()["model_path"]).name
@@ -49,7 +49,7 @@ def normalise(e):
     return e / np.linalg.norm(e, axis=-1, keepdims=True)
 
 
-def embed(texts, prefix=DOC, dim=None, model=NOMIC, url=URL, batch=32, cache=True):
+def embed(texts, prefix=DOC, dim=None, model=EMBG, url=URL, batch=32, cache=True):
     """Embeddings of `texts` as a float32 array (n, dim), rows of unit norm. `dim` in {768, 512, 384, 256, ...} truncates."""
     texts = list(texts)
     path = None

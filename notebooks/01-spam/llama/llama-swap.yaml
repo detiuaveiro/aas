@@ -1,45 +1,45 @@
 # llama-swap config (https://github.com/mostlygeek/llama-swap): ONE endpoint, the request field `model` picks the GGUF.
 # llama-swap starts llama-server on demand and unloads it when the policy (`matrix`) or the idle `ttl` says so.
-# NGL (GPU layers) comes from compose.yml: 99 with the gpu profile, 0 with the cpu profile.
-healthCheckTimeout: 300 # seconds to load a GGUF (the 12B model from a slow disk)
+# The unified image has llama-server on the PATH. NGL (GPU layers) comes from compose.yml: 99 on a GPU profile, 0 with the cpu profile.
+# Every GGUF is Q4 (or smaller): RAM and disk are the scarce resources on a student laptop.
+healthCheckTimeout: 300 # seconds to load a GGUF from a slow disk
 logLevel: info
 startPort: 10001
 
 models:
-  # --- embedders (class 03): small, kept loaded ---
-  nomic:
-    name: Nomic Embed Text v2 MoE (Q8_0)
+  # --- embedders (class 03, victims and judge of class 04): small, kept loaded ---
+  embgemma:
+    name: EmbeddingGemma 2 (UD-Q4_K_XL)
     cmd: >
-      /app/llama-server --port ${PORT} -m /models/nomic-embed-text-v2-moe.Q8_0.gguf
-      --embeddings -c 512 -b 512 -ub 512 -np 1 -ngl ${env.NGL}
+      llama-server --port ${PORT} -m /models/embeddinggemma-2-UD-Q4_K_XL.gguf
+      --embeddings --pooling mean -c 2048 -b 2048 -ub 2048 -np 1 -ngl ${env.NGL}
     checkEndpoint: /health
     unlisted: true # callable, but not in /v1/models: Open WebUI should offer chat models only
   minilm:
-    name: all-MiniLM-L6-v2 (F16, CPU)
+    name: all-MiniLM-L6-v2 (Q4_K_M, CPU)
     cmd: >
-      /app/llama-server --port ${PORT} -m /models/all-MiniLM-L6-v2-ggml-model-f16.gguf
+      llama-server --port ${PORT} -m /models/all-MiniLM-L6-v2-Q4_K_M.gguf
       --embeddings --pooling mean -c 512 -b 512 -ub 512 -np 1 -ngl 0
     checkEndpoint: /health
     unlisted: true
 
-  # --- chat model (class 12: Open WebUI and the context-tampering notebook; class 04: optional paraphrase attacker) ---
-  # Gemma 4 E2B, QAT Q4_K_XL (2.6 GB): the only chat model, small on purpose (RAM). 8k context; thinking is off by default (--reasoning off),
+  # --- chat model (class 12: Open WebUI and the context-tampering notebook; class 04: paraphrase attacker) ---
+  # Gemma 4 E2B, QAT Q4_K_XL (2.6 GB): the ONLY chat model, small on purpose (RAM). 8k context; thinking is off by default (--reasoning off),
   # a request can still ask for it. Unloaded after 10 minutes without requests, loaded again by the next request.
   chat:
     name: Gemma 4 E2B (QAT Q4_K_XL)
     cmd: >
-      /app/llama-server --port ${PORT} -m /models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf
+      llama-server --port ${PORT} -m /models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf
       --jinja --reasoning off -c 8192 -np 1 -ngl ${env.NGL}
     checkEndpoint: /health
     ttl: 600
 
-# Memory policy: llama-swap's default is ONE model at a time. Here the three models together need 3.2 GB, and the two embedders are used
-# together (Nomic as victim, MiniLM as judge of meaning: swapping on every query would cost seconds), so all three may run at once.
-# Add a bigger chat model later as another entry and a second set: `"(c | big) & n & m"` keeps one chat model in memory.
+# Memory policy: llama-swap's default is ONE model at a time. Here the three models together need about 3 GB, and the two embedders are
+# used together (EmbeddingGemma as victim, MiniLM as judge of meaning: swapping on every query would cost seconds), so all three may run at once.
 matrix:
   vars:
     c: chat
-    n: nomic
+    e: embgemma
     m: minilm
   sets:
-    all_three: "c & n & m"
+    all_three: "c & e & m"

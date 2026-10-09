@@ -5,10 +5,9 @@ Resumable (HTTP Range), verified (SHA-256 from the Hub's LFS metadata), and depe
 A token for gated repositories is read from the environment (HF_TOKEN); it is never printed or stored.
 
 Examples
-    ./download_model.py                                   # Nomic Embed Text v2 MoE, Q8_0 (about 490 MB)
-    ./download_model.py --quant Q4_K_M                    # smaller, slightly less accurate
+    ./download_model.py                                   # EmbeddingGemma 2, UD-Q4_K_XL (176 MB)
     ./download_model.py --list                            # show the .gguf files of the repository
-    ./download_model.py --repo unsloth/Qwen3.5-9B-GGUF --quant Q4_K_M
+    ./download_model.py --repo unsloth/gemma-4-E2B-it-qat-GGUF --quant UD-Q4_K_XL
 """
 
 import argparse
@@ -21,8 +20,8 @@ from pathlib import Path
 import requests
 
 HUB = "https://huggingface.co"
-DEFAULT_REPO = "nomic-ai/nomic-embed-text-v2-moe-GGUF"
-DEFAULT_QUANT = "Q8_0"
+DEFAULT_REPO = "unsloth/embeddinggemma-2-GGUF"
+DEFAULT_QUANT = "UD-Q4_K_XL"
 CHUNK = 1 << 20
 
 

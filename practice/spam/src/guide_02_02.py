@@ -2,13 +2,13 @@
 # # Practice guide 2: from words to meaning (word vectors, small language models, llama.cpp)
 #
 # **Goal.** Climb the second half of the spam ladder: **Word2Vec** and **fastText** vectors (trained on our messages *and*
-# pre-trained), **sentence embeddings** of a small language model (MiniLM), and **Nomic Embed v2 MoE**, both **served
+# pre-trained), **sentence embeddings** of a small language model (MiniLM), and **EmbeddingGemma 2**, both **served
 # by llama.cpp**. You compare them on the same split and find out *when* each one pays off.
 #
 # Read `guide_02_02.pdf` first. Time: about 2 hours. Cells marked **(given)** are complete.
 #
 # **Requirements.** `make venv` (no PyTorch, no TensorFlow), and for parts D and E the llama-swap stack: `make llama-models` then
-# `make llama-up` from the repository root (`PROFILE=cpu` without a usable GPU). Set `AAS_W2V=skip` to skip the 1.7 GB Google News download.
+# `make llama-up` from the repository root (it detects your GPU and picks the matching image; `make llama-up PROFILE=cpu` forces the CPU). Set `AAS_W2V=skip` to skip the 1.7 GB Google News download.
 
 # %%
 import os
@@ -199,7 +199,7 @@ print(f"MiniLM + LR: F1 {f1_minilm:.3f}")
 # **Question D1.** Why do we standardise the embeddings, and why must the scaler be fitted on the training set only?
 
 # %% [markdown]
-# ## Part E. Nomic Embed v2 MoE served by llama.cpp
+# ## Part E. EmbeddingGemma 2 served by llama.cpp
 #
 # Start the server (see the header). Check that it answers, then talk to it **without** any helper library: one HTTP request.
 
@@ -211,12 +211,12 @@ pair = [
     "Ok I'll be home at 7, want me to pick up dinner?",
 ]
 # <<TODO
-# TODO: r = requests.post(f"{ll.URL}/v1/embeddings", json={"input": ["search_document: " + t for t in pair], "model": "nomic"}, timeout=60)
+# TODO: r = requests.post(f"{ll.URL}/v1/embeddings", json={"input": [ll.DOC + t for t in pair], "model": "embgemma"}, timeout=60)
 #       e = np.array([d["embedding"] for d in r.json()["data"]])
 raise NotImplementedError
 # TODO>>
 # <<SOL
-r = requests.post(f"{ll.URL}/v1/embeddings", json={"input": ["search_document: " + t for t in pair], "model": "nomic"}, timeout=60)
+r = requests.post(f"{ll.URL}/v1/embeddings", json={"input": [ll.DOC + t for t in pair], "model": "embgemma"}, timeout=60)
 e = np.array([d["embedding"] for d in r.json()["data"]])
 # SOL>>
 print("shape:", e.shape, "norms:", np.linalg.norm(e, axis=1).round(3))
@@ -233,8 +233,8 @@ assert e.shape == (3, 768) and e[0] @ e[1] > e[0] @ e[2]
 t0 = time.time()
 N_tr, N_te = ll.embed(X_train), ll.embed(X_test)
 print(f"embedded in {time.time() - t0:.0f}s (0 s when cached)")
-f1_nomic = f1_cv(N_tr, N_te)
-print(f"Nomic v2 MoE + LR: F1 {f1_nomic:.3f}")
+f1_embg = f1_cv(N_tr, N_te)
+print(f"EmbeddingGemma 2 + LR: F1 {f1_embg:.3f}")
 
 # %% [markdown]
 # **Matryoshka.** The model was trained so that the first $d$ values of the vector are already a good embedding. Implement the
@@ -256,13 +256,13 @@ def truncate(emb, d):
 
 assert np.allclose(np.linalg.norm(truncate(N_te, 256), axis=1), 1.0)
 print(f"{'dimensions':>11}{'bytes (fp32)':>14}{'F1':>8}")
-for d in (768, 384, 256, 128, 64):
+for d in (768, 512, 256, 128, 64):
     print(f"{d:11d}{4 * d:14d}{f1_cv(truncate(N_tr, d), truncate(N_te, d)):8.3f}")
 
 # %% [markdown]
 # **Question E2.** What is the smallest $d$ whose F1 is within 0.01 of the full vector? What does it save per million messages?
 #
-# **The task prefix.** Nomic asks for `search_document: ` in front of every text. Does it matter for a classifier? A single F1 is noisy
+# **The task prefix.** EmbeddingGemma asks for `title: none | text: ` in front of every document (`ll.DOC`). Does it matter for a classifier? A single F1 is noisy
 # (1,024 test messages, about 130 spam): attach a **bootstrap interval**.
 
 
@@ -281,9 +281,9 @@ def bootstrap_f1(y_true, y_pred, n=500, seed=42):
     # SOL>>
 
 
-for label, prefix in (("search_document: ", ll.DOC), ("(none)", "")):
+for label, prefix in (("title: none | text: ", ll.DOC), ("(none)", "")):
     a_tr, a_te = ll.embed(X_train, prefix=prefix), ll.embed(X_test, prefix=prefix)
-    pred = probe(0.01).fit(a_tr, y_train).predict(a_te)
+    pred = probe(0.1).fit(a_tr, y_train).predict(a_te)
     lo, hi = bootstrap_f1(y_test, pred)
     print(f"{label:20} F1 {sl.scores(y_test, pred)['f1']:.3f}   95% interval [{lo:.3f}, {hi:.3f}]")
 
@@ -298,12 +298,12 @@ sample = X_test[:128]
 t0 = time.time()
 for i in range(0, len(sample), 16):
     ll.embed(sample[i : i + 16], cache=False, batch=16)
-ms_nomic = 1000 * (time.time() - t0) / len(sample)
+ms_embg = 1000 * (time.time() - t0) / len(sample)
 t0 = time.time()
 for i in range(0, len(sample), 16):
     ll.embed_mini(sample[i : i + 16], cache=False, batch=16)
 ms_minilm = 1000 * (time.time() - t0) / len(sample)
-print(f"Nomic v2 MoE: {ms_nomic:.1f} ms per message;  MiniLM: {ms_minilm:.1f} ms;  TF-IDF + LR: about 0.04 ms")
+print(f"EmbeddingGemma 2: {ms_embg:.1f} ms per message;  MiniLM: {ms_minilm:.1f} ms;  TF-IDF + LR: about 0.04 ms")
 
 # %% [markdown]
 # ## Part F. Few labels and the final table
@@ -313,14 +313,14 @@ print(f"Nomic v2 MoE: {ms_nomic:.1f} ms per message;  MiniLM: {ms_minilm:.1f} ms
 
 # %%
 SIZES = [20, 50, 100, 250]
-curve = {"TF-IDF + LR": [], "Word2Vec in-domain": [], "MiniLM": [], "Nomic v2 MoE": []}
+curve = {"TF-IDF + LR": [], "Word2Vec in-domain": [], "MiniLM": [], "EmbeddingGemma 2": []}
 for n in SIZES:
     reps = {k: [] for k in curve}
     for idx, _ in StratifiedShuffleSplit(n_splits=5, train_size=n, random_state=42).split(np.zeros(len(y_train)), y_train):
         yt = y_train[idx]
         m = tfidf.fit([X_train[i] for i in idx], yt)
         reps["TF-IDF + LR"].append(sl.scores(y_test, m.predict(X_test))["f1"])
-        for name, (a, b, C) in {"Word2Vec in-domain": (A_tr, A_te, 0.1), "MiniLM": (M_tr, M_te, 0.1), "Nomic v2 MoE": (N_tr, N_te, 0.01)}.items():
+        for name, (a, b, C) in {"Word2Vec in-domain": (A_tr, A_te, 0.1), "MiniLM": (M_tr, M_te, 0.1), "EmbeddingGemma 2": (N_tr, N_te, 0.1)}.items():
             reps[name].append(sl.scores(y_test, probe(C).fit(a[idx], yt).predict(b))["f1"])
     for k, v in reps.items():
         curve[k].append(float(np.mean(v)))
@@ -339,4 +339,4 @@ _ = tfidf.fit(X_train, y_train)  # restore the full model
 # | TF-IDF + logistic regression | | | |
 # | Word2Vec in-domain + LR | | | |
 # | MiniLM + LR | | | |
-# | Nomic v2 MoE (llama.cpp) + LR | | | |
+# | EmbeddingGemma 2 (llama.cpp) + LR | | | |

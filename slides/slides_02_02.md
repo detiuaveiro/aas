@@ -267,12 +267,13 @@ Nearest neighbours of disguised words (`notebooks/01-spam/05`):
 * **Contrastive learning** on billions of text pairs: pull a pair together, push the other texts of the batch apart (*InfoNCE* [@oord:2018; @reimers:2019]).
 * Similar meanings end up **close in cosine similarity**; normalised vectors: $\cos\theta=\mathbf{e}_1\cdot\mathbf{e}_2$.
 
-| Pair of messages (Nomic v2) | cosine |
+| Pair of messages (EmbeddingGemma 2) | cosine |
 |:--------------------------------------------------|------:|
-| a prize message and a rewrite with other words | 0.76 |
-| the prize message and a chat message | 0.41 |
+| a prize message and a rewrite with other words | 0.90 |
+| the prize message and a chat message | 0.63 |
+| two random messages (mean of 200 pairs) | 0.69 |
 
-* TF-IDF gives the first pair a similarity close to 0.
+* TF-IDF: about 0 for the first pair. Compare cosines only **within one model** (MiniLM: 0.13 for random pairs).
 
 ## Frozen encoder, linear probe
 
@@ -289,40 +290,17 @@ Nearest neighbours of disguised words (`notebooks/01-spam/05`):
 ```
 
 * Only $d+1$ weights are trained: a *linear probe*. Standardise each dimension first: LLM embeddings are **anisotropic** (all cosines high).
-* No fine-tuning, no GPU for training. A small Keras MLP head on Nomic (JAX) gives 0.965 against 0.952: noise-level.
+* No fine-tuning, no GPU for training. A small Keras MLP head (JAX) on the embeddings gives the same F1 (0.960): the vectors are already almost linearly separable.
 
 ## The 2026 zoo of small embedders
 
-| Model | Params | Dim. | Note |
-|:----------------------------|:------------------|-----:|:---------------------------|
-| `all-MiniLM-L6-v2` | 22 M | 384 | BERT-style, F16 GGUF 46 MB [@reimers:2019] |
-| EmbeddingGemma | 300 M | | gated licence [@vera:2025] |
-| **Nomic Embed v2 MoE** | 475 M (305 M active) | 768 | Matryoshka, Apache-2.0 [@nussbaum:2025] |
+| Model | Params | Dim. | 4-bit file |
+|:------------------------|:------------------|-----:|-----:|
+| `all-MiniLM-L6-v2` [@reimers:2019] | 22 M | 384 | 21 MB |
+| **EmbeddingGemma 2** [@vera:2025] | 270 M | 768 | 176 MB |
+| Nomic Embed v2 MoE [@nussbaum:2025] | 475 M (305 M active) | 768 | 344 MB |
 
-* Today's demo model is Nomic v2: **open weights, no gate, a GGUF file** for llama.cpp. We use it in English only.
-
-## Nomic v2: a mixture of experts
-
-```{=latex}
-\begin{adjustbox}{max width=\linewidth,center}
-\begin{tikzpicture}[node distance=5mm, every node/.style={font=\scriptsize}]
-  \node[neu, text width=1.6cm] (t) {token\\state};
-  \node[dfn, text width=1.4cm, right=of t] (r) {router};
-  \node[neu, text width=1.5cm, right=14mm of r, yshift=15mm] (e1) {expert 1};
-  \node[atk, text width=1.5cm, below=2mm of e1] (e2) {expert 2};
-  \node[neu, text width=1.5cm, below=2mm of e2] (e3) {$\cdots$};
-  \node[atk, text width=1.5cm, below=2mm of e3] (e7) {expert 7};
-  \node[neu, text width=1.5cm, below=2mm of e7] (e8) {expert 8};
-  \node[dfn, text width=1.6cm, right=14mm of e3] (o) {weighted\\sum};
-  \draw[arr] (t) -- (r);
-  \draw[arratk] (r) -- (e2); \draw[arratk] (r) -- (e7);
-  \draw[arr] (r) -- (e1); \draw[arr] (r) -- (e8);
-  \draw[arratk] (e2) -- (o); \draw[arratk] (e7) -- (o);
-\end{tikzpicture}
-\end{adjustbox}
-```
-
-* **Sparse:** 8 expert feed-forward blocks, the router picks 2 per token: 475 M parameters stored, **305 M used** per token [@shazeer:2017; @nussbaum:2025].
+* Today: **EmbeddingGemma 2**, open weights, Matryoshka, 8k tokens, Apache-2.0. It matches the larger Nomic v2 (F1 0.96) in half the file and leads with few labels. English only.
 
 ## Matryoshka: one vector, several sizes
 
@@ -332,24 +310,24 @@ The first $d$ values of the vector form a valid smaller embedding [@kusupati:202
 \begin{adjustbox}{max width=\linewidth,center}
 \begin{tikzpicture}
 \begin{axis}[aasplot, height=0.42\textheight, width=0.62\linewidth, xlabel={dimensions kept}, ylabel={F1 (spam)}, ymin=0.85, ymax=0.98, xmin=0, xmax=832,
-  xtick={64,256,384,512,768}]
-  \addplot[thick, aasred, mark=*] coordinates {(64,0.883) (128,0.909) (256,0.932) (384,0.960) (512,0.949) (768,0.952)};
+  xtick={64,128,256,512,768}]
+  \addplot[thick, aasred, mark=*] coordinates {(64,0.900) (128,0.948) (256,0.940) (512,0.960) (768,0.960)};
 \end{axis}
 \end{tikzpicture}
 \end{adjustbox}
 ```
 
-* 384 dimensions lose nothing (half the memory: 1.5 KB per message); 256 costs about two points; 64 costs seven.
+* 512 dimensions lose nothing (2 KB per message); 256 and 128 stay within two points (one test message is 0.4 points: the dip is noise); 64 costs six.
 
 ## Does the task prefix matter?
 
-Nomic asks for `search_document: ` in front of each text. F1 with a 95% bootstrap interval (1,000 resamples of the test set):
+EmbeddingGemma asks for `title: none | text: ` in front of each document. F1 with a 95% bootstrap interval (1,000 resamples of the test set):
 
 | prefix | F1 | 95% interval |
 |:--------------------|------:|:-------------|
-| `search_document: ` | 0.952 | [0.924, 0.977] |
-| none | 0.960 | [0.932, 0.984] |
-| `classification: ` | 0.957 | [0.926, 0.980] |
+| `title: none | text: ` | 0.960 | [0.932, 0.982] |
+| none | 0.960 | [0.931, 0.983] |
+| `task: classification | query: ` | 0.948 | [0.915, 0.975] |
 
 * The intervals overlap: **for a classification probe the prefix is irrelevant** here. It matters for retrieval (queries versus documents).
 * Do not read a difference of 0.005 as an effect without an interval: 1,024 messages, about 130 spam.
@@ -363,8 +341,8 @@ Nomic asks for `search_document: ` in front of each text. F1 with a 95% bootstra
 \begin{tikzpicture}[node distance=9mm, every node/.style={font=\scriptsize}]
   \node[neu, text width=2.2cm] (n) {notebook /\\application};
   \node[dfn, text width=2.6cm, right=of n] (s) {\texttt{llama-swap}\\:8080};
-  \node[neu, text width=3.4cm, right=of s] (g) {\texttt{llama-server} + GGUF\\\texttt{nomic}, \texttt{minilm}, \texttt{chat}};
-  \node[atk, text width=2.2cm, right=of g] (v) {Vulkan\\GPU or CPU};
+  \node[neu, text width=3.4cm, right=of s] (g) {\texttt{llama-server} + GGUF\\\texttt{embgemma}, \texttt{minilm}, \texttt{chat}};
+  \node[atk, text width=2.2cm, right=of g] (v) {CUDA, Vulkan\\or CPU};
   \draw[arr] (n) -- node[above, note] {HTTP} (s);
   \draw[arr] (s) -- node[above, note] {\texttt{model}} (g);
   \draw[arr] (g) -- (v);
@@ -374,59 +352,68 @@ Nomic asks for `search_document: ` in front of each text. F1 with a 95% bootstra
 
 * **Separation:** text in, vectors out; **no PyTorch, no TensorFlow**, no model in the notebook process; notebooks share one model.
 * **Same API as commercial services** (`/v1/embeddings`, `/v1/chat/completions`).
-* **llama.cpp** [@llamacpp]: C++ engine for quantised models, on CPUs and (Vulkan) most GPUs.
+* **llama.cpp** [@llamacpp]: C++ engine for quantised models, on CPUs and on NVIDIA (CUDA) and most other GPUs (Vulkan).
 * **llama-swap**: one endpoint; the `model` field picks the `llama-server`, loaded on demand.
 
 ## GGUF and quantisation
 
-* **GGUF**: one file with weights, vocabulary and metadata (pooling type, context length).
-* **Quantisation**: weights in 8, 6, 5 or 4 bits (blocks share one scale) instead of 16 or 32.
+* **GGUF**: one file with weights, vocabulary and metadata.
+* **Quantisation**: weights in 8, 6, 5 or 4 bits (blocks share one scale) instead of 16: less disk and RAM, a little more error. `UD-` (*Unsloth Dynamic*): sensitive layers keep more bits.
 
-| File (Nomic v2 MoE) | Size |
+| File (EmbeddingGemma 2) | Size |
 |:------------------------|--------:|
-| F32 | 1,908 MB |
-| BF16 / F16 | 958 MB |
-| **Q8_0** | **512 MB** |
-| Q4_K_M | 344 MB |
+| BF16 | 558 MB |
+| Q8_0 | 310 MB |
+| **UD-Q4_K_XL** | **176 MB** |
 
-* Q4_K_M vs Q8_0: cosine 0.985, F1 0.960 vs 0.952, 48 vs 53 msg/s. Q8_0 vs original: cosine $\geq$ 0.999.
+* Q4 vs Q8_0: cosine 0.993, F1 0.960 vs 0.964. **Every model of the course is 4 bit** (laptop RAM).
 
-## Vulkan: one GPU backend for everybody
+## One image per GPU family
 
-* **Vulkan** is a cross-vendor graphics and compute API: AMD, Intel and NVIDIA drivers all implement it. No ROCm, no CUDA, no vendor container.
-* The container only needs the device: `/dev/dri`. Without a GPU, the same stack runs on the CPU (`--profile cpu`).
+llama-swap publishes **unified images** (llama-swap + llama.cpp in one container). `make llama-up` picks the one that matches the GPU (`detect_gpu.sh`: `nvidia-smi`, then `/dev/dri`):
+
+| Profile | GPUs | Needs |
+|:--------|:------------------------------------------|:------------------|
+| `cuda13` | NVIDIA Ampere to Blackwell (RTX 30/40/50, A100, H100) | driver $\geq$ 580 |
+| `cuda` | NVIDIA Pascal to Ada (GTX 10xx, RTX 20xx) | CUDA 12 |
+| `vulkan` | AMD, Intel, any Vulkan GPU | `/dev/dri` |
+| `cpu` | none (macOS, Windows) | Vulkan image, 0 GPU layers |
+
+* **Vulkan**: a cross-vendor graphics and compute API (AMD, Intel and NVIDIA drivers): no ROCm.
+
+## How fast?
 
 | Backend (messages/s, batches of 16) | speed |
 |:--------------------------------------------|------:|
-| Vulkan, AMD Radeon 860M (integrated GPU) | 53 |
-| CPU backend, same machine | 31 |
-| MiniLM 22 M, CPU backend | 267 |
+| Vulkan, AMD Radeon 860M (integrated GPU) | 55 |
+| CPU, same machine | 27 |
+| MiniLM 22 M, CPU | 195 |
 
-* The MoE model has about 20 times the parameters of MiniLM.
+* An integrated GPU only doubles the speed of the same machine's CPU (a discrete GPU is faster still; not measured here). Either way the SLM is a *second-stage* model.
 
 ## The Docker Compose stack
 
 ```yaml
 services:
-  llama-swap:
-    image: ghcr.io/mostlygeek/llama-swap:v261-vulkan-b11347
-    profiles: [gpu]
+  llama-swap-vulkan:        # also: cuda13, cuda, cpu
+    image: ghcr.io/mostlygeek/llama-swap:
+           unified-vulkan
     devices: ["/dev/dri:/dev/dri"]
-    volumes: ["./models:/models:ro",
-              "./config.yaml:/app/config.yaml:ro"]
+    volumes: ["./models:/models:ro", "./llama-swap.yaml:..."]
     ports: ["127.0.0.1:8080:8080"]
 ```
 
-* **Pinned** image; one port, bound to localhost. `make llama-up llama-check`. Open WebUI (`webui` profile) comes in class 12.
-* The models live in `config.yaml`, not in the Compose file.
+* **Docker**: a program in a *container* (own file system); **Compose**: containers, devices, files in one YAML file.
+* **Floating tag** = latest llama.cpp (new model families need it); `SWAP_TAG=<date>` pins a build. Port bound to localhost.
+* `LLAMA_SWAP_LISTEN=0.0.0.0` inside, or the published port refuses connections.
 
 ## Which model is loaded: llama-swap
 
 ```yaml
 models:
-  nomic:
-    cmd: llama-server --port ${PORT} --embeddings
-         -m /models/nomic-embed-text-v2-moe.Q8_0.gguf -ngl 99
+  embgemma:
+    cmd: llama-server --port ${PORT} --embeddings --pooling mean
+         -m /models/embeddinggemma-2-UD-Q4_K_XL.gguf -ngl ${env.NGL}
   minilm:
     cmd: llama-server --port ${PORT} --embeddings -ngl 0 ...
   chat:                              # Gemma 4 E2B, Q4
@@ -434,18 +421,17 @@ models:
     ttl: 300
 ```
 
-* `${PORT}`: chosen by llama-swap. **Policy** (matrix): at most one chat model and one embedder in memory.
-* The **first request** after a swap waits while the GGUF loads (seconds); then it is as fast as a direct server.
-* `-ngl 99`: all layers on the GPU; MiniLM stays on the CPU.
+* `${PORT}`: chosen by llama-swap. **Policy** (matrix): the three models may share the memory (3 GB); by default only one.
+* The **first request** after a swap waits while the GGUF loads. `-ngl`: layers on the GPU (99 = all, 0 with `cpu`); MiniLM stays on the CPU.
 
 ## Getting the model
 
 ```
-python download_model.py --repo nomic-ai/nomic-embed-text-v2-moe-GGUF --quant Q8_0
-python download_model.py --repo second-state/All-MiniLM-L6-v2-Embedding-GGUF --quant f16
+python download_model.py --repo unsloth/embeddinggemma-2-GGUF --quant UD-Q4_K_XL
+python download_model.py --repo second-state/All-MiniLM-L6-v2-Embedding-GGUF --quant Q4_K_M
 ```
 
-* Nomic (512 MB) and MiniLM (46 MB); `make llama-models` fetches both (and the small chat model for class 12). From Hugging Face; **resumable** (HTTP Range), **verified** (SHA-256 of the file against the Hub metadata), skips a file that is already good.
+* EmbeddingGemma (176 MB) and MiniLM (21 MB); `make llama-models` fetches both (and the small chat model, 2.6 GB, for class 12). From Hugging Face; **resumable** (HTTP Range), **verified** (SHA-256 of the file against the Hub metadata), skips a file that is already good.
 * A token for gated repositories comes from the environment (`HF_TOKEN`); it is never stored or printed.
 * Pin what you run: image **tag**, model **file**, **checksum**. A `latest` tag is a supply-chain risk in a security course.
 
@@ -453,12 +439,12 @@ python download_model.py --repo second-state/All-MiniLM-L6-v2-Embedding-GGUF --q
 
 ```
 POST http://127.0.0.1:8080/v1/embeddings
-{"model": "nomic", "input": ["search_document: <message>", ...]}
+{"model": "embgemma", "input": ["title: none | text: <message>", ...]}
 ```
 
 * Response: `data[i].embedding`, 768 floats, **already L2-normalised**.
 * Batch 16 to 64 messages per request; cache the vectors on disk (the model file name is part of the key).
-* About 19 ms per message, batched or not: with `-np 1` the server handles them one after another. `"model": "minilm"` on the same URL reaches MiniLM.
+* About 18 ms per message, batched or not: with `-np 1` the server handles them one after another. `"model": "minilm"` on the same URL reaches MiniLM.
 
 # Results
 
@@ -471,42 +457,40 @@ POST http://127.0.0.1:8080/v1/embeddings
   xtick={20,50,100,250,500,1000}, xticklabels={20,50,100,250,500,1000}, legend style={at={(1.03,0.5)}, anchor=west}]
   \addplot[thick, aasgrey, mark=diamond*] coordinates {(20,0.395) (50,0.531) (100,0.759) (250,0.845) (500,0.889) (1000,0.909)};
   \addlegendentry{TF-IDF + LR}
-  \addplot[thick, aasgold, mark=square*] coordinates {(20,0.346) (50,0.595) (100,0.788) (250,0.875) (500,0.898) (1000,0.912)};
+  \addplot[thick, aasgold, mark=square*] coordinates {(20,0.347) (50,0.588) (100,0.793) (250,0.876) (500,0.900) (1000,0.914)};
   \addlegendentry{MiniLM 22M}
-  \addplot[thick, aasred, mark=triangle*] coordinates {(20,0.296) (50,0.662) (100,0.846) (250,0.902) (500,0.920) (1000,0.934)};
-  \addlegendentry{Nomic v2 MoE}
+  \addplot[thick, aasred, mark=triangle*] coordinates {(20,0.509) (50,0.775) (100,0.895) (250,0.927) (500,0.940) (1000,0.947)};
+  \addlegendentry{EmbeddingGemma 2}
 \end{axis}
 \end{tikzpicture}
 \end{adjustbox}
 ```
 
-* Notebooks 06 and 07 (10 to 20 repetitions). At 20 labels (about 3 spam) nothing is reliable. From **50** on the embeddings lead (Nomic: +13 points at 50, +3 at 500).
-* Fair baselines: an untuned TF-IDF (`min_df=1`) scored 0.05 at 20 labels; tuned, 0.40.
+* Notebooks 06, 07 (10 to 20 repetitions). At 20 labels (3 spam) nothing is reliable; from **50** the embeddings lead (+24 points at 50, +5 at 500). Untuned TF-IDF scored 0.05 at 20 labels, tuned 0.40.
 
 ## A new campaign: leave one family out
 
 Spam falls in **families**. Train **without** one family, then test on it (recall; false positives below 1% for all models; families of 72 to 172 messages: suggestive, not proven):
 
-| held-out family | TF-IDF + LR | MiniLM + LR | Nomic + LR |
+| held-out family | TF-IDF + LR | MiniLM + LR | EmbeddingGemma + LR |
 |:-------------------|------:|------:|------:|
-| competition | 0.695 | 0.619 | **0.762** |
-| prize claim | 0.988 | 0.977 | 0.988 |
-| mobile upgrade | 0.949 | 0.906 | 0.957 |
-| account statement | 0.949 | 0.759 | 0.949 |
-| ringtones | 0.889 | 0.931 | 0.931 |
-| chat lines | 0.657 | 0.576 | **0.808** |
-| **macro average** | 0.855 | 0.795 | **0.899** |
-
+| competition | 0.695 | 0.562 | **0.848** |
+| prize claim | 0.988 | 0.977 | 0.994 |
+| mobile upgrade | 0.949 | 0.906 | 0.974 |
+| account statement | 0.949 | 0.797 | 1.000 |
+| ringtones | 0.889 | 0.889 | 0.847 |
+| chat lines | 0.657 | 0.586 | **0.838** |
+| **macro average** | 0.855 | 0.786 | **0.917** |
 
 ## The price of meaning
 
 | Representation + classifier | F1 | ms/msg | Size |
 |:----------------------------------|------:|------:|:------------------|
 | TF-IDF + LR | 0.944 | 0.04 | about 1 MB |
-| MiniLM (llama.cpp, CPU) | 0.952 | 3.4 | 22 M parameters |
-| Nomic v2 MoE (llama.cpp, GPU) | 0.952 | 19 | 475 M, 512 MB file |
+| MiniLM (llama.cpp, CPU) | 0.957 | 5.0 | 22 M parameters, 21 MB file |
+| EmbeddingGemma 2 (llama.cpp, GPU) | 0.960 | 18 | 270 M, 176 MB file |
 
-* With abundant labels the gap is **noise**; an SLM costs **85 to 475 times more** per message.
+* With abundant labels the gap is **noise**; an SLM costs **125 to 450 times more** per message.
 * **Design rule:** TF-IDF + linear first; an SLM as second stage, when labels are scarce or a new campaign appears.
 
 ## The ladder in one table
@@ -517,8 +501,8 @@ Spam falls in **families**. Train **without** one family, then test on it (recal
 | Logistic regression, TF-IDF | 0.983 | 0.907 | 0.944 |
 | fastText supervised | 0.983 | 0.915 | 0.948 |
 | Word2Vec skip-gram (in-domain) + LR | 0.975 | 0.899 | 0.935 |
-| MiniLM + LR | 0.976 | 0.930 | 0.952 |
-| Nomic v2 MoE + LR | 0.976 | 0.930 | 0.952 |
+| MiniLM + LR | 0.976 | 0.938 | 0.957 |
+| EmbeddingGemma 2 + LR | 0.984 | 0.938 | 0.960 |
 
 * **All within 0.93 to 0.96.** The clean test score does not separate them. **Cost, label efficiency, new campaigns and robustness** do: the last one is next class.
 
@@ -531,8 +515,8 @@ Notebooks in `notebooks/01-spam/`:
 | Notebook | Content |
 |:----------|:------------------------------------------------------------|
 | **05** | Word2Vec and fastText: in-domain vs pre-trained, OOV, few labels |
-| **06** | SLM embeddings (MiniLM, Nomic) through llama.cpp: probe, few labels, Keras head, cost |
-| **07** | Nomic v2 MoE through llama.cpp: prefix, Matryoshka, new campaign, throughput |
+| **06** | SLM embeddings (MiniLM, EmbeddingGemma) through llama.cpp: probe, few labels, Keras head, cost |
+| **07** | EmbeddingGemma 2 through llama.cpp: prefix, Matryoshka, new campaign, throughput |
 | `llama/` | Docker Compose stack, llama-swap config, GGUF download script, smoke test |
 
 * **Practice guide** `practice/spam/guide_02_02`: word vectors, MiniLM, then your own llama.cpp stack (llama-swap). Fill-in notebook; solution published afterwards.
@@ -540,8 +524,8 @@ Notebooks in `notebooks/01-spam/`:
 ## Take-aways
 
 * **Vectors** add similarity to a bag of words: **in-domain** with plenty of unlabelled text from the same stream; **pre-trained** only if it covers your vocabulary.
-* **Sentence embeddings** lead with few labels or a **new campaign**, at 85 to 475 times the cost.
-* Run models as a **service** (llama.cpp behind llama-swap, GGUF, Vulkan); **pin** image, file and checksum.
+* **Sentence embeddings** lead with few labels or a **new campaign**, at 125 to 450 times the cost.
+* Run models as a **service** (llama.cpp behind llama-swap, GGUF, 4 bit, the image that matches your GPU); **pin** image, file and checksum.
 * Report **intervals** and compare with a **fair baseline**.
 * **Next class:** we attack every model on the ladder.
 
@@ -580,7 +564,7 @@ $$
 * The other $N-1$ texts of the batch are the **negatives**: larger batches give harder negatives [@oord:2018].
 * **Matryoshka loss** [@kusupati:2022]: the same loss summed over nested prefixes $\mathbf{e}_{1:d}$, $d\in\{64,128,\dots,768\}$, so that each prefix is a good embedding.
 
-## Mixture-of-experts routing
+## Mixture-of-experts routing (Nomic v2, not used today)
 
 For a token state $\mathbf{x}$ and experts $E_1,\dots,E_8$ [@shazeer:2017]:
 
@@ -592,8 +576,7 @@ $$
 g=\operatorname{softmax}\big((\mathbf{W}_g\mathbf{x})_T\big)
 $$
 
-* Only two feed-forward blocks run: compute per token like a much smaller model, **memory** like the full one (512 MB file).
-* A **load-balancing** term keeps the router from sending every token to the same experts.
+* Two feed-forward blocks run: compute like a smaller model, **memory** like the full one (Nomic v2: 475 M stored, 305 M used). A **load-balancing** term spreads the tokens over the experts.
 
 ## Quantisation in one formula
 
@@ -603,8 +586,8 @@ $$
 d=\frac{\max_i\lvert w_i\rvert}{127},\qquad q_i=\operatorname{round}(w_i/d),\qquad \hat{w}_i=d\,q_i
 $$
 
-* The error of every weight is at most $d/2$; with 8 bits it is below 0.4% of the largest weight of the block, and the cosine to the full-precision vector stays at 0.999.
-* Fewer bits (`Q4_K_M`): smaller file, larger error; on this task the cosine to Q8_0 was 0.985 and the F1 unchanged.
+* The error of every weight is at most $d/2$; with 8 bits it is below 0.4% of the largest weight of the block.
+* Fewer bits (4-bit `Q4` families): smaller file, larger error; for EmbeddingGemma 2 the mean cosine between the 4-bit and the 8-bit vector was 0.993 and the F1 0.960 against 0.964.
 
 ## Bibliography {.allowframebreaks}
 

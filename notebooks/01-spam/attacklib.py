@@ -46,12 +46,14 @@ def _probe(C):
 
 
 def build_victims(
-    X_train, y_train, which=("nb_presence", "nb_counts", "tfidf_lr", "fasttext", "vectors_lr", "minilm_lr", "nomic_lr")
+    X_train,
+    y_train,
+    which=("nb_presence", "nb_counts", "tfidf_lr", "fasttext", "vectors_lr", "minilm_lr", "embgemma_lr"),
 ):
     """Train the filters of the ladder on the training split. Returns {key: Victim} in the order of `which`.
 
     keys: nb_presence, nb_counts, tfidf_lr, fasttext (supervised), vectors_lr (in-domain fastText vectors + LR),
-    minilm_lr and nomic_lr (need the llama-swap endpoint, see llama/README.md).
+    minilm_lr and embgemma_lr (need the llama-swap endpoint, see llama/README.md).
     """
     from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
     from sklearn.linear_model import LogisticRegression
@@ -94,8 +96,8 @@ def build_victims(
             out[key] = _vectors_victim(X_train, y_train)
         elif key == "minilm_lr":
             out[key] = _minilm_victim(X_train, y_train)
-        elif key == "nomic_lr":
-            out[key] = _nomic_victim(X_train, y_train)
+        elif key == "embgemma_lr":
+            out[key] = _embgemma_victim(X_train, y_train)
         else:
             raise ValueError(key)
     return out
@@ -141,11 +143,13 @@ def _vectors_victim(X_train, y_train):
     )
 
 
-def _nomic_victim(X_train, y_train):
+def _embgemma_victim(X_train, y_train):
     import llamalib as ll
 
-    clf = _probe(0.01).fit(ll.embed(X_train), y_train)  # cached: the training vectors are computed once
-    return Victim("Nomic v2 MoE + LR", lambda docs: clf.decision_function(ll.embed(docs, cache=False)), encoder="nomic")
+    clf = _probe(0.1).fit(ll.embed(X_train), y_train)  # cached: the training vectors are computed once
+    return Victim(
+        "EmbeddingGemma 2 + LR", lambda docs: clf.decision_function(ll.embed(docs, cache=False)), encoder="embgemma"
+    )
 
 
 def _minilm_victim(X_train, y_train):
@@ -217,6 +221,12 @@ def edit_count(a, b):
 # ---------------------------------------------------------------------------------------------------------------------
 
 
+UNRELATED_COSINE = {
+    "minilm": 0.0,
+    "embgemma": 0.69,
+}  # mean cosine of two random SMS is 0.13 (MiniLM, left as is) and 0.69 (EmbeddingGemma)
+
+
 def make_judge(kind="minilm"):
     """Return `sim(original, candidates) -> array of cosines`, from an embedder that is NOT the victim being attacked."""
     import llamalib as ll
@@ -226,24 +236,27 @@ def make_judge(kind="minilm"):
         def embed(t):
             return ll.embed_mini(t, cache=False)
 
-    elif kind == "nomic":
+    elif kind == "embgemma":
 
         def embed(t):
             return ll.embed(t, cache=False)
 
     else:
         raise ValueError(kind)
+    # EmbeddingGemma's cosines are compressed: two unrelated SMS already have cosine 0.69 (MiniLM: 0.13), a paraphrase 0.94 (MiniLM: 0.83).
+    # Rescale so that "unrelated" is 0 and "identical" is 1: then one threshold tau means the same for both judges (paraphrases: mean 0.81 vs 0.83).
+    floor = UNRELATED_COSINE[kind]
 
     def sim(original, candidates):
         e = embed([original, *candidates])
-        return e[1:] @ e[0]
+        return (e[1:] @ e[0] - floor) / (1 - floor)
 
     return sim
 
 
 def judge_for(victim):
-    """MiniLM judges everything except the MiniLM victim; Nomic judges that one (an attacker gains nothing from its own judge)."""
-    return make_judge("nomic" if victim.encoder == "minilm" else "minilm")
+    """MiniLM judges everything except the MiniLM victim; EmbeddingGemma judges that one (an attacker gains nothing from its own judge)."""
+    return make_judge("embgemma" if victim.encoder == "minilm" else "minilm")
 
 
 @dataclass

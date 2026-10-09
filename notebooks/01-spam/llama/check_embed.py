@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Smoke test for the llama-swap endpoint (:8080): the embedders `nomic` (Nomic Embed Text v2 MoE) and `minilm` (all-MiniLM-L6-v2) and the `chat` model.
+"""Smoke test for the llama-swap endpoint (:8080): the embedders `embgemma` (EmbeddingGemma 2) and `minilm` (all-MiniLM-L6-v2) and the `chat` model.
 
 Waits for /health, embeds a few SMS through the OpenAI-compatible /v1/embeddings endpoint and checks: unit norm,
 semantic sanity (two spam messages are closer to each other than to a ham message), the Matryoshka truncation
-(Nomic only: first 256 dimensions, renormalised) and, with --bench, the throughput.
+(EmbeddingGemma only: first 256 dimensions, renormalised) and, with --bench, the throughput.
 
-    ./check_embed.py                     # Nomic on http://127.0.0.1:8080
+    ./check_embed.py                     # EmbeddingGemma 2 on http://127.0.0.1:8080
     ./check_embed.py --mini              # all-MiniLM-L6-v2
     ./check_embed.py --chat              # one short completion of the chat model (Gemma 4 E2B)
     ./check_embed.py --bench 200         # also time 200 messages
@@ -18,7 +18,7 @@ import time
 import numpy as np
 import requests
 
-NOMIC_PREFIX = "search_document: "  # Nomic v2 needs a task prefix; MiniLM takes the text as it is
+EMBG_PREFIX = "title: none | text: "  # EmbeddingGemma needs a task prefix; MiniLM takes the text as it is
 SAMPLES = [
     "WINNER!! As a valued network customer you have been selected to receive a £900 prize reward! To claim call 09061701461.",
     "Congratulations! You've won a free holiday. Call now to claim your cash prize before it expires.",
@@ -39,7 +39,7 @@ def wait_ready(url, timeout):
     sys.exit(f"FAIL: {url}/health not ready after {timeout}s (docker compose logs)")
 
 
-def embed(url, texts, prefix, model="nomic"):
+def embed(url, texts, prefix, model="embgemma"):
     r = requests.post(f"{url}/v1/embeddings", json={"input": [prefix + t for t in texts], "model": model}, timeout=120)
     r.raise_for_status()
     data = sorted(r.json()["data"], key=lambda d: d["index"])
@@ -70,7 +70,7 @@ def matryoshka(e, dim):
 
 def main():
     ap = argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0])
-    ap.add_argument("--mini", action="store_true", help="test MiniLM (no prefix) instead of Nomic")
+    ap.add_argument("--mini", action="store_true", help="test MiniLM (no prefix) instead of EmbeddingGemma")
     ap.add_argument("--chat", action="store_true", help="test the chat model instead of an embedder")
     ap.add_argument("--url", default="http://127.0.0.1:8080", help="llama-swap URL")
     ap.add_argument("--timeout", type=int, default=120, help="seconds to wait for the server")
@@ -81,8 +81,8 @@ def main():
         print(f"{url}: ready after {wait_ready(url, args.timeout):.1f}s")
         print("PASS" if check_chat(url) else "FAIL")
         sys.exit(0)
-    model = "minilm" if args.mini else "nomic"
-    prefix = "" if args.mini else NOMIC_PREFIX
+    model = "minilm" if args.mini else "embgemma"
+    prefix = "" if args.mini else EMBG_PREFIX
     ok = True
 
     print(f"{url}: ready after {wait_ready(url, args.timeout):.1f}s")

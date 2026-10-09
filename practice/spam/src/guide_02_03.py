@@ -10,7 +10,7 @@
 # > **Scope.** Attacks on *our own* models, in the lab, on the public SMS corpus. No real numbers, links or infrastructure. The techniques are the
 # > standard way to measure how fragile a model is.
 #
-# **Requirements.** `make venv`; the llama-swap stack (`make llama-up`): `minilm` is the judge of meaning in part D, `nomic` an optional third victim (`AAS_SLM=skip` leaves the Nomic victim out).
+# **Requirements.** `make venv`; the llama-swap stack (`make llama-up`): `minilm` is the judge of meaning in part D, `embgemma` an optional third victim (`AAS_SLM=skip` leaves the EmbeddingGemma victim out).
 
 # %%
 import os
@@ -41,11 +41,11 @@ import spamlib as sl  # noqa: E402
 texts, y = sl.load()
 X_train, X_test, y_train, y_test = sl.split(texts, y)
 spam_test = [t for t, lab in zip(X_test, y_test) if lab == 1]
-WHICH = ["nb_counts", "tfidf_lr"] + ([] if os.environ.get("AAS_SLM") == "skip" else ["nomic_lr"])
+WHICH = ["nb_counts", "tfidf_lr"] + ([] if os.environ.get("AAS_SLM") == "skip" else ["embgemma_lr"])
 try:
     V = al.build_victims(X_train, y_train, which=WHICH)
 except RuntimeError as exc:  # llama-swap stack not running
-    print("Nomic victim skipped:", exc)
+    print("EmbeddingGemma victim skipped:", exc)
     V = al.build_victims(X_train, y_train, which=["nb_counts", "tfidf_lr"])
 for v in V.values():
     print(f"{v.name:22} spam caught: {v.caught(spam_test).mean():.3f}")
