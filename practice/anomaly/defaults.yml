@@ -1,0 +1,8 @@
+resource-path:
+  - "."
+  - "malware"
+  - "datasets"
+  - "../assets"
+  - "../assets/figures"
+include-in-header:
+  - "header.tex"

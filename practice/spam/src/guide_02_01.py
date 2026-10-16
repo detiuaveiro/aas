@@ -43,7 +43,12 @@ X_txt_train, X_txt_test, y_train, y_test = train_test_split(texts, y, test_size=
 print(len(X_txt_train), len(X_txt_test), int(y_test.sum()))
 
 # %% [markdown]
-# **Question A1.** Why do we split *before* building the vocabulary? Why `stratify=y`? (Answer in your report.)
+# **Question A1.** Why do we split *before* building the vocabulary? Why `stratify=y`?
+
+# <<SOL
+# %% [markdown]
+# **Answers A1.** The vocabulary (and later the IDF) is a model parameter: built on all messages it would carry test words into training (leakage) and make the test score optimistic. `stratify=y` keeps the spam share equal in both sets (12.6%: 129 spam among 1,024 test messages); with a rare class a random split can move it by a few points and change precision and recall. The 5,521 non-empty messages hold only 5,119 distinct texts: without removing duplicates the same message can sit in train and test, and the classifier is graded on messages it has memorised.
+# SOL>>
 
 # %% [markdown]
 # ## Part B. The tokenizer
@@ -178,7 +183,12 @@ print("Naive Bayes OK")
 
 # %% [markdown]
 # **Question D1.** Build a message of ~1,000 words (join 30 spam messages) and compute the posterior **without** logs (product of
-# probabilities). What do you get? Why does the log version not fail? Write the two outputs in your report.
+# probabilities). What do you get? Why does the log version not fail? Write down the two outputs.
+
+# <<SOL
+# %% [markdown]
+# **Answers D1.** Without logs the posterior is `[nan nan]`: the product of about 1,000 probabilities underflows to 0 for both classes and the normalisation computes 0/0. In log space the joint log-probabilities are large negative numbers that a float holds easily; log-sum-exp subtracts the largest one before exponentiating, so at least one term is $e^0=1$ and nothing underflows: the posterior is `[0, 1]` (spam, with certainty).
+# SOL>>
 
 # %%
 long_msg = " ".join(t for t, lab in zip(X_txt_train, y_train) if lab == 1)[:6000]
@@ -246,6 +256,13 @@ print("metrics OK")
 #
 # A mail provider prefers to let some spam through rather than block a real message. Find the **lowest threshold** on
 # $P(\text{spam}\mid\mathbf{x})$ for which the precision is at least 0.99, and report the recall at that threshold.
+
+# <<SOL
+# %% [markdown]
+# **Answers E1.** On this test set it is right on the 895 ham messages: accuracy $895/1024=0.874$. It flags nothing, so precision is undefined (0/0, reported as 0) and recall is 0. Recall (and F1, MCC, PR-AUC) expose it; accuracy does not, because the class imbalance rewards the trivial answer.
+#
+# **Operating point.** Precision $\ge0.99$ needs the threshold $P(\text{spam}\mid\mathbf{x})\ge0.992$; recall falls from 0.953 (threshold 0.5) to 0.930: three more spam messages reach the inbox in exchange for almost no blocked real message. A mail provider prefers this point because a lost legitimate message costs more trust than one more spam.
+# SOL>>
 
 # %%
 proba = nb.predict_proba(C_test)[:, 1]
@@ -317,11 +334,18 @@ print("highest idf:", [vocab[i] for i in order[-5:]])
 # %% [markdown]
 # **Question F1.** Why are `you`, `to`, `the` at the bottom of the idf list, and what does that do to their weight?
 #
-# ## Part G. Compare the models (report table)
+# ## Part G. Compare the models (comparison table)
 #
 # Train Naive Bayes on the **counts** and on the **TF-IDF** matrix, with $k=0.1$ and $k=1$, and fill in the table
 # (precision, recall, F1 on the test set). Which representation is better? Is the difference larger than the noise? (Repeat the
 # split with 3 different `random_state` values to estimate it; optional if you are short of time.)
+
+# <<SOL
+# %% [markdown]
+# **Answers F1.** They occur in a large share of all messages, so $\text{df}$ is close to $N$ and $\text{idf}=\ln\frac{1+N}{1+\text{df}}+1$ is close to its minimum 1 (the lowest are `i, to, you, a, the, !, u, and`). After L2 normalisation their weight is small compared with rare, specific words (`claim`, `prize`): TF-IDF turns down words that say nothing about the class.
+#
+# **Answers G.** On this split: counts $k=0.1$ F1 0.953, counts $k=1$ 0.957, TF-IDF $k=0.1$ 0.949, TF-IDF $k=1$ 0.903 (precision 0.991, recall 0.829). TF-IDF does **not** help Naive Bayes here: NB models counts, and TF-IDF values are small fractions, so with $k=1$ the smoothing dominates and recall drops. The gaps between the three best rows (0.004 to 0.008 in F1, one or two messages) are within the noise of a 129-spam test set; only the TF-IDF $k=1$ row is clearly worse.
+# SOL>>
 
 # %%
 rows = {}
@@ -414,6 +438,13 @@ print(f"logistic regression (GD): precision {p:.3f}  recall {r:.3f}  F1 {f1:.3f}
 # %% [markdown]
 # **Question H1.** Plot the loss history for $\eta=1$, $50$ and $500$ (use the cell below). Describe and explain each behaviour.
 
+# <<SOL
+# %% [markdown]
+# **Answers H1.** $\eta=1$: a smooth, slow decrease (still about 0.3 after 100 steps): the steps are safe but tiny. $\eta=50$: the loss jumps up and down for about 20 steps (the step overshoots the minimum along the steep directions), then settles and reaches the lowest loss (about 0.05). $\eta=500$: spikes up to about 50 (each step throws the weights far past the minimum) before it lands in a flat region and decreases slowly (about 0.09). Too small is slow, too large is unstable; the best rate is just below the point where the loss starts to oscillate.
+#
+# **Answers H2.** Logistic regression (TF-IDF, gradient descent): precision 0.975, recall 0.907, F1 0.940. Best Naive Bayes (counts, $k=1$): precision 0.961, recall 0.953, F1 0.957. Logistic regression blocks fewer real messages, Naive Bayes catches more spam; a mail gateway that values real mail more would prefer the logistic regression, or move the NB threshold up (part E).
+# SOL>>
+
 # %%
 # <<TODO
 # TODO: for eta in (1, 50, 500): _, h = gradient_descent(A_train, y_tr, eta=eta, steps=100); plot h (log y axis), add a legend
@@ -456,3 +487,10 @@ print("LR  hammy :", [vocab[i] for i in o[:10]])
 #
 # **Question I2.** The weight vector of the logistic regression is the gradient of its score with respect to the input. What would
 # an attacker need to know, and do, to use it against the filter?
+
+# <<SOL
+# %% [markdown]
+# **Answers I1.** `lt` and `gt` are what is left of the HTML entities `&lt;` and `&gt;` (the corpus stored placeholders such as `&lt;#&gt;` in many personal messages): an artefact of how the data were collected, not a property of ham. The model learned the collection process; an attacker who reads the list (or guesses it) appends `lt gt` and other "hammy" words to a spam message to lower its score (class 04).
+#
+# **Answers I2.** For a linear score $z=\mathbf{w}\cdot\mathbf{x}+b$ the gradient with respect to the input is $\mathbf{w}$: the words with the most negative weights lower the score most per occurrence. An attacker needs the weights (white box: a leaked or downloaded model) or enough queries to estimate them (black box); then the cheapest evasion is to append the most negative words and remove the most positive ones while keeping the message readable. Class 04 measures both attacks.
+# SOL>>

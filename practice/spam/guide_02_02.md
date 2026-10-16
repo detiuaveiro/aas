@@ -21,7 +21,7 @@ header-includes:
 Climb the second half of the spam ladder. You will train **Word2Vec** and **fastText** vectors on our messages and compare them with **pre-trained** ones, use the **sentence embeddings** of a small language model (MiniLM), and then run **EmbeddingGemma 2**, both in your own **llama.cpp servers** (Docker, GPU or CPU), as feature extractors. You will find out **when** each one is the right choice, and how much a single F1 number can be trusted.
 
 * **Notebook to complete:** `guide_02_02.ipynb`. Cells marked `TODO` are yours; `check` cells validate your work.
-* **Time:** about 2 hours (suggested: A 5 min, B 20, C 20, D 15, E 40, F 15). **Deliverable:** the completed notebook and the answers below.
+* **Time:** about 2 hours (suggested: A 5 min, B 20, C 20, D 15, E 40, F 15).
 * **Prerequisite:** Guide 1 and the lecture of class 3.
 * **Requirements:** `make venv` at the root of the repository (no PyTorch, no TensorFlow). For parts D and E you need **Docker** and the model files: from the repository root run `make llama-models` (downloads about 2.8 GB: EmbeddingGemma 2 176 MB, MiniLM 21 MB and the small chat model Gemma 4 E2B 2.6 GB; checksums verified), then `make llama-up` (it detects your GPU and picks the matching image; `PROFILE=cpu` forces the CPU) and `make llama-check`. One **llama-swap** endpoint on port 8080 serves every model; the `model` field of the request picks it and the first request after a swap waits while the GGUF loads. Details and troubleshooting: `notebooks/01-spam/llama/README.md`.
 * Set `AAS_W2V=skip` to skip the 1.7 GB Google News download (part C then compares two sources instead of three).
@@ -51,7 +51,7 @@ Climb the second half of the spam ladder. You will train **Word2Vec** and **fast
 
 **Tips.** If part E cannot reach the server, run `make llama-check` and read `docker compose logs`; the notebook prints the hint. The first embedding of the 5,119 messages takes a few minutes and is cached in `notebooks/01-spam/.cache/`.
 
-# Questions for the report
+# Questions
 
 1. **(B1)** Look at the nearest neighbours of `free`, `prize`, `call` and `home`. What kind of words do you get, and why do they differ from a dictionary?
 2. **(B2)** The corpus has about 65,000 tokens. Which words get unreliable vectors, and why?
@@ -80,6 +80,6 @@ Climb the second half of the spam ladder. You will train **Word2Vec** and **fast
 * Repeat part F with **leave-one-family-out**: `spam_families` gives six scam families; train without one, test on it (notebook 07, section 6).
 * Concatenate the MiniLM and EmbeddingGemma vectors and train one probe. Does it beat either alone, and what does it cost per message?
 
-# Grading
+# Reference solution
 
-Working implementations that pass the checks (60%), the completed table (20%), the answers to the questions (20%). Reference solutions: `solution/`.
+The solved notebook is `solution/guide_02_02.ipynb`.

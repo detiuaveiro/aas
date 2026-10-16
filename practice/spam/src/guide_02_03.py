@@ -85,6 +85,13 @@ print("check OK. Most negative llr:", [(words[i], round(float(llr[i]), 2)) for i
 # negative is $\lceil z_0/\lvert\text{llr}_{\min}\rvert\rceil$ (counts model). Implement it and compute the fraction of the caught spam that flips with
 # $k=1,2,3,5,8,12$ words.
 
+# <<SOL
+# %% [markdown]
+# **Answers B1.** `lt` and `gt` are the remains of the HTML entities `&lt;` `&gt;` that the corpus kept around placeholders in personal messages: they never occur in spam, so Naive Bayes gives them the most negative log-likelihood ratio (-4.82 each). That is an artefact of data collection, and it makes the attacker's job cheap: each appended `lt` lowers the log-odds by 4.82, a word that costs nothing and that a human reader ignores.
+#
+# **Answers B2 (closed form).** With the best word the caught spam flips with $k$ words in these shares: 1: 0.02, 2: 0.09, 3: 0.14, 5: 0.28, 8: 0.57, 12: 0.95.
+# SOL>>
+
 # %%
 best = llr.min()
 z0 = z[z >= 0]
@@ -146,6 +153,13 @@ plt.show()
 # **Question B2.** At budget 0 some messages already evade. What are they, and how does that change the meaning of "attack success rate"?
 # **B3.** Compare the white-box closed form of B2 with the black-box curve of NB. Which knowledge is worth more, and how many queries did the black-box attacker pay?
 
+# <<SOL
+# %% [markdown]
+# **Answers B2.** At budget 0 the messages the filter already misses count as evasions (Naive Bayes catches 0.953 of the test spam, so about 5% "evade" with no edit). An attack success rate must be measured on the messages the filter catches, or reported next to that baseline; otherwise the attack gets credit for the filter's own errors.
+#
+# **Answers B3.** White box: knowing the llr table, 12 copies of the best word flip 95% of the caught spam with **no query**. Black box: the greedy search reaches 1.00 at 12 words but pays about 307 queries per message (TF-IDF + LR: 381 queries, 0.55; EmbeddingGemma: 399 queries, 0.20). Knowing the weights is worth some 300 queries per message; for a linear model the queries can also reconstruct the weights.
+# SOL>>
+
 # %% [markdown]
 # ## Part C. Dilution and transfer
 #
@@ -177,6 +191,11 @@ for key, v in V.items():
 # %% [markdown]
 # **Question C1.** Which victim resists dilution best? Explain with the way each model turns a message into a score. **C2.** Do the messages crafted against Naive Bayes
 # in B3 also evade the other victims? (Use `al.transfer_matrix`, given below.)
+
+# <<SOL
+# %% [markdown]
+# **Answers C1.** EmbeddingGemma resists dilution best: with 8 ham messages appended, evasion is 0.35 against 1.00 for Naive Bayes and 0.98 for TF-IDF + LR. Naive Bayes and the logistic regression add up word evidence, so enough ham words always outweigh the spam words; the embedding summarises the meaning of the whole text, and the scam keeps pulling the vector towards spam. **C2.** Transfer is weak: the messages crafted against Naive Bayes evade it (1.00) but only 0.15 of TF-IDF + LR and of EmbeddingGemma; those crafted against TF-IDF + LR transfer better to Naive Bayes (0.50), which shares its word view.
+# SOL>>
 
 # %%
 adv = {}
@@ -276,6 +295,13 @@ if example:
 # **D2.** Look at the example: what did the attacker change, and why would a victim not notice? **D3.** Which scam family (competition, prize claim, mobile upgrade, account
 # statement, ringtones, chat lines: `sl.spam_families`) would you expect to be the easiest to disguise, and why? Test it with the messages of your run.
 
+# <<SOL
+# %% [markdown]
+# **Answers D1.** Useful ASR (payload intact, similarity $\ge0.7$, at most 15 visible words): Naive Bayes 0.50, TF-IDF + LR 0.74. Against Naive Bayes usefulness costs half of the level-1 success (1.00 to 0.50): the junk words that worked best are not allowed in large numbers. Against TF-IDF + LR the useful ASR is *higher* than the level-1 run (0.74 vs 0.55) because the useful search also uses fluent camouflage (a whole ham sentence) that dilutes TF-IDF weights faster than single words. The visible-edit cap is the binding constraint (about 12-13 of the 15 allowed words are used).
+#
+# **D2.** The attacker prepends an ordinary chat sentence (`Ok I'm gonna head up to usf in like fifteen minutes`) and leaves the offer, number and keyword untouched: a word model sees many ham words and a normal length; a human or a gateway that reads only the first line sees a chat message. **D3.** Families with a short, fixed payload (competitions such as the Westlife example, ringtones) leave the most room for camouflage under the 15-word cap; long account or prize-claim texts are harder. Check it with the per-family results of your run.
+# SOL>>
+
 # %% [markdown]
 # ## Part E. Defend, and measure the answer
 #
@@ -307,6 +333,11 @@ for mode in ("none", "homoglyph", "zwsp"):
 # **Question E1.** What does normalisation cost, and which of the attacks of Parts B to D does it not touch? **E2.** *Adversarial training*: append the adversarial messages
 # you found for NB in B3 (label *spam*) to the training set and retrain (the code below does it); re-run the black-box attack of B3 against the new model. What does the attacker do next?
 
+# <<SOL
+# %% [markdown]
+# **Answers E1.** Normalisation (NFKC, removal of zero-width characters, confusable skeleton) costs nothing in F1 here: on clean messages the catch rate is unchanged (0.953, 0.907, 0.938), and it restores the catch rate under homoglyphs and zero-width spaces (TF-IDF + LR: 0.806 and 0.829 back to 0.907). It does not touch the attacks of parts B to D, which add real words or sentences.
+# SOL>>
+
 # %%
 from sklearn.feature_extraction.text import CountVectorizer  # noqa: E402
 from sklearn.naive_bayes import MultinomialNB  # noqa: E402
@@ -335,3 +366,8 @@ for v in (v0, v1):
 # %% [markdown]
 # **Question E2.** Report the clean F1 and the evasion before and after. Why does the attack not go to zero, and what would you try next as the attacker? **E3.** Name one defence that
 # takes away the attacker's *feedback* instead of hardening the model, and the attacker's answer to it.
+
+# <<SOL
+# %% [markdown]
+# **Answers E2.** Adversarial training: clean F1 0.957 to 0.942; evasion of the black-box attack at 12 words 1.00 to 0.60, at a higher price (307 to 363 queries per message). It does not go to zero because the attacker searches again against the retrained model and finds other hammy words; next it would retrain its search on the new model (adaptive attack) or switch to fluent camouflage. **E3.** A label-only API (no score), rate limits or delayed feedback take away the attacker's signal; the answer is a surrogate model trained on the labels it can still observe [Tramer et al. 2016], or more queries spread over many accounts.
+# SOL>>

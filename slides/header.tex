@@ -6,7 +6,10 @@
 \usepackage{amssymb}
 \usepackage{fancyvrb}
 \captionsetup[figure]{labelformat=empty}
-\AtBeginEnvironment{longtable}{\scriptsize}
+% tables after the Pueschel guide (booktabs, no vertical lines, 3 rules, air between rows): 1.5 x row height, bold top and bottom rule
+\AtBeginEnvironment{longtable}{\scriptsize\renewcommand{\arraystretch}{1.5}}
+\setlength{\heavyrulewidth}{0.9pt}
+\setlength{\lightrulewidth}{0.45pt}
 \AtBeginEnvironment{verbatim}{\scriptsize}
 \AtBeginEnvironment{Highlighting}{\scriptsize}
 \AtBeginEnvironment{cslreferences}{\tiny}

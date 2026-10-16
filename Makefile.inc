@@ -31,7 +31,8 @@ all: $(TARGETS)
 pdf: $(TARGETS)
 
 # 1:1 Compilation Rule (Standard & Slides)
-%.pdf: %.md
+# rebuild when the shared header, the config or a plot PDF changes, not only the .md
+%.pdf: %.md $(wildcard header.tex defaults.yml config.yml) $(wildcard ../assets/figures/plots/*/*.pdf)
 	@mkdir -p $(BUILD_PATH)/$*
 	@pandoc $(PANDOC_FLAGS) $(PANDOC_DOC_FLAGS) \
 		--pdf-engine=latexmk \

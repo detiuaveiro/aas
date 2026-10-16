@@ -22,7 +22,7 @@ Build, **by yourself**, the first rungs of the spam ladder presented in the lect
 
 * **Notebook to complete:** `guide_02_01.ipynb` (this folder). Cells marked `TODO` are yours; `check` cells tell you whether you are right.
 * **Data:** `datasets/spam.csv` (SMS Spam Collection: 5,574 messages, about 13% spam).
-* **Time:** about 2 hours (suggested: A to C 15 min, D 25, E 10, F 15, G 5, H 30, I 10). **Deliverable:** the completed notebook and the answers to the questions below (a short report, PDF or Markdown).
+* **Time:** about 2 hours (suggested: A to C 15 min, D 25, E 10, F 15, G 5, H 30, I 10).
 * **Environment:** `make venv` at the root of the repository (see `pyproject.toml`); JAX is installed with it.
 
 # Background in one page
@@ -57,13 +57,13 @@ $$
 | **D** | Implement `NaiveBayes` (fit, joint log-probability, log-sum-exp) | matches scikit-learn |
 | **E** | Confusion counts, precision, recall, F1; choose an operating point | `metrics OK` |
 | **F** | Implement TF-IDF | matches scikit-learn |
-| **G** | Compare counts and TF-IDF, $k=0.1$ and $k=1$ (the split repetition is optional) | table for the report |
+| **G** | Compare counts and TF-IDF, $k=0.1$ and $k=1$ (the split repetition is optional) | comparison table |
 | **H** | **Logistic regression in JAX:** stable loss, one gradient-descent step, loss curves for three learning rates | `loss and gradient OK`, Question H1 |
 | **I** | Read the learned words of Naive Bayes and of the logistic regression | Questions I1, I2 |
 
 **Tips.** Do not use loops over the messages when a matrix product will do. Run the `check` cell after each part. If a check fails, print the shapes and a few values before changing code.
 
-# Questions for the report
+# Questions
 
 1. **(A1)** Why do we split the data *before* building the vocabulary, and why `stratify=y`? What could go wrong with the duplicated messages?
 2. **(B)** Which token classes did we keep on purpose (`£`, `!`, `num`)? Give one example of a spam message that would be harder to detect without them.
@@ -92,6 +92,6 @@ $$
 * Add a **length** feature (number of tokens) and a **digit-count** feature. Do they help?
 * Implement a **$\chi^2$** feature selection and plot the F1 against the vocabulary size.
 
-# Grading
+# Reference solution
 
-Correct implementations that pass all checks (60%), the completed comparison table (20%), the answers to the questions (20%). A reference solution will be published after the class (`solution/`).
+The solved notebook is `solution/guide_02_01.ipynb`.

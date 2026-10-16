@@ -114,6 +114,11 @@ print(f"Word2Vec skip-gram (in-domain) + LR: F1 {f1_w2v:.3f}   (TF-IDF reference
 # **Question B1.** Look at the neighbours of `free`, `prize`, `call` and `home`. What kind of words do you get, and why do they differ
 # from what a dictionary would say? **B2.** The corpus has only about 65,000 tokens. Which words get unreliable vectors, and why?
 
+# <<SOL
+# %% [markdown]
+# **Answers B.** The neighbours are words that appear in the *same SMS contexts*, not synonyms: `free` sits with `unlimited`, `camcorder`, `jamster`, `bluetooth` (the products of the same campaigns), `prize` with `caller`, `guaranteed`, `pound`, `bonus`, `call` with `quoting`, `delivery`, `landline`, `home` with `lonely`, `chillin`, `knackered` (personal chat). Word2Vec learns distributional similarity, so on a spam corpus it learns campaign vocabulary. With about 65,000 training tokens most words occur a handful of times: rare words (names, typos, one-off products) get vectors from very few contexts, so their neighbours (`senthil`, `engin`) are noise.
+# SOL>>
+
 # %% [markdown]
 # ## Part C. In-domain or pre-trained?
 #
@@ -146,6 +151,13 @@ for name, (kv, oov_ok) in sources.items():
     a_tr, _ = sl.mean_vectors(kv, X_train, oov_ok)
     a_te, _ = sl.mean_vectors(kv, X_test, oov_ok)
     print(f"{name:24}{oov_rate(kv, tok_test, oov_ok):12.1%}{f1_of(a_tr, a_te):8.3f}")
+# <<SOL
+if gn is not None:  # C1: the ten most frequent training-spam tokens that Google News has no vector for
+    from collections import Counter
+
+    oov = Counter(w for t, lab in zip(X_train, y_train) if lab == 1 for w in sl.tokenize(t) if sl.word_vector(gn, w) is None)
+    print("most frequent spam tokens without a Google News vector:", oov.most_common(10))
+# SOL>>
 
 # %% [markdown]
 # **Question C1.** Print ten frequent spam tokens that Google News has no vector for. What do they have in common, and why does that
@@ -153,6 +165,13 @@ for name, (kv, oov_ok) in sources.items():
 #
 # Now the spammer's trick: **leet-speak**. Train an in-domain **fastText** (sub-words) model and compare it with TF-IDF on spam in which
 # the 25 most spammy words are disguised (`fr33`).
+
+# <<SOL
+# %% [markdown]
+# **Answers C1.** The list printed above (this split): `num`, `!`, `msg`, `pobox`, `optout`, `sae`, `mobileupd`, `wq`, `gbp`, `freemsg`. They are our own placeholder (`num` for phone numbers), punctuation, SMS abbreviations and glued words that a news corpus never writes. They are exactly the strongest spam signals, so a pre-trained vocabulary loses the evidence a filter needs.
+#
+# **Answers C2.** The in-domain Word2Vec wins (F1 0.935 against 0.882 for pre-trained fastText and 0.888 for Google News), although its OOV rate is higher (9.1%: rare test words below `min_count`): it has vectors for the tokens that matter. On product reviews, written in standard English, the pre-trained vectors would cover the vocabulary, carry knowledge learned from billions of words, and would probably win, especially with a small corpus.
+# SOL>>
 
 # %%
 # <<TODO
@@ -173,10 +192,19 @@ leet = [sl.obfuscate(t, trigger, "leet") for t in spam_test]
 rec_tfidf = float(tfidf.predict(leet).mean())
 rec_ft = float(clf_ft.predict(sl.mean_vectors(ft, leet, oov_ok=True)[0]).mean())
 print(f"recall on leet-speak spam: TF-IDF {rec_tfidf:.3f}   fastText in-domain {rec_ft:.3f}")
+# <<SOL
+print(f"recall on clean spam:      TF-IDF {float(tfidf.predict(spam_test).mean()):.3f}   fastText in-domain "
+      f"{float(clf_ft.predict(sl.mean_vectors(ft, spam_test, oov_ok=True)[0]).mean()):.3f}")
+# SOL>>
 
 # %% [markdown]
 # **Question C3.** Report both recalls (and the recall on the *clean* spam, for reference). Explain the difference. Which
 # disguises would hurt fastText more (think of `f.r.e.e`)?
+
+# <<SOL
+# %% [markdown]
+# **Answers C3.** On the leet-speak spam TF-IDF keeps a recall of 0.845 and the in-domain fastText 0.814 (clean spam: 0.907 for both, so the disguise costs TF-IDF 0.06 and fastText 0.09). Sub-words did not save fastText here: the disguised tokens share few character n-grams with the originals (`fr33` and `free` share only the n-grams built on `fr`), so their vectors land far from the spam words, and the mean over the message dilutes the remaining evidence; TF-IDF simply ignores the unknown tokens and still sees the rest of the message. Disguises that break every n-gram (`f.r.e.e`, spaces or dots between letters) hurt fastText most; a normalisation step (class 04) is the cheaper defence.
+# SOL>>
 
 # %% [markdown]
 # ## Part D. A small sentence embedder (MiniLM)
@@ -197,6 +225,11 @@ print(f"MiniLM + LR: F1 {f1_minilm:.3f}")
 
 # %% [markdown]
 # **Question D1.** Why do we standardise the embeddings, and why must the scaler be fitted on the training set only?
+
+# <<SOL
+# %% [markdown]
+# **Answers D1.** The logistic regression is regularised and trained by an optimiser: features on very different scales get unequal penalties and make the optimisation ill-conditioned, so we bring each dimension to mean 0, variance 1. The scaler is part of the model: fitted on all messages it would use the test set's mean and variance (leakage), so it is fitted on the training split only and applied to the test split.
+# SOL>>
 
 # %% [markdown]
 # ## Part E. EmbeddingGemma 2 served by llama.cpp
@@ -228,6 +261,11 @@ assert e.shape == (3, 768) and e[0] @ e[1] > e[0] @ e[2]
 # would TF-IDF give for that pair?
 #
 # Now all the messages (the client `ll.embed` batches the requests and caches the vectors on disk; the first run takes a few minutes).
+
+# <<SOL
+# %% [markdown]
+# **Answers E1.** Cosine 0.903 for the prize message and its rewrite against 0.626 for the prize message and a chat message: the encoder maps meaning, not words, so a paraphrase lands close to the original although the two share almost no token. TF-IDF compares token overlap: with only the number in common (and `num` being frequent, low idf) the cosine would be close to 0.
+# SOL>>
 
 # %%
 t0 = time.time()
@@ -265,6 +303,10 @@ for d in (768, 512, 256, 128, 64):
 # **The task prefix.** EmbeddingGemma asks for `title: none | text: ` in front of every document (`ll.DOC`). Does it matter for a classifier? A single F1 is noisy
 # (1,024 test messages, about 130 spam): attach a **bootstrap interval**.
 
+# <<SOL
+# %% [markdown]
+# **Answers E2.** $d=512$ keeps F1 0.960 (the full 768 also gives 0.960); 256 drops to 0.940 and 128 to 0.948, more than 0.01 below. In float32, 512 dimensions save 1,024 bytes per message: about 1 GB per million stored messages, and a third of the work of every similarity computation.
+# SOL>>
 
 # %%
 def bootstrap_f1(y_true, y_pred, n=500, seed=42):
@@ -292,6 +334,11 @@ for label, prefix in (("title: none | text: ", ll.DOC), ("(none)", "")):
 # question have another answer for *retrieval*?
 #
 # **Cost.** Time the two servers (batches of 16) and compare with TF-IDF.
+
+# <<SOL
+# %% [markdown]
+# **Answers E3.** Yes, almost completely: with the prefix F1 0.960 [0.932, 0.983], without it 0.960 [0.931, 0.982]. For classification with a trained head the prefix makes no measurable difference on this data. For retrieval it matters: queries and documents are embedded with different prefixes so that a short question and a long answer land close together; without them the asymmetric task loses accuracy.
+# SOL>>
 
 # %%
 sample = X_test[:128]
@@ -340,3 +387,12 @@ _ = tfidf.fit(X_train, y_train)  # restore the full model
 # | Word2Vec in-domain + LR | | | |
 # | MiniLM + LR | | | |
 # | EmbeddingGemma 2 (llama.cpp) + LR | | | |
+
+# <<SOL
+# %% [markdown]
+# **Answers F.** All labels: TF-IDF + LR 0.944, Word2Vec in-domain 0.935, MiniLM 0.957, EmbeddingGemma 2 0.960. With 50 labels: 0.490, 0.783, 0.577, 0.764. Cost per message: TF-IDF about 0.04 ms, MiniLM 6.6 ms, EmbeddingGemma 20.8 ms on this machine (Word2Vec: a mean of word vectors, well under 1 ms).
+#
+# **F2.** The embeddings win below a few hundred labels (at 50 labels 0.76-0.78 for EmbeddingGemma and in-domain Word2Vec against 0.49 for TF-IDF): they come with a geometry where messages with the same meaning are already close, so a linear head needs few examples to find the boundary; TF-IDF must learn every word from the labels.
+#
+# **F3.** At 10,000 messages per second EmbeddingGemma needs about 208 s of server time per second (some 200 parallel servers at 20.8 ms), TF-IDF about 0.4 s of one CPU core. A reasonable gateway runs TF-IDF + LR on every message and sends only the uncertain ones (near the threshold) to the embedding model; the embeddings also help when few new labels arrive. Neither model resisted leet-speak (part C): normalise the text before either.
+# SOL>>

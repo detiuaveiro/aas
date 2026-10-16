@@ -60,7 +60,7 @@ You play the **attacker** against the filters of the previous guides, at two lev
 
 **Tips.** Every attack is an optimisation problem: gradients when the model is differentiable and known, derivative-free search when it is not. Count queries. Print the adversarial messages: what a model accepts and what a person accepts are different questions.
 
-# Questions for the report
+# Questions
 
 1. **(B1)** What are `lt` and `gt`, why are they so "hammy", and what does that say about the data and about the attacker's cost?
 2. **(B2)** At budget 0 some messages already evade. What are they, and how does this change the meaning of "attack success rate"?
@@ -88,6 +88,6 @@ You play the **attacker** against the filters of the previous guides, at two lev
 * **Judge:** use EmbeddingGemma instead of MiniLM as the judge of meaning (`al.make_judge("embgemma")`). Does the useful ASR change?
 * **Paraphrase:** use the paraphrases of `datasets/spam_paraphrases.json` (made once by the local Gemma 4 E2B model with the payload protected by placeholders) as one more operator (`al.op_paraphrase`).
 
-# Grading
+# Reference solution
 
-Working implementations that pass the checks (50%), the plots and tables (25%), the answers to the questions (25%). Reference solution: `solution/guide_02_03.ipynb`.
+The solved notebook is `solution/guide_02_03.ipynb`.
