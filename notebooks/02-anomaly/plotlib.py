@@ -26,7 +26,8 @@ FULL, COL = 4.3, 2.15  # slide text width and a column of a two-column frame, in
 def setup() -> None:
     """Common matplotlib style: Noto Sans, small text, no top/right spines, transparent PDF."""
     mpl.rcParams.update({
-        "font.family": ["Noto Sans", "DejaVu Sans"], "font.size": 8, "axes.labelsize": 8, "axes.titlesize": 8.5,
+        "font.family": "sans-serif",
+        "font.sans-serif": ["Noto Sans", "DejaVu Sans"], "font.size": 8, "axes.labelsize": 8, "axes.titlesize": 8.5,
         "xtick.labelsize": 7.5, "ytick.labelsize": 7.5, "legend.fontsize": 7.5, "axes.linewidth": 0.6,
         "axes.spines.top": False, "axes.spines.right": False, "xtick.major.width": 0.6, "ytick.major.width": 0.6,
         "xtick.major.size": 2.5, "ytick.major.size": 2.5, "lines.linewidth": 1.3, "legend.frameon": False,

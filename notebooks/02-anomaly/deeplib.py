@@ -32,7 +32,7 @@ def dense_ae(n_in: int, latent: int = 8, hidden: int = 32, l1: float = 0.0) -> k
 class AE(Detector):
     """Reconstruction-error detector. `noise > 0`: denoising AE (Gaussian noise on the input during training only)."""
 
-    def __init__(self, latent=8, hidden=32, l1=0.0, noise=0.0, epochs=20, seed=0, name=None):
+    def __init__(self, latent=8, hidden=32, l1=0.0, noise=0.0, epochs=128, seed=0, name=None):
         self.latent, self.hidden, self.l1, self.noise, self.epochs, self.seed = latent, hidden, l1, noise, epochs, seed
         self.name = name or ("sparse AE" if l1 else "denoising AE" if noise else "autoencoder")
 

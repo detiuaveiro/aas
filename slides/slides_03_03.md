@@ -75,17 +75,18 @@ header-includes:
 ::: {.column width="48%"}
 * B $=(1,-1)$ must pass the Mahalanobis detector at 1% FPR ($d_M^2\le9.21$) keeping $x_2=-1$.
 * That needs $x_1\le0.35$ (derivation: appendix).
-* B passes only by sending **less per session**: the detector makes the attack **slower**, and a slow attack has to last longer.
+* B passes only by sending **less per session**: a **slower** attack lasts longer.
 :::
 ::::
 
 ## Mimicry on KDD99: borrow normal volume and timing
 
-* For each caught attack: take the normal row nearest in the **fixed** features, copy its **mutable** ones [@wagner:2002]. No query needed.
+* For each caught attack, take the nearest normal row in the **fixed** features; copy its **mutable** ones [@wagner:2002].
 
 ![](plots/03/mimicry.pdf)
 
-* Evasion is rare: the detectors catch attacks by what they **do**, not by size or duration; r2l and u2r rows, near the threshold, evade first.
+* No query is needed. Evasion is rare: detectors catch attacks by what they **do**, not by size.
+* The r2l and u2r rows, near the threshold, evade first.
 
 ## DEMO
 
@@ -114,7 +115,8 @@ header-includes:
 
 ## The boiling frog
 
-* A detector retrained on recent traffic follows legitimate change, and also an attacker's: each round the attacker adds points just **below** the threshold, toward the target [@rubinstein:2009; @kravchik:2020].
+* A detector retrained on recent traffic follows legitimate change, and also an attacker's.
+* Each round the attacker adds points just **below** the threshold, toward the target [@rubinstein:2009; @kravchik:2020].
 
 ```{=latex}
 \begin{adjustbox}{max width=\linewidth,max totalheight=0.28\textheight,center}
@@ -136,7 +138,8 @@ header-includes:
 ![](plots/03/boiling_frog.pdf)
 
 * Both estimators accept the target after 8 or 9 rounds (200 to 225 poison points, 40-45% of the window).
-* MCD discards *scattered* outliers; the poison is a tight cluster that MCD keeps: robust estimators do not stop an adversary who adapts.
+* MCD discards *scattered* outliers; the poison is a tight cluster that MCD keeps.
+* Robust estimators do not stop an adaptive adversary.
 
 ## DEMO
 
@@ -147,9 +150,13 @@ header-includes:
 
 ## Slow drift beats a per-point threshold
 
-* Example 2: the pressure sensor drifts slowly. **CUSUM** [@page:1954] adds up small deviations of the residual $r_t$ (median of 5 runs, no false alarms):
+* Example 2: the pressure sensor drifts slowly.
+* **CUSUM** [@page:1954] adds up small deviations of the residual $r_t$; alarm if $S_t>h$ (median of 5 runs, no false alarms):
+<!-- derivation: slow-drift-beats-a-per-point-threshold -->
 $$
-S_t=\max\big(0,\ S_{t-1}+(r_t-\mu)/\sigma-k\big),\qquad\text{alarm if } S_t>h
+\begin{aligned}
+S_t=\max\big(0,\ S_{t-1}+(r_t-\mu)/\sigma-k\big) && \text{(definition)}
+\end{aligned}
 $$
 
 ![](plots/03/slow_drift.pdf)
@@ -174,7 +181,8 @@ $$
 
 ## Vetted retraining against the boiling frog
 
-* Keep a **frozen reference** model fitted once on trusted data; retrain only on new points it also accepts (0.1% false alarms).
+* Keep a **frozen reference** fitted once on trusted data.
+* Retrain only on points it accepts (0.1% false alarms).
 
 ![](plots/03/vetting.pdf)
 

@@ -26,14 +26,16 @@ header-includes:
 ## Class 03_01 in one frame
 
 * Model **normal**, score the departure $s(\mathbf{x})$, set $t$ at 1% false alarms on normal validation data.
-* KDD99, 1.8% attacks: ten classic detectors reach AUPRC 0.33 to 0.68; the GMM is best, PCA has the best F1.
+* KDD99, 1.8% attacks: ten classic detectors reach AUPRC 0.33 to 0.68.
+* The GMM is best; PCA has the best F1.
 * r2l looks like normal traffic: every detector struggles; a classifier misses attack kinds it never saw.
 * Today: can **learned representations** do better, and what about anomalies in **time** and across **sensors**?
 
 ## Why neural detectors?
 
 * Hand-made features work for tables like KDD99; they are poor for raw **sequences**, **images**, **many sensors**.
-* A neural network learns the features from normal data; the price: tuning, training time, less transparency. Deep and shallow detectors share a few principles [@ruff:2021]:
+* A neural network learns the features from normal data; the price: tuning, training time, less transparency.
+* Deep and shallow detectors share a few principles [@ruff:2021]:
 
 ```{=latex}
 \begin{adjustbox}{max width=\linewidth,max totalheight=0.46\textheight,center}
@@ -125,11 +127,19 @@ header-includes:
 ## Variational AE: definition of the loss
 
 * Loss = reconstruction + $\beta$ times the distance of the code distribution from $\mathcal{N}(0,I)$:
+<!-- derivation: variational-ae-definition-of-the-loss -->
 $$
+\begin{aligned}
 \mathcal{L}=\lVert\mathbf{x}-\hat{\mathbf{x}}\rVert^2+\beta\,\mathrm{KL}
+&& \text{(definition)}
+\end{aligned}
 $$
+<!-- derivation: variational-ae-definition-of-the-loss-2 -->
 $$
+\begin{aligned}
 \mathrm{KL}=-\frac{1}{2}\sum_j\big(1+\log\sigma_j^2-\mu_j^2-\sigma_j^2\big)
+&& \text{(definition)}
+\end{aligned}
 $$
 * The sum runs over the code units $j$. Why the sampling is differentiable: appendix.
 
@@ -158,8 +168,12 @@ $$
 
 ## Deep SVDD: definition and collapse
 
+<!-- derivation: deep-svdd-definition-and-collapse -->
 $$
+\begin{aligned}
 \min_\phi\ \frac1n\sum_i\lVert\phi(\mathbf{x}_i)-\mathbf{c}\rVert^2,\qquad s(\mathbf{x})=\lVert\phi(\mathbf{x})-\mathbf{c}\rVert^2
+&& \text{(definition)}
+\end{aligned}
 $$
 
 * $\mathbf{c}$ is the mean of the initial outputs, then fixed.
@@ -179,8 +193,10 @@ $$
 
 ![](plots/03/deep_band.pdf)
 
-* Mean of 3 seeds, default sizes (code 8), 20 epochs, 2-3 s each on a CPU. The mixture still leads; the AE equals its linear twin.
-* PCA keeps the best F1 (0.637) and r2l recall (0.45). Depth is no free lunch on hand-made features [@han:2022].
+* Mean of 3 seeds, default sizes (code 8), 20 epochs, 2-3 s each on a CPU.
+* The mixture still leads; the AE equals its linear twin.
+* PCA keeps the best F1 (0.637) and r2l recall (0.45).
+* Depth is no free lunch on hand-made features [@han:2022].
 
 ## How big should the code be?
 
@@ -192,7 +208,8 @@ $$
 ## Tuning without anomalies is guessing
 
 * A one-class detector has no labelled anomalies to tune code size, epochs, $\nu$, $k$ on.
-* A gain from tuning on the test attacks is **not** a gain: report the default, or tune on a separate labelled set.
+* A gain from tuning on the test attacks is **not** a gain.
+* Report the default, or tune on a separate labelled set.
 * Options: a few labelled anomalies (semi-supervised), a simulated attack set, or robust defaults over seeds.
 
 ## Explaining an alarm: error per feature
@@ -210,16 +227,17 @@ $$
 
 ![](plots/03/nab_series.pdf)
 
-* A **contextual** anomaly (80 requests/s: normal at noon, not at 3 a.m.) needs a **window**. Four NAB series [@lavin:2015], 14 days, red = the labelled anomaly.
+* A **contextual** anomaly (80 requests/s: normal at noon, not at 3 a.m.) needs a **window**.
 * Only jumpsup leaves the normal range; jumpsdown, nojump (no daily rise) and flatmiddle stay inside it.
-* Protocol: train on days 1-8, threshold = max score of day 9 + 10%.
+* Four NAB series [@lavin:2015], 14 days, red = anomaly: train on days 1-8, threshold = max score of day 9 + 10%.
 
 ## Three one-liners, one autoencoder
 
 ![](plots/03/nab_scores.pdf)
 
-* One-liners: $|x_t|$; **seasonal difference** $|x_t-x_{t-288}|$; moving std (1 h). **Conv AE** over one-day windows (288 steps).
-* AE score of step $t$: the squared error **at $t$**, averaged over the windows holding it. Plot: the seasonal difference (top) echoes a day later, the conv AE does not.
+* One-liners: $|x_t|$; **seasonal difference** $|x_t-x_{t-288}|$; moving std. **Conv AE**: windows of 288 steps.
+* AE score of step $t$: the squared error **at $t$**, averaged over the windows holding it.
+* Plot: the seasonal difference (top) echoes a day later, the conv AE does not.
 
 ## DEMO
 
@@ -249,8 +267,9 @@ $$
 
 ![](plots/03/plant_events.pdf)
 
-* 8 sensors, two hidden processes: **demand** (daily cycle) and **heat** (slow wander); correlated with each other (**space**) and with their own past (**time**).
-* Three events in the second half (red): **spike** on level (+1.2, 30 min), **freeze** of the valve (stale value, 6 h: every value normal), **drift** of pressure (slow ramp, 10 h).
+* 8 sensors, two hidden processes: **demand** (daily cycle), **heat** (slow wander); correlated in **space** and **time**.
+* Events in the second half (red): **spike** on level (+1.2, 30 min); **drift** of pressure (slow ramp, 10 h).
+* **Freeze** of the valve: a stale value for 6 h, every value normal.
 
 ## Graphs of sensors: predict each one from the others
 
@@ -271,8 +290,12 @@ $$
 \end{adjustbox}
 ```
 
+<!-- derivation: graphs-of-sensors-predict-each-one-from- -->
 $$
+\begin{aligned}
 s_t=\max_i\ \big|x_{t,i}-\hat{x}_{t,i}(\mathbf{x}_{t,-i})\big|
+&& \text{(definition)}
+\end{aligned}
 $$
 
 * A frozen valve reports a normal value, but not the one its neighbours predict.
@@ -306,13 +329,18 @@ $$
 
 ## A map of the newer tools
 
-| Tool | Idea | Note |
-|:--------------------|:------------------------------------|:----------------------------------|
-| Kitsune [@mirsky:2018] | online ensemble of small AEs on packet statistics | trains on live traffic: assumes it is clean |
-| GDN [@deng:2021] | graph of sensor dependencies | names the sensor |
-| TranAD [@tuli:2022] | transformer reconstruction | reported gains on benchmarks with known flaws |
-| foundation models | pre-trained forecasters, zero-shot | ~ one-liners |
+```{=latex}
+\begin{adjustbox}{max width=\linewidth,max totalheight=0.5\textheight,center}
+\begin{tikzpicture}[node distance=4mm]
+  \node[dfn, text width=4.5cm] (k) {\textbf{Kitsune}\\online ensemble of small AEs on packet statistics\\\emph{assumes live traffic is clean}};
+  \node[dfn, text width=4.5cm, right=4mm of k] (g) {\textbf{GDN}\\graph of sensor dependencies\\\emph{names the sensor}};
+  \node[neu, text width=4.5cm, below=4mm of k] (t) {\textbf{TranAD}\\transformer reconstruction\\\emph{gains on benchmarks with known flaws}};
+  \node[neu, text width=4.5cm, right=4mm of t] (f) {\textbf{Foundation models}\\pre-trained forecasters, zero-shot\\\emph{about as good as one-liners}};
+\end{tikzpicture}
+\end{adjustbox}
+```
 
+* Sources: Kitsune [@mirsky:2018], GDN [@deng:2021], TranAD [@tuli:2022].
 * Each brings a real idea; none removes the base rate, the threshold, or the need for baselines.
 
 ## What to take from the literature
@@ -333,7 +361,7 @@ $$
 | **06** | Example 2: per-sensor vs space vs space + time; point-adjust; attribution |
 
 * All neural models: Keras 3 on the JAX backend, CPU is enough (each notebook under 2 minutes).
-* **Guide** `practice/anomaly/guide_03_02`: an AE by hand in Keras, its PCA twin, a windowed conv AE on NAB, one-liner baselines.
+* **Guide** `practice/anomaly/guide_03_02`: an AE by hand in Keras, its PCA twin, a conv AE on NAB, baselines.
 
 ## Take-aways
 

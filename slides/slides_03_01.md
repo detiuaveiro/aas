@@ -67,13 +67,13 @@ Schematic: unusual alone, in its context, or as a group. Today: point anomalies 
 
 ## Three settings, by what the training data holds
 
-Schematic: the same events, different labels [@sommer:2010].
+Schematic: the same events, other labels [@sommer:2010]. Which labels do we have?
 
 ![](plots/03/settings.pdf)
 
-* **Supervised:** normal + labelled attacks.
-* **Semi-supervised (novelty):** normal only.
-* **Unsupervised:** unlabelled, attacks inside.
+* **Supervised:** labels for normal and attacks.
+* **Semi-supervised (novelty):** only normal data.
+* **Unsupervised:** no labels; attacks inside.
 
 ## Families of detectors: the map of this class
 
@@ -95,11 +95,22 @@ Schematic: the same events, different labels [@sommer:2010].
 | Symbol | Meaning | Shape | Example 1 |
 |:----------------|:---------------------------------|:--------:|:----------------------------|
 | $\mathbf{x}$ | one event as a feature vector | $d$ | $(2,2)$ |
-| $X$ | the normal training rows | $n\times d$ | 500 sessions |
+| $X$ | data matrix (example $i$, feature $j$): the normal training rows | $n\times d$ | 500 sessions |
 | $\boldsymbol\mu$ | mean of the normal rows | $d$ | $(0,0)$ |
 | $\sigma_j$ | standard deviation of feature $j$ | scalar | $1$ |
 | $C$ | covariance matrix: how features vary together | $d\times d$ | $\begin{pmatrix}1&0.9\\0.9&1\end{pmatrix}$ |
-| $s(\mathbf{x}),\,t,\,\alpha$ | score, threshold, accepted false-alarm rate | scalar | $t=9.21$ at $\alpha=0.01$ |
+| $s(\mathbf{x}),\,t$ | score, threshold | scalar | $t=9.21$ |
+| $\alpha$ | significance level | scalar | $0.01$: 1% false alarms |
+
+## Notation: distances and alarms
+
+| Symbol | Meaning | Shape | Example 1 |
+|:----------------|:---------------------------------|:--------:|:----------------------------|
+| $d_M$ | distance from the mean, scaled by $C^{-1}$ | scalar | $d_M(A)=2.05$ |
+| $C^{-1}$ | inverse covariance matrix | $d\times d$ | $\frac{1}{0.19}\begin{pmatrix}1&-0.9\\-0.9&1\end{pmatrix}$ |
+| $\text{TPR}$ | share of attacks that raise an alarm | scalar | $0.95$ |
+| $\text{FPR}$ | share of normal events that raise an alarm | scalar | $0.01$ |
+| $P(\text{attack}\mid\text{alarm})$ | share of alarms that are attacks | scalar | $0.94\%$ at $b=10^{-4}$ |
 
 ## Model normal with a distribution
 
@@ -159,8 +170,12 @@ Schematic: the same events, different labels [@sommer:2010].
 
 ## The Mahalanobis distance: definition
 
+<!-- derivation: the-mahalanobis-distance-definition -->
 $$
+\begin{aligned}
 d_M(\mathbf{x})^2=(\mathbf{x}-\boldsymbol\mu)^\top C^{-1}(\mathbf{x}-\boldsymbol\mu)
+&& \text{(definition)}
+\end{aligned}
 $$
 
 * Example 1: $\det C=1-0.81=0.19$ and $C^{-1}=\frac{1}{0.19}\begin{pmatrix}1&-0.9\\-0.9&1\end{pmatrix}$.
@@ -196,8 +211,12 @@ $$
 
 ## The base rate decides what an alarm is worth
 
+<!-- derivation: the-base-rate-decides-what-an-alarm-is-w -->
 $$
+\begin{aligned}
 P(\text{attack}\mid\text{alarm})=\frac{\text{TPR}\cdot b}{\text{TPR}\cdot b+\text{FPR}\cdot(1-b)}
+&& \text{(Bayes' rule)}
+\end{aligned}
 $$
 
 ![](plots/03/baserate.pdf)
@@ -212,9 +231,22 @@ $$
 
 ![](plots/03/mcd.pdf)
 
-* **Ledoit-Wolf** [@ledoit:2004] is not robust: 5% copies cut $d_M^2(B)$ from 19.4 to 5.6; **MCD** [@rousseeuw:1999] keeps 23.3.
+* **Ledoit-Wolf** [@ledoit:2004] is not robust: 5% copies cut $d_M^2(B)$ from 19.4 to 5.6; **MCD** [@rousseeuw:1999]: 23.3.
 
 # Other families: distance, isolation, boundary, reconstruction, clusters
+
+## Notation: neighbours, trees and subspaces
+
+<!-- defines: LOF -->
+
+| Symbol | Meaning | Shape | Used in |
+|:----------------|:---------------------------------|:--------:|:----------------|
+| $k,\ N_k(\mathbf{x})$ | number of neighbours, the $k$ nearest neighbours of $\mathbf{x}$ | integer, set | kNN, density |
+| $\mathbf{o}$ | one neighbour of $\mathbf{x}$ | $d$ | density |
+| $\text{LOF}_k(\mathbf{x})$ | neighbours' density over its own | scalar | density |
+| $h$ | path length in an isolation tree | scalar | forest |
+| $c(n)$ | mean path length in a random tree of $n$ points | scalar | forest |
+| $V_k$ | the top $k$ principal directions | $d\times k$ | PCA |
 
 ## Distance: the kNN score
 
@@ -231,18 +263,21 @@ $$
 
 ## Density: the idea of LOF
 
-<!-- defines: LOF -->
-
-* The **Local Outlier Factor** (LOF) [@breunig:2000] compares the density around $\mathbf{x}$ with the density around its neighbours.
+* **Local Outlier Factor** (LOF) [@breunig:2000]: density around $\mathbf{x}$ against density around its neighbours.
 
 ![](plots/03/lof.pdf)
 
-* P and Q have the same kNN distance (0.82); P is far from its dense neighbours: LOF 3.8. Q: 1.05 ($\approx1$ is normal).
+* P and Q have the same kNN distance (0.82).
+* P is far from its dense neighbours: LOF 3.8. Q: 1.05 ($\approx1$ is normal).
 
 ## LOF: definition
 
+<!-- derivation: lof-definition -->
 $$
+\begin{aligned}
 \text{LOF}_k(\mathbf{x})=\frac{1}{k}\sum_{\mathbf{o}\in N_k(\mathbf{x})}\frac{\text{lrd}(\mathbf{o})}{\text{lrd}(\mathbf{x})}
+&& \text{(definition)}
+\end{aligned}
 $$
 
 * $N_k(\mathbf{x})$: the $k$ nearest neighbours. lrd: local reachability density, the inverse of the mean distance to them (appendix).
@@ -256,7 +291,7 @@ $$
 :::
 ::: {.column width="48%"}
 * A flood is many near-identical events: a **dense** cluster (red, 60 points).
-* LOF of the flood: 5.66 at test time, **1.07** once it is in the training data: its points are each other's neighbours.
+* LOF of the flood: 5.66 at test time, **1.07** in training: its points are each other's neighbours.
 * On KDD99, LOF misses 92% of the DoS rows.
 :::
 ::::
@@ -274,11 +309,16 @@ Notebook 00, part D rebuilds these numbers.
 
 ## Isolation Forest: definition and score
 
+<!-- derivation: isolation-forest-definition-and-score -->
 $$
-s(\mathbf{x})=2^{-E[h(\mathbf{x})]/c(n)},\qquad c(n)=2H(n-1)-\frac{2(n-1)}{n}
+\begin{aligned}
+s(\mathbf{x})&=2^{-E[h(\mathbf{x})]/c(n)} && \text{(definition)} \\
+c(n)&=2H(n-1)-\frac{2(n-1)}{n} && \text{(definition)}
+\end{aligned}
 $$
 
-* $h$: path length (number of cuts); $E[h]$: its mean over the trees; $c(n)$: mean path in a random binary tree of $n$ points; $H(i)\approx\ln i+0.5772$.
+* $h$: path length (number of cuts); $E[h]$: its mean over the trees.
+* $c(n)$: mean path in a random binary tree of $n$ points; $H(i)\approx\ln i+0.5772$.
 * Trees use subsamples of $n=256$: $c(256)=10.25$. Isolated after 4 cuts: $s=2^{-4/10.25}=0.76$; after 10.25 cuts: $s=0.5$.
 
 ## Isolation Forest: fast, robust, axis-bound
@@ -291,7 +331,7 @@ $$
 :::
 ::: {.column width="48%"}
 * Cuts are **axis-aligned**.
-* B is ordinary on each axis: 41 and 39 normal sessions share its $x_1$ and $x_2$ (strips), so no cut isolates it.
+* B is ordinary on each axis (41 and 39 normal sessions share its $x_1$, $x_2$): no cut isolates it.
 * Rank of B among 500 normal sessions (0 = above all): Mahalanobis 0, LOF 0, kNN 2, **forest 31**.
 :::
 ::::
@@ -327,8 +367,12 @@ $$
 
 ## A subspace for normal: PCA reconstruction
 
+<!-- derivation: a-subspace-for-normal-pca-reconstruction -->
 $$
+\begin{aligned}
 s(\mathbf{x})=\lVert(\mathbf{x}-\boldsymbol\mu)-V_kV_k^\top(\mathbf{x}-\boldsymbol\mu)\rVert^2
+&& \text{(definition)}
+\end{aligned}
 $$
 
 :::: {.columns}
@@ -346,7 +390,8 @@ $$
 
 <!-- defines: ICA, NMF -->
 
-* **ICA** (independent component analysis [@hyvarinen:2000]) and **NMF** (non-negative matrix factorisation [@lee:1999]) join PCA: each event is a mix of a few sources or parts.
+* **ICA** (independent component analysis [@hyvarinen:2000]) and **NMF** (non-negative matrix factorisation [@lee:1999]) join PCA.
+* Each event is a mix of a few sources or parts.
 * The constraint differs; the score is always the squared residual.
 
 ![](plots/03/bss_toy.pdf)
@@ -399,8 +444,9 @@ Question: does the constraint change what is found?
 
 ![](plots/03/dedup.pdf)
 
-* 70.5% of the rows are copies, almost all of two floods (smurf, neptune): on the raw file a detector is graded on recognising them.
-* Deduplicated: 87,831 normal, 54,572 dos, 2,131 probe, 999 r2l, 52 u2r. Even so, 40% attacks is far from any real network.
+* 70.5% of the rows are copies, mostly of two floods (smurf, neptune): a detector is graded on spotting them.
+* Deduplicated: 87,831 normal, 54,572 dos, 2,131 probe, 999 r2l, 52 u2r.
+* Even so, 40% attacks is far from any real network.
 
 ## Terminology: the metrics
 
@@ -498,7 +544,8 @@ Question: how many labels beat the one-class detector?
 
 ![](plots/03/fewlabels.pdf)
 
-* Forest, labels drawn from the pool (95% DoS), mean of 3: it passes the GMM between 30 and 100 labels; r2l and u2r need about 300 [@ruff:2020].
+* Forest, labels from the pool (95% DoS), mean of 3: it passes the GMM at 30 to 100 labels.
+* r2l and u2r need about 300 labels [@ruff:2020].
 
 # Wrap-up
 
@@ -516,7 +563,8 @@ Question: how many labels beat the one-class detector?
 ## Take-aways
 
 * Model **normal**, score the departure, set the threshold on **normal** data; the **base rate** decides what an alarm is worth.
-* Six families: distribution-based, distance and density, isolation, boundary, reconstruction (PCA, ICA, NMF), clusters. Each has a blind spot (dense floods for LOF, correlations for axis cuts); no detector wins everywhere.
+* Six families: distribution, distance and density, isolation, boundary, reconstruction, clusters.
+* Each has a blind spot (dense floods for LOF, correlations for axis cuts); none wins everywhere.
 * The covariance matters: Mahalanobis sees broken relations that per-feature z-scores miss.
 * Report AUPRC, per-category recall and the spread over splits; deduplicate first.
 * Classifiers catch what they have seen; one-class detectors are for the rest. Use both.
@@ -534,11 +582,12 @@ Question: how many labels beat the one-class detector?
 
 * $k$-distance of $\mathbf{o}$: distance to its $k$-th neighbour. Reachability distance: $\text{rd}_k(\mathbf{x},\mathbf{o})=\max\{k\text{-dist}(\mathbf{o}),\ d(\mathbf{x},\mathbf{o})\}$ (smooths small distances).
 * Local reachability density: $\text{lrd}(\mathbf{x})=\Big(\frac1k\sum_{\mathbf{o}\in N_k(\mathbf{x})}\text{rd}_k(\mathbf{x},\mathbf{o})\Big)^{-1}$.
-* $\text{LOF}_k(\mathbf{x})$ = mean of $\text{lrd}(\mathbf{o})/\text{lrd}(\mathbf{x})$ over the neighbours: a ratio, so it adapts to regions of different density (its strength) and returns 1 inside any dense cluster, malicious or not (its weakness).
+* $\text{LOF}_k(\mathbf{x})$ = mean of $\text{lrd}(\mathbf{o})/\text{lrd}(\mathbf{x})$ over the neighbours: a ratio, so it adapts to regions of different density (its strength).
+* It returns 1 inside any dense cluster, malicious or not (its weakness).
 
 ## Isolation Forest: where $c(n)$ comes from
 
-* An isolation tree is a random binary search tree; isolating a point equals an **unsuccessful search** in a BST of $n$ keys.
+* An isolation tree is a random binary search tree (BST); isolating a point is an **unsuccessful search** in it.
 * Its mean path length is $c(n)=2H(n-1)-2(n-1)/n$ with $H(i)=\sum_{m=1}^{i}1/m\approx\ln i+0.5772$ (Euler's constant).
 * Normalising by $c(n)$ makes scores comparable across subsample sizes: $E[h]\to0\Rightarrow s\to1$; $E[h]=c(n)\Rightarrow s=0.5$; $E[h]\gg c(n)\Rightarrow s\to0$.
 
