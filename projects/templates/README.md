@@ -3,92 +3,98 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Python](https://img.shields.io/badge/Python-3.12%2B-blue)
 
-## Introduction
+This `README.md` is the report of the project.
+Keep it concise, link every figure from an image file in the zip, and delete the hints in *italics*.
 
-This repository contains the source code for the Practical Project of the **Aprendizagem Aplicada à Segurança (AAS)** course.
+## Authors
 
-The objective of this project is to [briefly describe goal, e.g., classify portable executable (PE) files as benign or malicious] using [briefly describe technique, e.g., Random Forest classifiers based on header metadata].
+| Name | Student number | E-mail |
+|:--|:--|:--|
+| Student Name 1 | 000001 | name1@ua.pt |
+| Student Name 2 | 000002 | name2@ua.pt |
 
-**Authors:**
-* Student Name 1 (nMec)
-* Student Name 2 (nMec)
+Course: Aprendizagem Aplicada à Segurança (AAS), Universidade de Aveiro. Project: 1 or 2. Team name: student number.
 
-## Prerequisities
+## 1. Abstract
 
-* Python 3.8 or higher
-* Pip (Python Package Installer)
+*150-250 words: the security problem, the method, the main result (e.g., "F1 of 0.95 on a time-based split").*
+
+## 2. Introduction and Threat Model
+
+* **Problem:** what specific issue you solve, and why it matters.
+* **Threat model:** who the attacker is, what they know and can change, and which error costs more (false positive or false negative).
+* **Objectives:** what you built.
+
+## 3. Related Work
+
+*Two or three papers or tools; how your approach differs or which one you replicate.*
+
+## 4. Data and Method
+
+* **Data:** source, number of samples, class balance, link or download script.
+* **Split:** how the test set stays free of leaks (deduplication, family or time split, seed).
+* **Features:** how raw data (bytes, logs, text) becomes numerical vectors. *This is the crucial part.*
+* **Models:** a trivial baseline plus at least two models or feature sets, and why.
+
+## 5. Results
+
+Main results table on the test set (state the split):
+
+| Model | Precision | Recall | F1-Score |
+| :--- | :---: | :---: | :---: |
+| Baseline | 0.00 | 0.00 | 0.00 |
+| Model A | 0.00 | 0.00 | 0.00 |
+| **Model B** | 0.00 | 0.00 | **0.00** |
+
+* Confusion matrix of the best model (figure), and PR-AUC or ROC-AUC when the classes are imbalanced.
+* Error analysis: examples of false positives and false negatives, and what they cost in your setting.
+* Cost of the system (features per sample, time per sample) when the topic is real-time.
+
+## 6. Attack or Defence
+
+*The evasion, distribution shift or hardening step you tested, and its measured effect.*
+
+## 7. Changes since Project 1
+
+*Project 2 only, at most one page: what is new and what the feedback asked for. Delete this section in Project 1.*
+
+## 8. Conclusion and Future Work
+
+*Main achievements, limits, and what you would do with six more months.*
 
 ## Installation
 
-It is strongly recommended to run this project inside a virtual environment to avoid dependency conflicts.
-
-### 1. Extract the compressed file
-```bash
-tar xvf [compressed_file].tar.xz
-cd [your-project]
-````
-
-### 2. Create and Activate Virtual Environment
-
-**Linux / macOS:**
+Python 3.12 or higher. Use a virtual environment.
 
 ```bash
 python3 -m venv venv
-source venv/bin/activate
-```
-
-**Windows (PowerShell):**
-
-```powershell
-python -m venv venv
-.\venv\Scripts\Activate
-```
-
-### 3. Install Dependencies
-
-```bash
+source venv/bin/activate        # Windows: .\venv\Scripts\Activate
 pip install -r requirements.txt
 ```
 
-## Dataset
+## Dataset Setup
 
-This project utilizes the [Name of Dataset] dataset.
-
-  * **Source:** [Link to dataset]
-  * **Setup:** Place the dataset files in the `data/` folder. If the dataset is large, run the provided script to download it:
-    ```bash
-    python scripts/download_data.py
-    ```
-
-## Usage
-
-To train the model:
+* **Source:** [link to the dataset]
+* If the data is large, download it with the provided script:
 
 ```bash
-python src/train.py --input data/train.csv --output models/rf_model.pkl
+python scripts/download_data.py
 ```
 
-To run the classification on a new file:
+## Usage and Reproducing the Results
+
+Train the model, then rebuild the results table above from the raw data.
+State the random seed and the runtime on your machine.
 
 ```bash
-python src/main.py --target suspicious_file.exe --model models/rf_model.pkl
+python src/train.py --input data/train.csv --output models/rf_model.pkl --seed 42
+python src/evaluate.py --model models/rf_model.pkl --seed 42
 ```
 
-## Major Results
+## Use of AI Assistants and References
 
-The following table summarizes the performance of our best model ([Model Name]) on the test set (20% split).
-
-| Class | Precision | Recall | F1-Score | Support |
-| :--- | :---: | :---: | :---: | :---: |
-| **Benign** | 0.98 | 0.97 | 0.97 | 1050 |
-| **Malicious** | 0.96 | 0.99 | 0.97 | 980 |
-| **Accuracy** | | | **0.97** | 2030 |
-
-**Key Findings:**
-
-  * The model achieved a low False Negative Rate (FNR), which is critical for security applications.
-  * Feature extraction overhead was approximately 15ms per file.
+*Which parts an AI assistant helped with, and a list of the datasets, papers and tools cited.*
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License, see [LICENSE](LICENSE).
