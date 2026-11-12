@@ -88,4 +88,4 @@ ignore = ["E501"]
 "*.ipynb" = ["E402"]
 
 [tool.ruff.lint.isort]
-known-first-party = ["spamlib", "llamalib", "attacklib", "anomlib", "deeplib", "robustlib", "aasplot", "autoenc", "thresholds"]
+known-first-party = ["spamlib", "llamalib", "attacklib", "anomlib", "deeplib", "robustlib", "aasplot", "autoenc", "thresholds", "malwlib"]

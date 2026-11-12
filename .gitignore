@@ -196,3 +196,7 @@ dist/
 *.out
 *.bbl
 *.blg
+
+# module-04 notebook caches (sampled API matrix)
+.cache_api_sub.npz
+.cache_api_sub.npy
