@@ -50,6 +50,31 @@ header-includes:
 | easy to fake | yes, metadata | no, behaviour must happen |
 | blind spots | packers, no row | sandbox detection, delays |
 
+## What a trace contains
+
+* **Kernel calls**: system calls such as open, write, connect, execve.
+* **Library calls**: Windows functions that open files, edit keys, allocate memory.
+* **Files and registry**: what is created, changed, deleted.
+* **Processes and memory**: children spawned, code injected into other processes.
+* Network: domain names, connections, protocols, bytes sent.
+
+## Anatomy of one sandbox run
+
+```{=latex}
+\begin{adjustbox}{max width=\linewidth,max totalheight=0.34\textheight,center}
+\begin{tikzpicture}
+  \node[dfn, text width=1.9cm] (r) {1 restore clean snapshot};
+  \node[dfn, text width=1.9cm, right=6mm of r] (d) {2 drop sample, start agent};
+  \node[atk, text width=1.9cm, right=6mm of d] (x) {3 run for a fixed time};
+  \node[dfn, text width=1.9cm, right=6mm of x] (c) {4 collect trace and files};
+  \node[ok, text width=1.9cm, right=6mm of c] (m) {5 report to the model};
+  \draw[arr] (r) -- (d); \draw[arr] (d) -- (x); \draw[arr] (x) -- (c); \draw[arr] (c) -- (m);
+\end{tikzpicture}
+\end{adjustbox}
+```
+
+* Cuckoo and CAPEv2 automate these five steps; the run is then thrown away.
+
 ## Which sandbox?
 
 * **Container** (Docker, Podman): fast, shares the host kernel, no Windows.
@@ -87,6 +112,39 @@ header-includes:
 * Top syscalls: socket, connect, execve, write: **behaviour**.
 * Limits: Linux only, toy training set.
 
+## Container, microVM or virtual machine
+
+| | Container | microVM | Full VM |
+|:------------|:--------------|:--------------|:--------------|
+| kernel | shared with host | own, minimal | own, complete |
+| Windows samples | no | no | yes |
+| start time | very fast | fast | slow |
+| isolation | weakest | strong | strong |
+
+* Docker and Podman are containers; rootless Podman limits an escape.
+
+## Five questions to choose a sandbox
+
+1. Which operating system does the sample need?
+2. How strong must isolation be if the sample escapes?
+3. How many samples per hour must it analyse?
+4. Can the sample detect the environment?
+5. Who restores the clean state after each run?
+
+## Sandbox evasion by malware
+
+* **Environment checks**: hypervisor bit, virtual network card, guest tools.
+* **Timing**: sleep for minutes; the sandbox stops watching first.
+* **Human checks**: no mouse movement, no recent documents, tiny disk: probably a sandbox.
+* A sample that detects the sandbox stays quiet, and its trace looks benign.
+
+## Countering sandbox evasion
+
+* Harden the guest: realistic hardware names, installed software, user files.
+* Accelerate sleeps and simulate a user (mouse, keys, clicks).
+* Run suspicious samples on bare metal, restored from a disk image.
+* Treat a quiet trace as **unknown**, not as benign.
+
 # Sequences of Calls
 
 ## The data
@@ -94,6 +152,13 @@ header-includes:
 * 43,876 sandbox runs, 100 API calls each, vocabulary 307, 97.5% malware.
 * "Always malware" scores 97.5% accuracy: use area under the curve (AUC), average precision and F1.
 * A bag of calls is a sparse count matrix.
+
+## Representing a trace
+
+* Bag of calls: how often each call occurs; order lost.
+* **$n$-grams**: counts of call pairs and triples; keeps local order.
+* **Sequence of ids**: the full trace through an embedding; keeps all order.
+* **Graph**: calls as nodes and transitions as edges; for process trees and data flow.
 
 ## Bag of calls
 
@@ -137,6 +202,38 @@ header-includes:
 * Recurrent nets: order; 1-D convolution: local patterns.
 * Transformers need more data and longer traces.
 * Run the shuffle test before claiming "learned order".
+
+## Models for traces
+
+| Model | Reads order? | Cost | Use when |
+|:---------------|:--------|:------|:------------------------------|
+| bag of calls + linear | no | tiny | first baseline, interpretable |
+| $n$-grams + forest | locally | small | short traces |
+| 1-D convolution | locally | medium | repeated call patterns |
+| GRU, LSTM | yes | medium | long traces |
+| transformer | yes | high | large corpora |
+
+## Cheap first, expensive second
+
+```{=latex}
+\begin{adjustbox}{max width=\linewidth,max totalheight=0.34\textheight,center}
+\begin{tikzpicture}
+  \node[neu, text width=1.8cm] (f) {file};
+  \node[dfn, text width=2.4cm, right=8mm of f] (s) {static model, milliseconds};
+  \node[ok, text width=1.9cm, above right=2mm and 9mm of s] (a) {confident: decide};
+  \node[atk, text width=2.6cm, below right=2mm and 9mm of s] (d) {uncertain: sandbox, then dynamic model};
+  \draw[arr] (f) -- (s); \draw[arr] (s) -- (a); \draw[arr] (s) -- (d);
+\end{tikzpicture}
+\end{adjustbox}
+```
+
+* Send only the files the static model cannot decide to the costly sandbox.
+
+## The price of behavioural features
+
+* Behaviour is **representative** but expensive: minutes per sample.
+* Labels are scarce; the set is imbalanced; traces are truncated.
+* The sandbox can be fooled: a quiet trace proves little.
 
 # Takeaways
 
