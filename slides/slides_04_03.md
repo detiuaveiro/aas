@@ -51,7 +51,28 @@ header-includes:
 | knowledge | white-box field list, or query access only |
 | cost | edits, or `predict` queries per file |
 
-* Our model, public data, **feature space**; the aim is defence.
+* Our model, public data, edited feature vectors; the aim is defence.
+
+## A taxonomy of evasion
+
+* **Static evasion**: header edits, padding, new sections, code caves, packing.
+* **Dynamic evasion**: sandbox detection, delayed start, harmless calls inserted between real ones.
+* **Mimicry**: copy the profile of benign software.
+* Each acts on a different feature family: that is why class 04_01 and 04_02 differ.
+
+## Feature space and problem space
+
+* **Feature space**: edit the feature vector directly; fast, an upper bound.
+* **Problem space**: edit the real file and re-extract features; the true test.
+* A feature-space evasion that no real file can realise is not a threat.
+
+## What the attacker knows
+
+| Knowledge | Access | Typical attack |
+|:--------------|:----------------------|:---------------------------|
+| white box | model and features | direct optimisation |
+| gray box | features, no weights | surrogate model |
+| black box | scores or labels only | query search (greedy, genetic) |
 
 # Three Attacks
 
@@ -112,6 +133,27 @@ header-includes:
 * Query-efficient black-box attacks on Windows malware [@demetrio:2020].
 * A survey of PE evasion and defences [@ling:2021].
 * EMBER2024 includes evasive files for evaluation [@joyce:2025].
+
+## Defences in layers
+
+* **Canonicalise**: normalise header fields before scoring, so edits do not move features.
+* **Robust features**: use fields the author cannot change without breaking the file.
+* **Adversarial training**: add attacked samples with the true label.
+* **Behaviour**: add the dynamic model of class 04_02.
+* **Query control**: rate-limit and log scanner APIs.
+
+## Evaluate a defence honestly
+
+* Report clean performance **and** performance under each attack.
+* Test attacks the defender did not train on.
+* Let the attacker adapt to the defended model, not to the old one.
+* Fix the budget: edits, queries, time.
+
+## Scope and ethics
+
+* We attack our own models, on public data, in feature space.
+* No executable is modified or produced in these classes.
+* The goal is a stronger defence; publish results with their threat model.
 
 ## An arms race with finite resources
 
