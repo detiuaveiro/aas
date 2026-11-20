@@ -44,6 +44,18 @@ header-includes:
 
 ## Threat model
 
+```{=latex}
+\begin{adjustbox}{max width=\linewidth,max totalheight=0.20\textheight,center}
+\begin{tikzpicture}
+  \node[atk, text width=2.2cm] (g) {goal: evade at test time};
+  \node[atk, text width=2.6cm, right=10mm of g] (c) {edit 22 of 34 fields};
+  \node[neu, text width=2.6cm, right=10mm of c] (k) {knowledge: field list or queries};
+  \node[dfn, text width=2.2cm, right=10mm of k] (m) {model};
+  \draw[arratk] (g) -- (c); \draw[arratk] (c) -- (k); \draw[arratk] (k) -- (m);
+\end{tikzpicture}
+\end{adjustbox}
+```
+
 | Element | In this class |
 |:-------------|:---------------------------------------------|
 | goal | evasion at test time |
@@ -67,6 +79,18 @@ header-includes:
 * A feature-space evasion that no real file can realise is not a threat.
 
 ## What the attacker knows
+
+```{=latex}
+\begin{adjustbox}{max width=\linewidth,max totalheight=0.20\textheight,center}
+\begin{tikzpicture}
+  \node[ok, text width=3.0cm] (w) {white box: model and features};
+  \node[neu, text width=3.0cm, right=8mm of w] (y) {gray box: features only};
+  \node[atk, text width=3.0cm, right=8mm of y] (k) {black box: scores or labels};
+  \draw[arr] (w) -- (y); \draw[arr] (y) -- (k);
+  \node[below=1mm of y, font=\scriptsize] {less knowledge, more queries};
+\end{tikzpicture}
+\end{adjustbox}
+```
 
 | Knowledge | Access | Typical attack |
 |:--------------|:----------------------|:---------------------------|
@@ -113,6 +137,18 @@ header-includes:
 * Greedy C falls to 0.017; mimicry B still evades (0.928).
 
 ## Defended model against all three
+
+```{=latex}
+\begin{adjustbox}{max width=\linewidth,max totalheight=0.20\textheight,center}
+\begin{tikzpicture}
+  \node[atk, text width=2.6cm] (a) {attacked rows, label malware};
+  \node[dfn, text width=2.2cm, right=10mm of a] (r) {retrain};
+  \node[ok, text width=2.6cm, right=10mm of r] (o) {A 0.000, C 0.017};
+  \node[atk, text width=2.6cm, right=10mm of o] (b) {B still 0.928};
+  \draw[arr] (a) -- (r); \draw[arr] (r) -- (o); \draw[arratk] (o) -- (b);
+\end{tikzpicture}
+\end{adjustbox}
+```
 
 | Attack | Undefended | Retrained on A |
 |:------------------|------:|------:|
